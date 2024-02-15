@@ -37,14 +37,10 @@ export default function LandingPage() {
                 link: 'https://instagram.com/adrianbonpin',
                 title: '@adrianbonpin'
               }
-            }
-          ]} />
-        </div>
-        <div className={styles.team_bottom}>
-          <Members members={[
+            },
             {
               name: 'Jan Stanlee Achumbre',
-              img: 'stanlee.png',
+              img: 'stanlee.webp',
               role: 'Full Stack Developer',
               description: 'Also known as Mikoto, He goes for adventure and the challenges ahead in the tech world',
               social: {
@@ -56,10 +52,14 @@ export default function LandingPage() {
         </div>
       </section>
       <section id="previous" className={styles.work}>
-
+        <div className={styles.work_top}>
+          <h1>Our Work</h1>
+        </div>
       </section>
       <section id="contact" className={styles.contact}>
-        
+        <div className={styles.contact_top}>
+          <h1>Contact Us</h1>
+        </div>
       </section>
     </>
   )
