@@ -1,6 +1,6 @@
 .main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     place-items: center;
     gap: 2rem;
 }
@@ -47,5 +47,44 @@
 
     display: grid;
     grid-template-columns: repeat(auto-fit, 1fr);
-    place-items: center;
+    align-items: center;
+}
+
+/* Responsive */
+
+@media (max-width: 1536px) {
+    
+}
+
+@media (max-width: 1280px) {
+    
+}
+
+@media (max-width: 1024px) {
+    .main {
+        grid-template-columns: auto;
+        grid-template-rows: auto 1fr;
+    }
+
+    .main_left {
+        align-items: center;
+    }
+
+    .main_left > h4,
+    .main_left > h5 {
+        text-align: center;
+    }
+
+    .team_top > h1,
+    .team_top > h5 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    
+}
+
+@media (max-width: 640px) {
+    
 }

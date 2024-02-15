@@ -17,7 +17,9 @@ export default function Members({members} : {members: {
                     <Image src={`/team/${data.img}`} width={450} height={450} alt={`picture of ${data.name}`}/>
                     <h5>{data.name}</h5>
                     <h5>{data.role}</h5>
-                    {data.social && <Link href={data.social.link}>{data.social.title}</Link>}
+                    {data.social && <span>
+                        <Link href={data.social.link}>{data.social.title}</Link>
+                    </span>}
                     <p>{data.description}</p>
                 </div>
             ))}

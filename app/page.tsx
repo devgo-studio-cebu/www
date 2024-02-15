@@ -30,7 +30,7 @@ export default function LandingPage() {
           <Members members={[
             {
               name: 'Adrian Alfred C. Bonpin',
-              img: 'adrian.png',
+              img: 'adrian.webp',
               role: 'Full Stack Developer',
               description: 'Adrian is a technically adept and explorative developer passionate in the challendge of creating websites. His experienced in NextJS.',
               social: {
@@ -40,6 +40,12 @@ export default function LandingPage() {
             }
           ]} />
         </div>
+      </section>
+      <section id="previous" className={styles.work}>
+
+      </section>
+      <section id="contact" className={styles.contact}>
+        
       </section>
     </>
   )

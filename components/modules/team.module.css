@@ -34,8 +34,30 @@
     grid-column: 1 / 3;
 }
 
-.member > a {
-    text-decoration: underline;
+.member > span a {
+    position: relative;
     font-size: 80%;
+    width: max-content;
+    z-index: 1;
+}
+
+.member > span {
     width: 100%;
+}
+
+.member a::before {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+
+    height: 1px;
+    background: var(--text);
+    animation: underline_rev 500ms forwards;
+    width: 0%;
+    transition: width 500ms;
+}
+
+.member a:hover::before {
+    width: 100%;
+    transition: width 500ms;
 }
