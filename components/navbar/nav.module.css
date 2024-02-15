@@ -1,0 +1,28 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    padding: 0 2rem;
+    width: 100lvw;
+    height: var(--nav);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    user-select: none;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.right {
+    display: flex;
+    gap: 2rem;
+    place-items: center;
+}
+
+.right a:hover {
+    color: var(--accent);
+}

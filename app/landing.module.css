@@ -1,0 +1,50 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    gap: 2rem;
+}
+
+.main_left,
+.main_right {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.main_left > h4 {
+    font-weight: 400;
+}
+
+.main_left > h5,
+.team_top > h5 {
+    font-weight: 200;
+}
+
+.main_left button {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--accent-30);
+}
+
+.main_left button:hover {
+    color: var(--text-900);
+    background: var(--accent);
+}
+
+.team {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    gap: 1rem;
+}
+
+.team_bottom {
+    padding: 1rem 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+}
