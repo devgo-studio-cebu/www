@@ -32,10 +32,24 @@ export default function LandingPage() {
               name: 'Adrian Alfred C. Bonpin',
               img: 'adrian.png',
               role: 'Full Stack Developer',
-              description: 'Adrian is a technically adept and explorative developer passionate in the challendge of creating websites. His experienced in NextJS.',
+              description: 'Adrian is a technically adept and explorative developer passionate in the challenge of creating websites. His experienced in NextJS.',
               social: {
                 link: 'https://instagram.com/adrianbonpin',
                 title: '@adrianbonpin'
+              }
+            }
+          ]} />
+        </div>
+        <div className={styles.team_bottom}>
+          <Members members={[
+            {
+              name: 'Jan Stanlee Achumbre',
+              img: 'stanlee.png',
+              role: 'Full Stack Developer',
+              description: 'Also known as Mikoto, He goes for adventure and the challenges ahead in the tech world',
+              social: {
+                link: 'https://www.instagram.com/mikotochefu',
+                title: '@mikotochefu'
               }
             }
           ]} />
