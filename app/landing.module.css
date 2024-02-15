@@ -45,12 +45,14 @@
 }
 
 .team_bottom {
-    padding: 1rem 2rem;
+    padding: 1rem 0;
 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 25rem);
+    display: flex;
+    flex-direction: row;
     gap: 2rem;
     align-items: center;
+
+    overflow-x: auto;
 }
 
 /* Responsive */
@@ -82,12 +84,6 @@
     .contact_top > h1,
     .contact_top > h5 {
         text-align: center;
-    }
-
-    .team_bottom {
-        grid-template-columns: auto;
-        grid-template-rows: repeat(auto-fill, 10rem);
-        place-items: center;
     }
 }
 

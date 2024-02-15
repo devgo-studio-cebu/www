@@ -151,6 +151,7 @@ small {
 
 ::-webkit-scrollbar-track {
   background: var(--primary-30);
+  border-radius: var(--corner);
 }
 
 ::-webkit-scrollbar-thumb {
