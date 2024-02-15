@@ -32,7 +32,7 @@ export default function LandingPage() {
               name: 'Adrian Alfred C. Bonpin',
               img: 'adrian.webp',
               role: 'Full Stack Developer',
-              description: 'Adrian is a technically adept and explorative developer passionate in the challenge of creating websites. His experienced in NextJS.',
+              description: 'A technically adept and explorative developer passionate in web development.',
               social: {
                 link: 'https://instagram.com/adrianbonpin',
                 title: '@adrianbonpin'

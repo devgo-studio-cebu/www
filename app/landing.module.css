@@ -72,13 +72,20 @@
     }
 
     .main_left > h4,
-    .main_left > h5 {
+    .main_left > h5,
+    .team_top > h1,
+    .team_top > h5,
+    .work_top > h1,
+    .work_top > h5,
+    .contact_top > h1,
+    .contact_top > h5 {
         text-align: center;
     }
 
-    .team_top > h1,
-    .team_top > h5 {
-        text-align: center;
+    .team_bottom {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(auto-fill, 10rem);
+        place-items: center;
     }
 }
 
