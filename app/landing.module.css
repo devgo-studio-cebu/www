@@ -21,7 +21,9 @@
 }
 
 .main_left > h5,
-.team_top > h5 {
+.team_top > h5,
+.work_top > h5,
+.contact_top > h5 {
     font-weight: 200;
 }
 

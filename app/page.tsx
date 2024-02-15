@@ -10,7 +10,7 @@ export default function LandingPage() {
         <div className={styles.main_left}>
           <h1>DEVGO</h1>
           <h4>A web development studio based in Cebu</h4>
-          <h5>We develop your website to reality.</h5>
+          <h5>Building your websites to reality.</h5>
           <Link href={'/#contact'}>
             <button type="button">
               Contact Us
@@ -24,7 +24,7 @@ export default function LandingPage() {
       <section id="team" className={styles.team}>
         <div className={styles.team_top}>
           <h1>Meet the Team</h1>
-          <h5>Our team is ready to work on your next big project.</h5>
+          <h5>So you can know us better.</h5>
         </div>
         <div className={styles.team_bottom}>
           <Members members={[
@@ -54,11 +54,13 @@ export default function LandingPage() {
       <section id="previous" className={styles.work}>
         <div className={styles.work_top}>
           <h1>Our Work</h1>
+          <h5>Because background is key.</h5>
         </div>
       </section>
       <section id="contact" className={styles.contact}>
         <div className={styles.contact_top}>
           <h1>Contact Us</h1>
+          <h5>And we'll contact you back.</h5>
         </div>
       </section>
     </>
