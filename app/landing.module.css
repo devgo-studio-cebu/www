@@ -37,8 +37,8 @@
 }
 
 .team {
+    min-height: max-content;
     display: grid;
-    grid-template-rows: 1fr 3fr;
     gap: 1rem;
 }
 
