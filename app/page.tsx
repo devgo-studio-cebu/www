@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./landing.module.css";
 import Members from "@/components/modules/team";
+import Contact from "@/components/modules/contact";
 
 export default function LandingPage() {
 
@@ -61,6 +62,9 @@ export default function LandingPage() {
         <div className={styles.contact_top}>
           <h1>Contact Us</h1>
           <h5>And we'll contact you back.</h5>
+        </div>
+        <div className={styles.contact_bottom}>
+          <Contact />
         </div>
       </section>
     </>
