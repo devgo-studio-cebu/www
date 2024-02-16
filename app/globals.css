@@ -186,10 +186,16 @@ input,
 textarea {
   padding: .5rem 1rem;
   font-size: 1rem;
-  
+
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--text);
+  border-radius: 0;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  border-radius: 0;
 }
 
 input::placeholder,
