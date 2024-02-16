@@ -59,12 +59,6 @@ export default function LandingPage() {
           ]} />
         </div>
       </section>
-      <section id="previous" className={styles.work}>
-        <div className={styles.work_top}>
-          <h1>Our Work</h1>
-          <h5>Because background is key.</h5>
-        </div>
-      </section>
       <section id="contact" className={styles.contact}>
         <div className={styles.contact_top}>
           <h1>Contact Us</h1>
