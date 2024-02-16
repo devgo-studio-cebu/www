@@ -16,7 +16,6 @@ export default function Navbar() {
                 <div className={styles.right}>
                     <Link href={'/#top'}>Home</Link>
                     <Link href={'/#team'}>Team</Link>
-                    <Link href={'/#previous'}>Previous Work</Link>
                     <Link href={'/#contact'}>
                         <button type='button'>
                             Contact Us
@@ -31,7 +30,6 @@ export default function Navbar() {
             <div className={mobile ? styles.sidebar_active : styles.sidebar}>
                 <Link href={'/#top'} onClick={() => setMobile(!mobile)}>Home</Link>
                 <Link href={'/#team'} onClick={() => setMobile(!mobile)}>Team</Link>
-                <Link href={'/#previous'} onClick={() => setMobile(!mobile)}>Previous Work</Link>
                 <Link href={'/#contact'} onClick={() => setMobile(!mobile)}>Contact Us</Link>
             </div>
         </>
