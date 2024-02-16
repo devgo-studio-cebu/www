@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="logo.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient4"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#60cda8;stop-opacity:1;"
+         offset="0"
+         id="stop4" />
+      <stop
+         style="stop-color:#2e6f59;stop-opacity:1;"
+         offset="1"
+         id="stop5" />
+    </linearGradient>
+    <linearGradient
+       id="swatch3"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#60cda8;stop-opacity:1;"
+         offset="0"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4"
+       id="linearGradient5"
+       x1="135.44093"
+       y1="256"
+       x2="376.55908"
+       y2="256"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.3367777,0,0,1.3367777,-86.215094,-86.215099)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:495.879px;fill:url(#linearGradient5);fill-opacity:1;stroke:none;stroke-width:8.59352;stroke-opacity:1"
+       x="94.839325"
+       y="433.02881"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="94.839325"
+         y="433.02881"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:495.879px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Bold';fill:url(#linearGradient5);fill-opacity:1;stroke:none;stroke-width:8.59352;stroke-opacity:1">V</tspan></text>
+  </g>
+</svg>

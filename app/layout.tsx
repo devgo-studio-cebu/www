@@ -4,8 +4,9 @@ import Navbar from "@/components/navbar/nav";
 import Footer from "@/components/footer/foot";
 
 export const metadata: Metadata = {
-  title: "devgo",
+  title: "DEVGO",
   description: "Web Development and Design Studio",
+  icons: '/logo.svg'
 };
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {

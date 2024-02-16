@@ -2,6 +2,9 @@ import Link from "next/link";
 import styles from "./landing.module.css";
 import Members from "@/components/modules/team";
 import Contact from "@/components/modules/contact";
+import Image from "next/image";
+
+import CompanyLogo from '../public/logo.svg'
 
 export default function LandingPage() {
 
@@ -19,7 +22,11 @@ export default function LandingPage() {
           </Link>
         </div>
         <div className={styles.main_right}>
-
+          <Image
+            src={CompanyLogo}
+            alt="CompanyLogo"
+          />
+          <div />
         </div>
       </section>
       <section id="team" className={styles.team}>
