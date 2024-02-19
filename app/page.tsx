@@ -5,6 +5,7 @@ import Contact from "@/components/modules/contact";
 import Image from "next/image";
 
 import CompanyLogo from '../public/logo.svg'
+import { teamProfile } from "@/utils/teamProfile";
 
 export default function LandingPage() {
 
@@ -35,28 +36,7 @@ export default function LandingPage() {
           <h5>So you can know us better.</h5>
         </div>
         <div className={styles.team_bottom}>
-          <Members members={[
-            {
-              name: 'Adrian Alfred C. Bonpin',
-              img: 'adrian.webp',
-              role: 'Full Stack Developer',
-              description: 'A technically adept and explorative developer passionate in web development.',
-              social: {
-                link: 'https://instagram.com/adrianbonpin',
-                title: '@adrianbonpin'
-              }
-            },
-            {
-              name: 'Jan Stanlee Achumbre',
-              img: 'stanlee.webp',
-              role: 'Full Stack Developer',
-              description: 'Also known as Mikoto, He goes for adventure and the challenges ahead in the tech world',
-              social: {
-                link: 'https://www.instagram.com/mikotochefu',
-                title: '@mikotochefu'
-              }
-            }
-          ]} />
+          <Members members={teamProfile} />
         </div>
       </section>
       <section id="contact" className={styles.contact}>
