@@ -22,4 +22,15 @@ export const teamProfile = [
             title: '@mikotochefu'
         }
     },
+    {
+        name: 'Jan Carlo Juab',
+        img: 'carlo.webp',
+        // temporary: Still learning backend development
+        role: 'Backend Developer',
+        description: 'You can call me Boyo',
+        social: {
+            link: 'https://github.com/juabjancarlo',
+            title: '@juabjancarlo'
+        }
+    },
 ]
