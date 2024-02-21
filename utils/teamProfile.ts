@@ -33,4 +33,14 @@ export const teamProfile = [
             title: '@juabjancarlo'
         }
     },
+    {
+        name: 'Achille Lorenzo Lanutan',
+        img: 'achille.webp',
+        role: 'Frontend Developer',
+        description: 'Lead, give, and love. Impact the world by doing what you love.',
+        social: {
+            link: 'https://github.com/dpswh-dev',
+            title: '@dpswh-dev'
+        }
+    },
 ]
