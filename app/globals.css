@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+
+  /* Variables */
+
+  --nav: 4rem;
+  --corner: 8px;
+
+  /* Colors */
+
+  --text: #e5eae9;
+  --background: #060908;
+  --primary: #a0cdbe;
+  --secondary: #2e6f59;
+  --accent: #60cda8;
+  --text-30: #e5eae94d;
+  --background-30: #0609084d;
+  --primary-30: #a0cdbe4d;
+  --secondary-30: #2e6f594d;
+  --accent-30: #60cda84d;
+
+  --text-50: #f1f4f3;
+  --text-100: #e3e8e7;
+  --text-200: #c6d2cf;
+  --text-300: #aabbb8;
+  --text-400: #8ea4a0;
+  --text-500: #718e88;
+  --text-600: #5b716d;
+  --text-700: #445552;
+  --text-800: #2d3936;
+  --text-900: #171c1b;
+  --text-950: #0b0e0e;
+
+  --background-50: #f0f5f3;
+  --background-100: #e0ebe7;
+  --background-200: #c2d6cf;
+  --background-300: #a3c2b8;
+  --background-400: #85ada0;
+  --background-500: #669988;
+  --background-600: #527a6d;
+  --background-700: #3d5c52;
+  --background-800: #293d36;
+  --background-900: #141f1b;
+  --background-950: #0a0f0e;
+
+  --primary-50: #eef6f4;
+  --primary-100: #deede8;
+  --primary-200: #bcdcd1;
+  --primary-300: #9bcaba;
+  --primary-400: #79b9a4;
+  --primary-500: #58a78d;
+  --primary-600: #468671;
+  --primary-700: #356454;
+  --primary-800: #234338;
+  --primary-900: #12211c;
+  --primary-950: #09110e;
+
+  --secondary-50: #edf7f4;
+  --secondary-100: #dbf0e9;
+  --secondary-200: #b7e1d3;
+  --secondary-300: #93d2bd;
+  --secondary-400: #6fc3a7;
+  --secondary-500: #4bb491;
+  --secondary-600: #3c9074;
+  --secondary-700: #2d6c57;
+  --secondary-800: #1e483a;
+  --secondary-900: #0f241d;
+  --secondary-950: #08120e;
+
+  --accent-50: #ecf9f4;
+  --accent-100: #d8f3ea;
+  --accent-200: #b1e7d5;
+  --accent-300: #8bdac0;
+  --accent-400: #64ceab;
+  --accent-500: #3dc296;
+  --accent-600: #319b78;
+  --accent-700: #25745a;
+  --accent-800: #184e3c;
+  --accent-900: #0c271e;
+  --accent-950: #06130f;
+
+}
+
+* {
+  font-family: "Noto Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  color: var(--text);
+  transition: all ease 300ms;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth !important;
+  scroll-padding: var(--nav);
+  background: var(--background);
+}
+
+body {
+  position: relative;
+  width: 100lvw;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 4.210rem;
+}
+
+h2 {
+  font-size: 3.158rem;
+}
+
+h3 {
+  font-size: 2.369rem;
+}
+
+h4 {
+  font-size: 1.777rem;
+}
+
+h5 {
+  font-size: 1.333rem;
+}
+
+small {
+  font-size: 0.750rem;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-30);
+  border-radius: var(--corner);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: var(--corner);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+section {
+  padding: 2rem;
+  width: 100%;
+  min-height: 35rem;
+}
+
+button {
+  cursor: pointer;
+  padding: .5rem 1rem;
+  border-radius: var(--corner);
+
+  background: transparent;
+  border: 2px solid var(--secondary);
+}
+
+button:hover {
+  background: var(--secondary-30);
+}
+
+input,
+textarea {
+  padding: .5rem 1rem;
+  font-size: 1rem;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--text);
+  border-radius: 0;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  border-radius: 0;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-30);
+  font-size: 1rem;
+}
