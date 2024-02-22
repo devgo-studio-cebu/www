@@ -16,7 +16,7 @@ export const teamProfile = [
         name: 'Jan Stanlee Achumbre',
         img: 'stanlee.webp',
         role: 'Full Stack Developer',
-        description: 'Also known as Mikoto, He goes for adventure and the challenges ahead in the tech world',
+        description: 'Also known as Mikoto, He goes for adventure and the challenges ahead in the tech world.',
         social: {
             link: 'https://www.instagram.com/mikotochefu',
             title: '@mikotochefu'
@@ -27,7 +27,7 @@ export const teamProfile = [
         img: 'carlo.webp',
         // temporary: Still learning backend development
         role: 'Backend Developer',
-        description: 'You can call me Boyo',
+        description: 'You can call me Boyo.',
         social: {
             link: 'https://github.com/juabjancarlo',
             title: '@juabjancarlo'
