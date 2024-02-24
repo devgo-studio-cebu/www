@@ -54,7 +54,11 @@ export default function Contact() {
             return
         }
 
-        setStatus(await SendMail(contactData))
+        const res = await SendMail(contactData)
+        setStatus(res)
+        if (res != 'Submitted!') { } else {
+            setContactData({ name: '', email: '', content: '' })
+        }
     }
 
     return (

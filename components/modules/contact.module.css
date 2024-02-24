@@ -49,14 +49,6 @@
 }
 
 @media (max-width: 1024px) {
-    
-}
-
-@media (max-width: 768px) {
-    
-}
-
-@media (max-width: 640px) {
     .contact {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, auto);
@@ -70,3 +62,9 @@
         grid-column: initial;
     }
 }
+
+@media (max-width: 768px) {
+    
+}
+
+@media (max-width: 640px) {}
