@@ -96,7 +96,7 @@
 
 @media (max-width: 640px) {
     .navbar {
-        background: var(--primary-900);
+        background: var(--background);
     }
 
     .right {
