@@ -4,7 +4,7 @@ import Members from '@/components/modules/team'
 import Contact from '@/components/modules/contact'
 import Image from 'next/image'
 
-import CompanyLogo from '../public/logo.svg'
+import CompanyLogo from '@/public/logo.svg'
 import { teamProfile } from '@/utils/teamProfile'
 
 export default function LandingPage() {
