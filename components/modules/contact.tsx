@@ -5,17 +5,16 @@ import styles from './contact.module.css'
 import { SendMail } from '@/utils/serverActions'
 
 export default function Contact() {
-
     const [contactData, setContactData] = useState({
         name: '',
         email: '',
-        content: ''
+        content: '',
     })
 
     const [formErr, setFormErr] = useState({
         name: false,
         email: false,
-        content: false
+        content: false,
     })
 
     const [status, setStatus] = useState('Submit')
@@ -28,7 +27,7 @@ export default function Contact() {
         if (contactData.name === '') {
             setFormErr({
                 ...formErr,
-                name: true
+                name: true,
             })
             setStatus('Submit')
             return
@@ -36,7 +35,7 @@ export default function Contact() {
         if (contactData.email === '') {
             setFormErr({
                 ...formErr,
-                email: true
+                email: true,
             })
             setStatus('Submit')
             return
@@ -44,73 +43,78 @@ export default function Contact() {
         if (contactData.content.length < 10) {
             setFormErr({
                 ...formErr,
-                content: true
+                content: true,
             })
             setContactData({
                 ...contactData,
-                content: ''
+                content: '',
             })
             setStatus('Submit')
             return
         }
 
-        setStatus(await SendMail(contactData))
+        const res = await SendMail(contactData)
+        setStatus(res)
+        if (res != 'Submitted!') {
+        } else {
+            setContactData({ name: '', email: '', content: '' })
+        }
     }
 
     return (
         <form onSubmit={submitMail} className={styles.contact}>
             <input
-                type='text'
-                placeholder='Enter Name'
-                aria-label='Name'
+                type="text"
+                placeholder="Enter Name"
+                aria-label="Name"
                 value={contactData.name}
                 onChange={(e) => {
                     setContactData({
                         ...contactData,
-                        name: e.target.value
+                        name: e.target.value,
                     })
                     setFormErr({
                         ...formErr,
-                        name: false
+                        name: false,
                     })
                 }}
                 className={formErr.name ? styles.error : undefined}
             />
             <input
-                type='email'
-                placeholder='Enter Email'
-                aria-label='eMail'
+                type="email"
+                placeholder="Enter Email"
+                aria-label="eMail"
                 value={contactData.email}
                 onChange={(e) => {
                     setContactData({
                         ...contactData,
-                        email: e.target.value
+                        email: e.target.value,
                     })
                     setFormErr({
                         ...formErr,
-                        email: false
+                        email: false,
                     })
                 }}
                 className={formErr.email ? styles.error : undefined}
             />
             <textarea
-                placeholder='Minimum 10 characters...'
-                aria-label='Content'
+                placeholder="Minimum 10 characters..."
+                aria-label="Content"
                 rows={5}
                 value={contactData.content}
                 onChange={(e) => {
                     setContactData({
                         ...contactData,
-                        content: e.target.value
+                        content: e.target.value,
                     })
                     setFormErr({
                         ...formErr,
-                        content: false
+                        content: false,
                     })
                 }}
                 className={formErr.content ? styles.error : undefined}
             />
-            <button type='submit'>{status}</button>
+            <button type="submit">{status}</button>
         </form>
     )
 }

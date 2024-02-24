@@ -13,7 +13,7 @@
     user-select: none;
     z-index: 3;
 
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     background: var(--background-30);
     backdrop-filter: blur(5px);
 }
@@ -67,9 +67,9 @@
     transform: translateY(-120%);
 }
 
-.sidebar>a,
-.sidebar_active>a {
-    padding: 0 0 .5rem 0;
+.sidebar > a,
+.sidebar_active > a {
+    padding: 0 0 0.5rem 0;
     font-size: 1.5rem;
     text-align: left;
     width: 100%;
@@ -82,13 +82,17 @@
 
 /* Left Space */
 
-@media (max-width: 1536px) {}
+@media (max-width: 1536px) {
+}
 
-@media (max-width: 1280px) {}
+@media (max-width: 1280px) {
+}
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+}
 
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+}
 
 @media (max-width: 640px) {
     .navbar {

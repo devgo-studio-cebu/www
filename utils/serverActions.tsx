@@ -6,8 +6,8 @@ import { Resend } from 'resend'
 const mail = new Resend(process.env.RESEND_API_KEY)
 
 export type contactData = {
-    name: string,
-    email: string,
+    name: string
+    email: string
     content: string
 }
 
@@ -20,7 +20,7 @@ export async function SendMail(content: contactData) {
             react: EmailTemplate({
                 name: content.name,
                 email: content.email,
-                content: content.content
+                content: content.content,
             }) as React.ReactElement,
         })
 
