@@ -1,6 +1,7 @@
 Official Website of Devgo.studio
 
 ## To add Team Profile
+
 navigate to
 `./public/team/`
 add your 450x450 webp photo
