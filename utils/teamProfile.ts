@@ -51,4 +51,14 @@ export const teamProfile = [
             title: '@kau4r',
         },
     },
+    {
+        name: 'Neal Andrew Peteros',
+        img: 'neal.webp',
+        role: 'Fullstack Developer',
+        description: 'Do what you love, love what you do.',
+        social: {
+            link: 'https://github.com/npeteros/',
+            title: '@npeteros'
+        }
+    }
 ]
