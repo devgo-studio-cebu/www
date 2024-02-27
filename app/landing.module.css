@@ -1,4 +1,5 @@
 .main {
+    height: calc(100lvh - var(--nav));
     display: grid;
     grid-template-columns: 1fr 1fr;
     place-items: center;
@@ -19,6 +20,8 @@
 .main_right {
     position: relative;
     place-items: center;
+
+    user-select: none;
 }
 
 .main_right > div {
@@ -29,8 +32,8 @@
     transform: translate(-50%, -50%);
 
     aspect-ratio: 1;
-    width: auto;
-    height: 90%;
+    width: 80%;
+    height: auto;
 
     border: 3px solid var(--primary-30);
     z-index: -1;
@@ -156,6 +159,7 @@
 
 @media (max-width: 1024px) {
     .main {
+        height: max-content;
         grid-template-columns: auto;
         grid-template-rows: auto 1fr;
     }
