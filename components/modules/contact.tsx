@@ -17,10 +17,16 @@ export default function Contact() {
         content: false,
     })
 
+    const [bot, setBot] = useState('')
+
     const [status, setStatus] = useState('Submit')
 
     async function submitMail(e: FormEvent) {
         e.preventDefault()
+
+        if ( bot != '' ){
+            return
+        }
 
         setStatus('Submitting...')
 
@@ -114,6 +120,7 @@ export default function Contact() {
                 }}
                 className={formErr.content ? styles.error : undefined}
             />
+            <input type="hidden" name="honeypot" value={bot} onChange={(e)=>setBot(e.target.value)} />
             <button type="submit">{status}</button>
         </form>
     )
