@@ -28,6 +28,10 @@
     place-items: center;
 }
 
+.right a {
+    transition: color ease 300ms;
+}
+
 .right a:hover {
     color: var(--accent);
 }
