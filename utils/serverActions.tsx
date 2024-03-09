@@ -14,8 +14,8 @@ export type contactData = {
 export async function SendMail(content: contactData) {
     try {
         const { data, error } = await mail.emails.send({
-            from: 'devgo <contact@devgo.space>',
-            to: 'adrianbonpin@devgo.space',
+            from: 'devgo <contact@devgo.studio>',
+            to: 'contact@devgo.studio',
             subject: 'DEVGO | Contact',
             react: EmailTemplate({
                 name: content.name,
