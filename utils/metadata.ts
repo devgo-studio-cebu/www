@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 
 export default function consMeta({
-    title = 'DEVGO',
+    title = 'DEVGO Studio',
     description = 'A web development studio based in Cebu. Helping you build your dreams to reality.',
     image = '/thumbnail.webp',
-    icons = '/logo.svg',
+    icons = '/logo.png',
     noIndex = false,
 }: {
     title?: string

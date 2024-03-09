@@ -88,7 +88,6 @@
     list-style: none;
     box-sizing: border-box;
     color: var(--text);
-    transition: all ease 300ms;
 }
 
 html {
@@ -175,6 +174,7 @@ button {
 
     background: transparent;
     border: 2px solid var(--secondary);
+    transition: background ease 300ms, color ease 300ms;
 }
 
 button:hover {
