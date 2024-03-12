@@ -1,7 +1,7 @@
 .navbar {
     position: sticky;
     top: 0;
-    padding: 0 2rem;
+    padding: 0 8lvw;
     width: 100lvw;
     height: var(--nav);
 

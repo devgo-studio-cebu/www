@@ -22,7 +22,7 @@ export default function Members({ members }: { members: members }) {
                     initial={{ opacity: '0%' }}
                     whileInView={{ opacity: '100%' }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.6 + (0.2 * index) }}
+                    transition={{ delay: 0.6 }}
                 >
                     <Image src={`/team/${data.img}`} width={450} height={450} alt={`picture of ${data.name}`} />
                     <h5>{data.name}</h5>
