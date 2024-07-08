@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 export default function consMeta({
     title = 'DEVGO Studio',
     description = 'A web development studio based in Cebu. Helping you build your dreams to reality.',
-    image = '/thumbnail.webp',
-    icons = '/logo.png',
+    image = '/banner.webp',
+    icons = '/icon.webp',
     noIndex = false,
 }: {
     title?: string
@@ -19,26 +19,18 @@ export default function consMeta({
         openGraph: {
             title,
             description,
-            images: [
-                {
-                    url: image,
-                },
-            ],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            images: [image],
-            creator: '@adrianbonpin',
+            siteName: title,
+            images: [{
+                url: image
+            }]
         },
         icons,
-        metadataBase: new URL('https://www.devgo.space'),
+        metadataBase: new URL('https://www.sync2va.com'),
         ...(noIndex && {
             robots: {
-                index: false,
-                follow: false,
-            },
-        }),
+                index: true,
+                follow: true
+            }
+        })
     }
 }

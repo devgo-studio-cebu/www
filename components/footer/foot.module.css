@@ -1,9 +1,0 @@
-.footer {
-    padding: 2rem 8lvw;
-    width: 100lvw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background: var(--accent-800);
-    user-select: none;
-}
