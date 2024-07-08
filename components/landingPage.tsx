@@ -266,3 +266,14 @@ export function ContactSection() {
         </section>
     )
 }
+
+export function PortfolioSection() {
+    return (
+        <section
+            id="portfolio"
+            className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]"
+        >
+            <h1 className="text-2xl text-primary md:text-4xl">Portfolio</h1>
+        </section>
+    )
+}
