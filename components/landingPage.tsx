@@ -1,22 +1,22 @@
 'use client'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 
 import logo from '@/public/logo.svg'
 import Link from 'next/link'
 import { Check } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { motion, AnimatePresence, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { SendMail } from '@/utils/serverActions'
+import useMeasure from 'react-use-measure'
 
 export function HeroSection({ children }: { children?: React.ReactNode }) {
     return (
         <>
             <section className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]">
-                <div className="absolute left-0 top-0 -z-10 h-[10rem] w-full overflow-hidden bg-gradient-to-b from-primary-30 to-transparent">
-                    <div className="absolute" />
+                <div className="absolute left-0 top-0 h-[10rem] w-full overflow-hidden bg-gradient-to-b from-primary-30 to-transparent">
                     <img src="grid.svg" alt="DEVGO Logo" className="grid-clip w-full opacity-10" />
                 </div>
-                <div className="flex w-full flex-col items-center gap-8 md:flex-row md:justify-center md:gap-16">
+                <div className="z-10 flex w-full flex-col items-center gap-8 md:flex-row md:justify-center md:gap-16">
                     <Image src={logo} alt="DEVGO Logo" className="w-[25%] md:w-[15%]" priority={true} />
                     <div className="flex flex-col items-center gap-2 md:items-start">
                         <h1 className="text-5xl font-semibold uppercase md:text-7xl">devgo</h1>
@@ -267,13 +267,227 @@ export function ContactSection() {
     )
 }
 
-export function PortfolioSection() {
+export function PortfolioSection({
+    projects,
+}: {
+    projects: {
+        name: string
+        logo?: StaticImageData
+        date: string
+        desc: string
+        preview?: StaticImageData
+        link: string
+    }[]
+}) {
+    const scrollRef = useRef(null)
+    const startRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: scrollRef,
+        offset: ['start 80%', '100% end'],
+    })
+    const { scrollYProgress: startProg } = useScroll({
+        target: scrollRef,
+        offset: ['start end', '15% end'],
+    })
+    const scrolPos = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+    function checkSide(project: any, idx: number) {
+        if (idx % 2 === 0) {
+            return <DesktopProjectLeft key={project.name + ' left ' + idx} project={project} />
+        }
+        return <DesktopProjectRight key={project.name + ' right ' + idx} project={project} />
+    }
     return (
         <section
             id="portfolio"
             className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]"
         >
             <h1 className="text-2xl text-primary md:text-4xl">Portfolio</h1>
+            {/* For Mobile */}
+            <div className="mt-8 flex w-full flex-col items-center gap-20 md:hidden">
+                {projects.map((project, idx) => (
+                    <MobileProjectCard key={project.name + ' mobile ' + idx} project={project} />
+                ))}
+            </div>
+            {/* For Desktop */}
+            <div className="relative mt-8 hidden w-full flex-col items-center gap-20 pt-8 md:flex" ref={scrollRef}>
+                <motion.div
+                    style={{ scale: startProg }}
+                    className="absolute -top-2 h-4 w-4 rounded-full bg-primary"
+                    ref={startRef}
+                />
+                <motion.div
+                    style={{ height: scrolPos }}
+                    className="absolute top-0 w-1 bg-gradient-to-b from-primary to-secondary-30"
+                />
+                {projects.map((project, idx) => checkSide(project, idx))}
+            </div>
+        </section>
+    )
+}
+
+function MobileProjectCard({ project }: { project: any }) {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true })
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isInView ? 1 : 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="relative flex w-full flex-col items-center justify-center gap-2 *:z-10"
+        >
+            <img src="grid.svg" alt="grid" className="portfolio-grid absolute z-0 scale-110" />
+            {project.logo && <Image src={project.logo} alt={project.name} className="w-1/3" />}
+            <p className="bg-gradient-to-br from-red-200 to-text bg-clip-text font-semibold text-transparent">
+                {project.desc}
+            </p>
+            <p className="bg-gradient-to-br from-red-200 to-text bg-clip-text font-bold text-transparent">
+                {project.date}
+            </p>
+            {project.preview && (
+                <Link href={project.link || '/'}>
+                    <Image
+                        src={project.preview}
+                        alt={project.name}
+                        className="cursor-pointer rounded-md shadow-[0_0_37px_0px] shadow-primary-30 transition-all duration-300 hover:scale-105"
+                    />
+                </Link>
+            )}
+        </motion.div>
+    )
+}
+
+function DesktopProjectLeft({ project }: { project: any }) {
+    const lineRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: lineRef,
+        offset: ['start center', 'end 65%'],
+    })
+    const scrolPos = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+    const opStat = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+    return (
+        <motion.div ref={lineRef} transition={{ duration: 0.5, delay: 0.5 }} className="relative grid grid-cols-2">
+            <div className="relative col-span-1 flex items-center justify-between">
+                <motion.div
+                    style={{ width: scrolPos }}
+                    className="absolute right-0 h-1 bg-gradient-to-l from-primary to-secondary-30"
+                />
+                <motion.div style={{ opacity: opStat }} className="w-1/2">
+                    {project.logo && <Image src={project.logo} alt={project.name} className="w-4/5" />}
+                </motion.div>
+                <motion.div style={{ opacity: opStat }} className="grid w-1/2 grid-rows-2 gap-4">
+                    <p className="flex flex-col justify-end bg-gradient-to-br from-red-200 to-text bg-clip-text pr-4 text-right font-bold text-transparent">
+                        {project.date}
+                    </p>
+                    <p className="flex flex-col justify-start bg-gradient-to-br from-red-200 to-text bg-clip-text pr-4 text-right font-semibold text-transparent">
+                        {project.desc}
+                    </p>
+                </motion.div>
+            </div>
+            <motion.div style={{ opacity: opStat }} className="relative col-span-1">
+                {project.preview && (
+                    <Link href={project.link || '/'} className="flex justify-end">
+                        <Image
+                            src={project.preview}
+                            alt={project.name}
+                            className="z-10 w-[80%] cursor-pointer rounded-md shadow-[0_0_37px_0px] shadow-primary-30 transition-all duration-300 hover:scale-105"
+                        />
+                    </Link>
+                )}
+                <img
+                    src="grid.svg"
+                    alt="grid"
+                    className="desktop-preview-grid absolute top-[50%] translate-x-[10%] translate-y-[-50%]"
+                />
+            </motion.div>
+        </motion.div>
+    )
+}
+
+function DesktopProjectRight({ project }: { project: any }) {
+    const lineRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: lineRef,
+        offset: ['start center', 'end 65%'],
+    })
+    const scrolPos = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+    const opStat = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+    return (
+        <motion.div ref={lineRef} transition={{ duration: 0.5, delay: 0.5 }} className="relative grid grid-cols-2">
+            <motion.div style={{ opacity: opStat }} className="relative col-span-1">
+                {project.preview && (
+                    <Link href={project.link || '/'} className="flex justify-start">
+                        <Image
+                            src={project.preview}
+                            alt={project.name}
+                            className="z-10 w-[80%] cursor-pointer rounded-md shadow-[0_0_37px_0px] shadow-primary-30 transition-all duration-300 hover:scale-105"
+                        />
+                    </Link>
+                )}
+                <img
+                    src="grid.svg"
+                    alt="grid"
+                    className="desktop-preview-grid absolute top-[50%] translate-x-[-10%] translate-y-[-50%]"
+                />
+            </motion.div>
+            <div className="relative col-span-1 flex items-center justify-between">
+                <motion.div
+                    style={{ width: scrolPos }}
+                    className="absolute left-0 h-1 bg-gradient-to-r from-primary to-secondary-30"
+                />
+                <motion.div style={{ opacity: opStat }} className="grid w-1/2 grid-rows-2 gap-4">
+                    <p className="flex flex-col justify-end bg-gradient-to-br from-red-200 to-text bg-clip-text pl-4 text-left font-bold text-transparent">
+                        {project.date}
+                    </p>
+                    <p className="flex flex-col justify-start bg-gradient-to-br from-red-200 to-text bg-clip-text pl-4 text-left font-semibold text-transparent">
+                        {project.desc}
+                    </p>
+                </motion.div>
+                <motion.div style={{ opacity: opStat }} className="flex w-1/2 justify-end">
+                    {project.logo && <Image src={project.logo} alt={project.name} className="w-4/5" />}
+                </motion.div>
+            </div>
+        </motion.div>
+    )
+}
+
+export function ClientSection({ clients }: { clients: string[] }) {
+    let [ref, { width }] = useMeasure()
+    const xTrans = useMotionValue(0)
+    useEffect(() => {
+        let controls
+        let finalPos = -width / 3 - clients.length
+        controls = animate(xTrans, [0, finalPos], {
+            ease: 'linear',
+            duration: 25,
+            repeat: Infinity,
+            repeatType: 'loop',
+            repeatDelay: 0,
+        })
+
+        return controls.stop
+    }, [width, xTrans])
+    return (
+        <section id="clients" className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]">
+            <h1 className="text-2xl text-primary md:text-4xl">And many more...</h1>
+            <div className="relative mt-8 h-[10rem] w-lvw py-4">
+                <motion.div style={{ x: xTrans }} className="absolute left-0 flex h-full w-max gap-8 z-10" ref={ref}>
+                    {[...clients, ...clients, ...clients].map((image, idx) => (
+                        <div key={idx} className="max-h-full w-[12rem]">
+                            <img
+                                src={`/logos/${image}.webp`}
+                                alt={`img ${idx}`}
+                                className="h-full w-full object-contain"
+                            />
+                        </div>
+                    ))}
+                </motion.div>
+                <img
+                    src="grid.svg"
+                    alt="grid"
+                    className="clients-grid absolute left-[50%] top-[50%] w-lvw translate-x-[-50%] translate-y-[-50%] opacity-40"
+                />
+            </div>
         </section>
     )
 }

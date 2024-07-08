@@ -49,7 +49,7 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #3379614D;
+    background: #3379614d;
     transition: background 0.3s ease;
 }
 
@@ -64,4 +64,19 @@ p {
 .footer-grid-clip {
     mask-image: linear-gradient(to bottom, transparent -30%, rgba(255, 255, 255, 1) 100%);
     -webkit-mask: linear-gradient(to bottom, transparent -30%, rgba(255, 255, 255, 1) 100%);
+}
+
+.portfolio-grid {
+    mask-image: linear-gradient(to bottom, transparent 20%, rgba(255, 255, 255, 1) 50%, transparent 90%);
+    -webkit-mask: linear-gradient(to bottom, transparent 20%, rgba(255, 255, 255, 1) 50%, transparent 90%);
+}
+
+.desktop-preview-grid {
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+    -webkit-mask: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.clients-grid {
+    mask-image: linear-gradient(to bottom, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%);
+    -webkit-mask: linear-gradient(to bottom, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%);
 }

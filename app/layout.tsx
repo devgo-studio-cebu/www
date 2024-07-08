@@ -12,7 +12,7 @@ const mont = Montserrat({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
+        <html lang="en" className='bg-background'>
             <body className={mont.className + ' relative overflow-x-hidden bg-background text-text'}>
                 <Navbar>
                     <NavLink href="/#about">About Us</NavLink>
