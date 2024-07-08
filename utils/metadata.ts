@@ -25,7 +25,7 @@ export default function consMeta({
             }]
         },
         icons,
-        metadataBase: new URL('https://www.sync2va.com'),
+        metadataBase: new URL('https://www.devgo.studio'),
         ...(noIndex && {
             robots: {
                 index: true,
