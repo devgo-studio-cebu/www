@@ -317,7 +317,7 @@ export function PortfolioSection({
                 />
                 <motion.div
                     style={{ height: scrolPos }}
-                    className="absolute top-0 w-1 bg-gradient-to-b from-primary to-secondary-30"
+                    className="absolute top-0 w-1 bg-gradient-to-b from-primary from-90% to-transparent to-[100%]"
                 />
                 {projects.map((project, idx) => checkSide(project, idx))}
             </div>
@@ -370,7 +370,7 @@ function DesktopProjectLeft({ project }: { project: any }) {
             <div className="relative col-span-1 flex items-center justify-between">
                 <motion.div
                     style={{ width: scrolPos }}
-                    className="absolute right-0 h-1 bg-gradient-to-l from-primary to-secondary-30"
+                    className="absolute right-0 h-1 bg-gradient-to-l from-primary from-60% to-transparent to-[100%]"
                 />
                 <motion.div style={{ opacity: opStat }} className="w-1/2">
                     {project.logo && <Image src={project.logo} alt={project.name} className="w-4/5" />}
@@ -433,7 +433,7 @@ function DesktopProjectRight({ project }: { project: any }) {
             <div className="relative col-span-1 flex items-center justify-between">
                 <motion.div
                     style={{ width: scrolPos }}
-                    className="absolute left-0 h-1 bg-gradient-to-r from-primary to-secondary-30"
+                    className="absolute left-0 h-1 bg-gradient-to-r from-primary from-60% to-transparent to-[100%]"
                 />
                 <motion.div style={{ opacity: opStat }} className="grid w-1/2 grid-rows-2 gap-4">
                     <p className="flex flex-col justify-end bg-gradient-to-br from-red-200 to-text bg-clip-text pl-4 text-left font-bold text-transparent">
