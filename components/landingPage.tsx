@@ -338,7 +338,7 @@ function MobileProjectCard({ project }: { project: any }) {
         >
             <img src="grid.svg" alt="grid" className="portfolio-grid absolute z-0 scale-110" />
             {project.logo && <Image src={project.logo} alt={project.name} className="w-1/3" />}
-            <p className="bg-gradient-to-br from-red-200 to-text bg-clip-text font-semibold text-transparent">
+            <p className="bg-gradient-to-br from-red-200 to-text bg-clip-text text-center font-semibold text-transparent">
                 {project.desc}
             </p>
             <p className="bg-gradient-to-br from-red-200 to-text bg-clip-text font-bold text-transparent">
@@ -471,7 +471,7 @@ export function ClientSection({ clients }: { clients: string[] }) {
         <section id="clients" className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]">
             <h1 className="text-2xl text-primary md:text-4xl">And many more...</h1>
             <div className="relative mt-8 h-[10rem] w-lvw py-4">
-                <motion.div style={{ x: xTrans }} className="absolute left-0 flex h-full w-max gap-8 z-10" ref={ref}>
+                <motion.div style={{ x: xTrans }} className="absolute left-0 z-10 flex h-full w-max gap-8" ref={ref}>
                     {[...clients, ...clients, ...clients].map((image, idx) => (
                         <div key={idx} className="max-h-full w-[12rem]">
                             <img
