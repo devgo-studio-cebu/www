@@ -1,7 +1,17 @@
 'use server'
+import { Ratelimit } from '@upstash/ratelimit'
+import { Redis } from '@upstash/redis'
+import { headers } from 'next/headers'
 import { Resend } from 'resend'
 
 const mail = new Resend(process.env.RESEND_API_KEY)
+
+const redis = Redis.fromEnv()
+
+const rateLimit = new Ratelimit({
+    redis: redis,
+    limiter: Ratelimit.slidingWindow(1, '10 s'),
+})
 
 export type contactData = {
     name: string
@@ -11,6 +21,15 @@ export type contactData = {
 }
 
 export async function SendMail(content: contactData) {
+    const ip = headers().get('x-forwarded-for') ?? '127.0.0.1'
+    const { success, reset } = await rateLimit.limit(ip)
+
+    if (!success) {
+        const now = Date.now()
+        const retryAfter = Math.floor((reset - now) / 1000)
+        return 'Too many Requests! Retry after ' + retryAfter + 's'
+    }
+
     try {
         const { data, error } = await mail.emails.send({
             from: 'devgo <contact@devgo.studio>',

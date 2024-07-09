@@ -191,6 +191,10 @@ export function ContactSection() {
         const form = e.target as HTMLFormElement
         const formData = new FormData(form)
         const phone = formData.get('phone') as string
+        if (formData.get('bot-field') as string) {
+            setBut(false)
+            return
+        }
         if (phone.length < 10 || /[a-zA-Z]/.test(phone)) {
             setStatus('Please enter a valid phone number')
             setBut(false)
@@ -262,6 +266,7 @@ export function ContactSection() {
                 >
                     {status}
                 </button>
+                <input type="hidden" name="bot-field" />
             </form>
         </section>
     )
