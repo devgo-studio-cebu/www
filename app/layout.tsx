@@ -5,6 +5,7 @@ import './globals.css'
 import consMeta from '@/utils/metadata'
 import Navbar, { NavLink } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = consMeta()
 
@@ -12,7 +13,7 @@ const mont = Montserrat({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en" className='bg-background overflow-x-clip'>
+        <html lang="en" className="overflow-x-clip bg-background">
             <body className={mont.className + ' relative overflow-x-clip bg-background text-text'}>
                 <Navbar>
                     <NavLink href="/#about">About Us</NavLink>
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 </Navbar>
                 {children}
                 <Footer />
+                <SpeedInsights />
             </body>
         </html>
     )

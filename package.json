@@ -11,6 +11,7 @@
     "dependencies": {
         "@upstash/ratelimit": "^1.2.1",
         "@upstash/redis": "^1.32.0",
+        "@vercel/speed-insights": "^1.0.12",
         "framer-motion": "^11.0.8",
         "lucide-react": "^0.402.0",
         "next": "14.1.0",
