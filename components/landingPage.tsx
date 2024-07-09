@@ -555,7 +555,7 @@ export function TeamSection({
                         <motion.div
                             layout
                             className={
-                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center rounded-lg border-2 shadow-primary-30 transition-colors transition-shadow duration-300' +
+                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center rounded-lg border-2 shadow-primary-30 transition-[box-shadow,color,background-color,border-color,fill,stroke] duration-300' +
                                 (idx === 2 ? ' z-10 border-primary shadow-[0_0_40px_0px]' : ' z-0 border-transparent')
                             }
                             key={member.name}
@@ -614,9 +614,14 @@ export function TeamSection({
             {card[2].skills && (
                 <div className="mt-8">
                     <p className="text-center text-base text-text-30">Skills</p>
-                    <div className="flex flex-wrap justify-center gap-6 mt-4">
+                    <div className="mt-4 flex flex-wrap justify-center gap-6">
                         {card[2].skills.map((skill, idx) => (
-                            <img key={idx} src={`/skills/${skill}.webp`} alt={skill} className="h-8 w-8 md:h-12 md:w-12" />
+                            <img
+                                key={idx}
+                                src={`/skills/${skill}.webp`}
+                                alt={skill}
+                                className="h-8 w-8 md:h-12 md:w-12"
+                            />
                         ))}
                     </div>
                 </div>
