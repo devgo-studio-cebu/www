@@ -1,11 +1,27 @@
 Official Website of Devgo.studio
 
-## To add Team Profile
+## To add and edit team profile
 
 navigate to
-`./public/team/`
-add your 450x450 webp photo
+`./public/members`
+and add or remove your webp photo
 
-then go to
-`./utils/teamProfile.ts`
-add your profile info, you only need to place the file name of your photo, yes it has typesafety
+for details, go to
+`./utils/teamProfile.tsx`
+and change your details there. my (adrian) profile has all the possible inputs so that should help you out
+
+for the skills, you can choose from the given or add a webp
+
+-   css
+-   figma
+-   framer
+-   html
+-   illustrator
+-   js
+-   typescript
+-   mysql
+-   nextjs
+-   react
+-   tailwind
+    ... please add if you add in
+    `./public/skills`

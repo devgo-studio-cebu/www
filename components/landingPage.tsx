@@ -497,22 +497,20 @@ export function ClientSection({ clients }: { clients: string[] }) {
     )
 }
 
-export function TeamSection({
-    members,
-}: {
-    members: {
-        image: StaticImageData
-        name: string
-        role: string
-        socials?: {
-            fb?: string
-            x?: string
-            li?: string
-            in?: string
-        }
-        skills?: string[]
-    }[]
-}) {
+export type Member = {
+    image: StaticImageData
+    name: string
+    role: string
+    socials?: {
+        fb?: string
+        x?: string
+        li?: string
+        in?: string
+    }
+    skills?: string[]
+}
+
+export function TeamSection({ members }: { members: Member[] }) {
     const [card, setCard] = useState(members)
     const handleNext = (idx: number) => {
         if (idx === 0) {
