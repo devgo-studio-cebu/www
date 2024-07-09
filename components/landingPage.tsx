@@ -533,12 +533,7 @@ export function TeamSection({
     }
     const handleExit = (idx: number) => {
         if (idx === 0) return '-50%'
-        if (idx === 2) return '50%'
-    }
-    const handleEnter = (idx: number) => {
-        if (idx === 0) return '-25%'
-        if (idx === 2) return '25%'
-        return 0
+        if (idx === 4) return '50%'
     }
     return (
         <section id="team" className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]">
@@ -559,7 +554,7 @@ export function TeamSection({
                                 (idx === 2 ? ' z-10 border-primary shadow-[0_0_40px_0px]' : ' z-0 border-transparent')
                             }
                             key={member.name}
-                            initial={{ opacity: 0, x: handleEnter(idx) }}
+                            initial={{ opacity: 0 }}
                             animate={{ opacity: handlePos(idx), x: 0, scale: handleScale(idx) }}
                             exit={{ opacity: 0, x: handleExit(idx) }}
                         >
