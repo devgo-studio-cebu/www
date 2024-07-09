@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image'
 
 import logo from '@/public/logo.svg'
 import Link from 'next/link'
-import { Check } from 'lucide-react'
+import { Check, ChevronLeft, ChevronRight, Facebook, Instagram, Linkedin, Twitter, XIcon } from 'lucide-react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { SendMail } from '@/utils/serverActions'
@@ -488,6 +488,139 @@ export function ClientSection({ clients }: { clients: string[] }) {
                     className="clients-grid absolute left-[50%] top-[50%] w-lvw translate-x-[-50%] translate-y-[-50%] opacity-40"
                 />
             </div>
+        </section>
+    )
+}
+
+export function TeamSection({
+    members,
+}: {
+    members: {
+        image: StaticImageData
+        name: string
+        role: string
+        socials?: {
+            fb?: string
+            x?: string
+            li?: string
+            in?: string
+        }
+        skills?: string[]
+    }[]
+}) {
+    const [card, setCard] = useState(members)
+    const handleNext = (idx: number) => {
+        if (idx === 0) {
+            const temp = [...card]
+            temp.unshift(temp.pop() as any)
+            setCard(temp)
+        } else if (idx === 1) {
+            const temp = [...card]
+            setCard([...temp.slice(1), ...temp.slice(0, 1)])
+        }
+    }
+    const handlePos = (idx: number) => {
+        if (idx === 2) {
+            return 1
+        }
+        return 0.4
+    }
+    const handleScale = (idx: number) => {
+        if (idx === 2) {
+            return 1
+        }
+        return 0.9
+    }
+    const handleExit = (idx: number) => {
+        if (idx === 0) return '-50%'
+        if (idx === 2) return '50%'
+    }
+    const handleEnter = (idx: number) => {
+        if (idx === 0) return '-25%'
+        if (idx === 2) return '25%'
+        return 0
+    }
+    return (
+        <section id="team" className="relative flex min-h-[fit] flex-col items-center px-4 py-[10svh] md:px-[10svw]">
+            <div className="flex max-w-2xl flex-col items-center gap-4">
+                <h1 className="text-2xl text-primary md:text-4xl">The Team</h1>
+                <p className="text-justify text-text-30">
+                    Swipe through our carefully handpicked members that are full of talent, vigor, and most importantly,
+                    a team player.
+                </p>
+            </div>
+            <div className="team-mask relative flex h-[30rem] w-max flex-nowrap items-center justify-center gap-4">
+                <AnimatePresence mode="popLayout" initial={false}>
+                    {card.slice(0, 5).map((member, idx) => (
+                        <motion.div
+                            layout
+                            className={
+                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center rounded-lg border-2 shadow-primary-30 transition-colors transition-shadow duration-300' +
+                                (idx === 2 ? ' z-10 border-primary shadow-[0_0_40px_0px]' : ' z-0 border-transparent')
+                            }
+                            key={member.name}
+                            initial={{ opacity: 0, x: handleEnter(idx) }}
+                            animate={{ opacity: handlePos(idx), x: 0, scale: handleScale(idx) }}
+                            exit={{ opacity: 0, x: handleExit(idx) }}
+                        >
+                            <Image
+                                src={member.image}
+                                alt={member.name}
+                                className="h-full select-none rounded-lg object-cover"
+                            />
+                            <div className="absolute bottom-0 flex h-[50%] w-full items-end justify-center gap-6 rounded-b-lg bg-gradient-to-t from-black from-20% to-transparent pb-4">
+                                {member.socials?.fb && (
+                                    <Link href={member.socials?.fb as string}>
+                                        <Facebook className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                    </Link>
+                                )}
+                                {member.socials?.x && (
+                                    <Link href={member.socials?.x as string}>
+                                        <Twitter className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                    </Link>
+                                )}
+                                {member.socials?.li && (
+                                    <Link href={member.socials?.li as string}>
+                                        <Linkedin className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                    </Link>
+                                )}
+                                {member.socials?.in && (
+                                    <Link href={member.socials?.in as string}>
+                                        <Instagram className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                    </Link>
+                                )}
+                            </div>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+                <div
+                    className="group absolute left-[35%] top-[50%] z-10 flex h-8 w-8 translate-y-[-50%] cursor-pointer items-center justify-center rounded-full bg-gradient-to-l from-secondary-30 to-secondary transition-colors duration-300 hover:bg-primary"
+                    onClick={() => handleNext(0)}
+                >
+                    <ChevronLeft className="stroke-primary transition-colors duration-300 group-hover:stroke-text" />
+                </div>
+                <div
+                    className="absolute right-[35%] top-[50%] z-10 flex h-8 w-8 translate-y-[-50%] cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-secondary-30 to-secondary transition-colors duration-300 hover:bg-primary"
+                    onClick={() => handleNext(1)}
+                >
+                    <ChevronRight className="stroke-primary transition-colors duration-300 group-hover:stroke-text" />
+                </div>
+            </div>
+            <div className="h-[2px] w-full bg-gradient-to-r from-transparent from-10% via-primary to-transparent to-90%" />
+            <div className="mt-8 flex flex-col items-center">
+                <h2 className="text-2xl text-primary">{card[2].name}</h2>
+                <p className="text-center text-base text-text-30">{card[2].role}</p>
+            </div>
+            {card[2].skills && (
+                <div className="mt-8">
+                    <p className="text-center text-base text-text-30">Skills</p>
+                    <div className="flex flex-wrap justify-center gap-6 mt-4">
+                        {card[2].skills.map((skill, idx) => (
+                            <img key={idx} src={`/skills/${skill}.webp`} alt={skill} className="h-8 w-8 md:h-12 md:w-12" />
+                        ))}
+                    </div>
+                </div>
+            )}
         </section>
     )
 }

@@ -80,3 +80,8 @@ p {
     mask-image: linear-gradient(to bottom, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%);
     -webkit-mask: linear-gradient(to bottom, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%);
 }
+
+.team-mask {
+    mask-image: linear-gradient(to right, transparent 5%, white, transparent 95%);
+    -webkit-mask: linear-gradient(to right, transparent 5%, white, transparent 95%);
+}

@@ -56,7 +56,7 @@ export function Footer() {
                         </Link>
                     </div>
                 </div>
-                <hr className="w-full border-primary-30" />
+                <div className="h-[2px] w-full bg-gradient-to-r from-transparent from-10% via-primary to-transparent to-90%" />
                 <small className="text-text-30">
                     Copyright &copy; {new Date().getFullYear()} DEVGO Studio. All Rights Reserved.
                 </small>

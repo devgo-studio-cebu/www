@@ -18,7 +18,7 @@ export default function Navbar({ children }: { children?: React.ReactNode }) {
     return (
         <nav
             className={
-                'sticky top-0 z-20 flex min-w-full items-center justify-between px-4 py-4 backdrop-blur-sm md:px-[5svw] transition-colors duration-300' +
+                'sticky top-0 z-50 flex min-w-full items-center justify-between px-4 py-4 backdrop-blur-sm md:px-[5svw] transition-colors duration-300' +
                 ' ' +
                 setBg(menu)
             }
