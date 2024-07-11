@@ -281,18 +281,16 @@ export function ContactSection() {
     )
 }
 
-export function PortfolioSection({
-    projects,
-}: {
-    projects: {
-        name: string
-        logo?: StaticImageData
-        date: string
-        desc: string
-        preview?: StaticImageData
-        link: string
-    }[]
-}) {
+export type Project = {
+    name: string
+    logo?: StaticImageData
+    date: string
+    desc: string
+    preview?: StaticImageData
+    link: string
+}
+
+export function PortfolioSection({ projects }: { projects: Project[] }) {
     const scrollRef = useRef(null)
     const startRef = useRef(null)
     const { scrollYProgress } = useScroll({
