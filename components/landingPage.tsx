@@ -3,7 +3,16 @@ import Image, { StaticImageData } from 'next/image'
 
 import logo from '@/public/logo.svg'
 import Link from 'next/link'
-import { Check, ChevronLeft, ChevronRight, Facebook, Instagram, Linkedin, Twitter, XIcon } from 'lucide-react'
+import {
+    Check,
+    ChevronLeft,
+    ChevronRight,
+    Facebook,
+    Instagram,
+    Linkedin,
+    Link as LinkIcon,
+    Twitter,
+} from 'lucide-react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { SendMail } from '@/utils/serverActions'
@@ -506,6 +515,7 @@ export type Member = {
         x?: string
         li?: string
         in?: string
+        personal?: string
     }
     skills?: string[]
 }
@@ -585,6 +595,11 @@ export function TeamSection({ members }: { members: Member[] }) {
                                 {member.socials?.in && (
                                     <Link href={member.socials?.in as string}>
                                         <Instagram className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                    </Link>
+                                )}
+                                {member.socials?.personal && (
+                                    <Link href={member.socials?.personal as string}>
+                                        <LinkIcon className="h-4 w-4 transition-colors hover:stroke-secondary" />
                                     </Link>
                                 )}
                             </div>

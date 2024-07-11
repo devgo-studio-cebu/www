@@ -19,5 +19,6 @@ for the skills, you can choose from the given
 -   nextjs
 -   react
 -   tailwind
+-   php
 
- or add a webp in `./public/skills` and update the list here
+or add a webp in `./public/skills` and update the list here

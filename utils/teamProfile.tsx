@@ -47,8 +47,8 @@ export const teamProfile: Member[] = [
         socials: {
             fb: 'https://www.facebook.com/peterosneal',
             li: 'https://www.linkedin.com/in/neal-peteros-02a164275/',
-        }
-    }
+        },
+    },
 ]
 
 // Member imports
@@ -58,4 +58,4 @@ import bessa from '@/public/members/bessa.webp'
 import julz from '@/public/members/julz.webp'
 import stanlee from '@/public/members/stanlee.webp'
 import carlo from '@/public/members/carlo.webp'
-import neal from '@/public/members/neal.webp';
+import neal from '@/public/members/neal.webp'

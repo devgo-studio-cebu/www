@@ -46,7 +46,7 @@ export default async function LandingPage() {
                         name: 'KLBHS',
                         logo: klbhs,
                         date: 'February 28, 2024',
-                        desc: 'A Cebu Based Creative Studio',
+                        desc: 'Cebu Based Creative Studio',
                         preview: klbhs_preview,
                         link: 'https://klbhs.com',
                     },
