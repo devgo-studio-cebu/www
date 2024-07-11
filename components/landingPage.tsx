@@ -297,7 +297,7 @@ export function PortfolioSection({
     const startRef = useRef(null)
     const { scrollYProgress } = useScroll({
         target: scrollRef,
-        offset: ['start 80%', '100% end'],
+        offset: ['start 80vh', 'end 80vh'],
     })
     const { scrollYProgress: startProg } = useScroll({
         target: scrollRef,
