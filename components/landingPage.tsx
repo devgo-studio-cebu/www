@@ -13,7 +13,7 @@ import {
     Link as LinkIcon,
     Twitter,
 } from 'lucide-react'
-import { motion, AnimatePresence, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { SendMail } from '@/utils/serverActions'
 import useMeasure from 'react-use-measure'
@@ -338,14 +338,15 @@ export function PortfolioSection({ projects }: { projects: Project[] }) {
 }
 
 function MobileProjectCard({ project }: { project: any }) {
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true })
+    const viewRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: viewRef,
+        offset: ['end end', 'end 80vh'],
+    })
     return (
         <motion.div
-            ref={ref}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isInView ? 1 : 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            ref={viewRef}
+            style={{ opacity: scrollYProgress }}
             className="relative flex w-full flex-col items-center justify-center gap-2 *:z-10"
         >
             <img src="grid.svg" alt="grid" className="portfolio-grid absolute z-0 scale-110" />
@@ -561,7 +562,7 @@ export function TeamSection({ members }: { members: Member[] }) {
                         <motion.div
                             layout
                             className={
-                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center rounded-lg border-2 shadow-primary-30 transition-[box-shadow,color,background-color,border-color,fill,stroke] duration-300' +
+                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center rounded-lg border-2 shadow-primary-30 transition-[box-shadow,color,background-color,border-color,fill,stroke] duration-300 overflow-clip' +
                                 (idx === 2 ? ' z-10 border-primary shadow-[0_0_40px_0px]' : ' z-0 border-transparent')
                             }
                             key={member.name}
@@ -572,7 +573,7 @@ export function TeamSection({ members }: { members: Member[] }) {
                             <Image
                                 src={member.image}
                                 alt={member.name}
-                                className="h-full select-none rounded-lg object-cover"
+                                className="h-full select-none object-cover"
                             />
                             <div className="absolute bottom-0 flex h-[50%] w-full items-end justify-center gap-6 rounded-b-lg bg-gradient-to-t from-black from-20% to-transparent pb-4">
                                 {member.socials?.fb && (
@@ -626,14 +627,20 @@ export function TeamSection({ members }: { members: Member[] }) {
                 <div className="mt-8">
                     <p className="text-center text-base text-text-30">Skills</p>
                     <div className="mt-4 flex flex-wrap justify-center gap-6">
-                        {card[2].skills.map((skill, idx) => (
-                            <img
-                                key={idx}
-                                src={`/skills/${skill}.webp`}
-                                alt={skill}
-                                className="h-8 w-8 md:h-12 md:w-12"
-                            />
-                        ))}
+                        <AnimatePresence mode='popLayout' initial={false}>
+                            {card[2].skills.map((skill, idx) => (
+                                <motion.img
+                                    key={idx + ' ' + skill + ' ' + card[2].name}
+                                    src={`/skills/${skill}.webp`}
+                                    alt={skill}
+                                    className="h-8 w-8 md:h-12 md:w-12"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ delay: idx * 0.1 }}
+                                />
+                            ))}
+                        </AnimatePresence>
                     </div>
                 </div>
             )}
