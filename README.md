@@ -10,10 +10,10 @@ for the skills, you can choose from the given
 
 -   css
 -   figma
--   framer
+-   framer-motion
 -   html
 -   illustrator
--   js
+-   javascript
 -   typescript
 -   mysql
 -   nextjs

@@ -520,14 +520,18 @@ export type Member = {
 }
 
 export function TeamSection({ members }: { members: Member[] }) {
-    const [card, setCard] = useState(members)
+    const [card, setCard] = useState([
+        ...members.slice(members.length - 2, members.length),
+        ...members.slice(0, 3),
+        ...members.slice(3, members.length - 2),
+    ])
+
     const handleNext = (idx: number) => {
+        const temp = [...card]
         if (idx === 0) {
-            const temp = [...card]
             temp.unshift(temp.pop() as any)
             setCard(temp)
         } else if (idx === 1) {
-            const temp = [...card]
             setCard([...temp.slice(1), ...temp.slice(0, 1)])
         }
     }
@@ -562,7 +566,7 @@ export function TeamSection({ members }: { members: Member[] }) {
                         <motion.div
                             layout
                             className={
-                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center rounded-lg border-2 shadow-primary-30 transition-[box-shadow,color,background-color,border-color,fill,stroke] duration-300 overflow-clip' +
+                                'relative flex h-[24rem] w-[15rem] select-none flex-col items-center overflow-clip rounded-lg border-2 shadow-primary-30 transition-[box-shadow,color,background-color,border-color,fill,stroke] duration-300' +
                                 (idx === 2 ? ' z-10 border-primary shadow-[0_0_40px_0px]' : ' z-0 border-transparent')
                             }
                             key={member.name}
@@ -570,37 +574,46 @@ export function TeamSection({ members }: { members: Member[] }) {
                             animate={{ opacity: handlePos(idx), x: 0, scale: handleScale(idx) }}
                             exit={{ opacity: 0, x: handleExit(idx) }}
                         >
-                            <Image
-                                src={member.image}
-                                alt={member.name}
-                                className="h-full select-none object-cover"
-                            />
-                            <div className="absolute bottom-0 flex h-[50%] w-full items-end justify-center gap-6 rounded-b-lg bg-gradient-to-t from-black from-20% to-transparent pb-4">
-                                {member.socials?.fb && (
-                                    <Link href={member.socials?.fb as string}>
-                                        <Facebook className="h-4 w-4 transition-colors hover:stroke-secondary" />
-                                    </Link>
-                                )}
-                                {member.socials?.x && (
-                                    <Link href={member.socials?.x as string}>
-                                        <Twitter className="h-4 w-4 transition-colors hover:stroke-secondary" />
-                                    </Link>
-                                )}
-                                {member.socials?.li && (
-                                    <Link href={member.socials?.li as string}>
-                                        <Linkedin className="h-4 w-4 transition-colors hover:stroke-secondary" />
-                                    </Link>
-                                )}
-                                {member.socials?.in && (
-                                    <Link href={member.socials?.in as string}>
-                                        <Instagram className="h-4 w-4 transition-colors hover:stroke-secondary" />
-                                    </Link>
-                                )}
-                                {member.socials?.personal && (
-                                    <Link href={member.socials?.personal as string}>
-                                        <LinkIcon className="h-4 w-4 transition-colors hover:stroke-secondary" />
-                                    </Link>
-                                )}
+                            <Image src={member.image} alt={member.name} className="h-full select-none object-cover" />
+
+                            <div className="absolute bottom-0 flex h-[50%] w-full items-end justify-center rounded-b-lg bg-gradient-to-t from-black from-20% to-transparent pb-4">
+                                <AnimatePresence initial={false}>
+                                    {idx === 2 && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.5 }}
+                                            className="flex w-full justify-center gap-6"
+                                        >
+                                            {member.socials?.fb && (
+                                                <Link href={member.socials?.fb as string}>
+                                                    <Facebook className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                                </Link>
+                                            )}
+                                            {member.socials?.x && (
+                                                <Link href={member.socials?.x as string}>
+                                                    <Twitter className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                                </Link>
+                                            )}
+                                            {member.socials?.li && (
+                                                <Link href={member.socials?.li as string}>
+                                                    <Linkedin className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                                </Link>
+                                            )}
+                                            {member.socials?.in && (
+                                                <Link href={member.socials?.in as string}>
+                                                    <Instagram className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                                </Link>
+                                            )}
+                                            {member.socials?.personal && (
+                                                <Link href={member.socials?.personal as string}>
+                                                    <LinkIcon className="h-4 w-4 transition-colors hover:stroke-secondary" />
+                                                </Link>
+                                            )}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </motion.div>
                     ))}
@@ -621,29 +634,54 @@ export function TeamSection({ members }: { members: Member[] }) {
             <div className="h-[2px] w-full bg-gradient-to-r from-transparent from-10% via-primary to-transparent to-90%" />
             <div className="mt-8 flex flex-col items-center">
                 <h2 className="text-2xl text-primary">{card[2].name}</h2>
-                <p className="text-center text-base text-text-30">{card[2].role}</p>
+                <p className="text-center text-base text-text-30">{card[2].role || '-'}</p>
             </div>
-            {card[2].skills && (
-                <div className="mt-8">
-                    <p className="text-center text-base text-text-30">Skills</p>
-                    <div className="mt-4 flex flex-wrap justify-center gap-6">
-                        <AnimatePresence mode='popLayout' initial={false}>
+            <div className="mt-8">
+                <p className="text-center text-base text-text-30">Skills</p>
+                <div className="mt-4 flex h-14 flex-wrap items-center justify-center gap-6">
+                    {card[2].skills && (
+                        <AnimatePresence mode="popLayout" initial={true}>
                             {card[2].skills.map((skill, idx) => (
-                                <motion.img
-                                    key={idx + ' ' + skill + ' ' + card[2].name}
-                                    src={`/skills/${skill}.webp`}
-                                    alt={skill}
-                                    className="h-8 w-8 md:h-12 md:w-12"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ delay: idx * 0.1 }}
-                                />
+                                <div className="relative" key={idx + ' ' + skill + ' ' + card[2].name}>
+                                    <SkillPopup skill={skill} idx={idx} name={card[2].name} />
+                                </div>
                             ))}
                         </AnimatePresence>
-                    </div>
+                    )}
                 </div>
-            )}
+            </div>
         </section>
+    )
+}
+
+function SkillPopup({ skill, idx, name }: { skill: string; name: string; idx: number }) {
+    const [isHover, setIsHover] = useState(false)
+    return (
+        <>
+            <motion.img
+                key={idx + ' ' + skill + ' ' + name}
+                src={`/skills/${skill}.webp`}
+                alt={skill}
+                className="h-8 w-8 md:h-12 md:w-12"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                onMouseEnter={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+            />
+            <AnimatePresence>
+                {isHover && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -5, x: '-50%' }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        className="absolute left-[50%] top-[calc(100%+0.5rem)] w-max rounded-md bg-secondary-30 px-2 py-1 text-sm uppercase"
+                    >
+                        {skill.split('-').join(' ')}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     )
 }

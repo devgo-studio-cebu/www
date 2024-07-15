@@ -11,18 +11,33 @@ export const teamProfile: Member[] = [
             li: 'https://linkedin.com/adrianbonpin',
             in: 'https://instagram.com/adrianbonpin',
         },
-        skills: ['css', 'html', 'react', 'typescript', 'nextjs', 'tailwind', 'framer'],
-    },
-    {
-        image: stanlee,
-        name: 'Stanlee Achumbre',
-        role: '',
+        skills: ['css', 'html', 'react', 'typescript', 'nextjs', 'tailwind', 'framer-motion'],
     },
     {
         image: julz,
         name: 'Julz Cortes',
         role: 'Frontend Developer',
-        skills: ['react', 'html', 'css', 'js', 'mysql', 'tailwind'],
+        skills: ['react', 'html', 'css', 'javascript', 'mysql', 'tailwind'],
+    },
+    {
+        image: neal,
+        name: 'Neal Andrew Peteros',
+        role: 'Backend Developer',
+        skills: ['html', 'css', 'tailwind', 'php', 'mysql', 'javascript', 'typescript', 'react', 'nextjs'],
+        socials: {
+            fb: 'https://www.facebook.com/peterosneal',
+            li: 'https://www.linkedin.com/in/neal-peteros-02a164275/',
+        },
+    },
+    {
+        image: carlo,
+        name: 'Jan Carlo Juab',
+        role: 'Backend Developer',
+    },
+    {
+        image: stanlee,
+        name: 'Stanlee Achumbre',
+        role: '',
     },
     {
         image: bessa,
@@ -33,21 +48,6 @@ export const teamProfile: Member[] = [
         image: achille,
         name: 'Achille Lanutan',
         role: '',
-    },
-    {
-        image: carlo,
-        name: 'Jan Carlo Juab',
-        role: 'Backend Developer',
-    },
-    {
-        image: neal,
-        name: 'Neal Andrew Peteros',
-        role: 'Backend Developer',
-        skills: ['html', 'css', 'tailwind', 'php', 'mysql', 'js', 'typescript', 'react', 'nextjs'],
-        socials: {
-            fb: 'https://www.facebook.com/peterosneal',
-            li: 'https://www.linkedin.com/in/neal-peteros-02a164275/',
-        },
     },
 ]
 
