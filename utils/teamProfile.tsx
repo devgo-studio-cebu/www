@@ -30,24 +30,22 @@ export const teamProfile: Member[] = [
         },
     },
     {
-        image: carlo,
-        name: 'Jan Carlo Juab',
-        role: 'Backend Developer',
-    },
-    {
         image: stanlee,
         name: 'Stanlee Achumbre',
-        role: '',
+        role: 'Project Manager',
+        skills: ['html', 'css', 'php', 'mysql', 'javascript', 'react', 'nextjs'],
     },
     {
         image: bessa,
         name: 'Bessa Nicole',
-        role: '',
+        role: 'UI/UX',
+        skills: ['figma'],
     },
     {
         image: achille,
         name: 'Achille Lanutan',
-        role: '',
+        role: 'Frontend Developer',
+        skills: ['figma', 'html', 'css', 'javascript', 'tailwind', 'react'],
     },
 ]
 
@@ -57,5 +55,4 @@ import achille from '@/public/members/achille.webp'
 import bessa from '@/public/members/bessa.webp'
 import julz from '@/public/members/julz.webp'
 import stanlee from '@/public/members/stanlee.webp'
-import carlo from '@/public/members/carlo.webp'
 import neal from '@/public/members/neal.webp'

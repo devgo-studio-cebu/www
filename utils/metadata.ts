@@ -20,17 +20,19 @@ export default function consMeta({
             title,
             description,
             siteName: title,
-            images: [{
-                url: image
-            }]
+            images: [
+                {
+                    url: image,
+                },
+            ],
         },
         icons,
         metadataBase: new URL('https://www.devgo.studio'),
         ...(noIndex && {
             robots: {
                 index: true,
-                follow: true
-            }
-        })
+                follow: true,
+            },
+        }),
     }
 }
