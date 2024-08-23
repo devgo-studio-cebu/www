@@ -7,9 +7,9 @@ export const teamProfile: Member[] = [
         role: 'Frontend Developer',
         socials: {
             fb: 'https://facebook.com/adrianbonpin',
-            x: 'https://x.com/adrianbonpin',
             li: 'https://linkedin.com/adrianbonpin',
             in: 'https://instagram.com/adrianbonpin',
+            personal: 'https://adrianbonpin.com',
         },
         skills: ['css', 'html', 'react', 'typescript', 'nextjs', 'tailwind', 'framer-motion'],
     },
