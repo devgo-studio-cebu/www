@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 export default function consMeta({
     title = 'DEVGO Studio',
     description = 'A web development studio based in Cebu. Helping you build your dreams to reality.',
-    image = '/banner.webp',
+    image = '/banner.png',
     icons = '/icon.webp',
     noIndex = false,
 }: {
