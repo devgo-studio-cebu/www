@@ -7,23 +7,39 @@ import { services } from "../../lib/values"
     class='flex flex-col py-10 md:py-20 relative'
 >
     <h2
+        id='services-header'
         class='font-head font-extrabold text-4xl md:text-8xl flex flex-col uppercase'
     >
-        what we<span class='ml-16 md:ml-48'>offer</span>
+        <span
+            id='header-line-1'
+            class='opacity-0'
+            >what we</span
+        >
+        <span
+            id='header-line-2'
+            class='ml-16 md:ml-48 opacity-0'
+            >offer</span
+        >
     </h2>
-    <p class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl'>
+    <p
+        id='services-intro'
+        class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl'
+    >
         From scalable websites to mobile apps and smart AI, we build tools that
         move your ideas forward and bring them to life.
     </p>
-    <div class='flex flex-col space-y-6 mx-6 md:mx-12 mt-8 md:mt-14 md:w-max'>
+    <div
+        id='services-list'
+        class='flex flex-col space-y-6 mx-6 md:mx-12 mt-8 md:mt-14 md:w-max'
+    >
         {
             services.map((service) => (
-                <div class=''>
-                    <span class='flex flex-row flex-nowrap items-center gap-2 font-semibold text-lg'>
-                        <service.icon class='w-7 h-7 stroke-bg-secondary' />
-                        {service.title}
+                <div class='service-item opacity-0'>
+                    <span class='flex flex-row flex-nowrap items-center gap-2 font-semibold text-lg md:text-2xl uppercase'>
+                        <service.icon class='service-icon w-7 h-7 md:w-9 md:h-9 stroke-bg-secondary' />
+                        <span class='service-title'>{service.title}</span>
                     </span>
-                    <p class='ml-9 mt-1 text-base text-bg-secondary text-wrap'>
+                    <p class='service-desc ml-9 md:ml-11 mt-1 text-base md:text-lg text-bg-secondary text-wrap'>
                         {service.description}
                     </p>
                     <div class='w-full h-0.5 bg-linear-to-r from-transparent via-bg-secondary to-transparent mt-2' />
@@ -31,13 +47,64 @@ import { services } from "../../lib/values"
             ))
         }
     </div>
-    <p class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl'>
+    <p
+        id='services-closing'
+        class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl opacity-0'
+    >
         And much more. If you can dream it, we can build it.
     </p>
 </section>
 
 <script>
-    import { animate } from "animejs"
+    import { animate, onScroll, splitText, stagger } from "animejs"
 
-    
+    // Header
+    animate("#services-header span", {
+        autoplay: onScroll({
+            enter: "90% bottom",
+            target: "#services-header",
+        }),
+        opacity: [0, 1],
+        translateX: [-100, 0],
+        ease: "outCubic",
+        delay: stagger(500),
+    })
+
+    // Subheader
+    const { chars: servicesIntroChars } = splitText("#services-intro", {
+        words: true,
+        chars: true,
+    })
+    animate(servicesIntroChars, {
+        autoplay: onScroll({
+            enter: "90% top",
+            target: "#services-intro",
+        }),
+        opacity: [0, 1],
+        translateY: [20, 0],
+        ease: "outCubic",
+        delay: stagger(5),
+    })
+
+    // Services
+    animate(".service-item", {
+        autoplay: onScroll({
+            enter: "90% top",
+            target: "#services-list",
+        }),
+        opacity: [0, 1],
+        translateX: [-100, 0],
+        ease: "outCubic",
+        delay: stagger(300),
+    })
+
+    // Closing
+    animate("#services-closing", {
+        autoplay: onScroll({
+            enter: "90% top",
+            target: "#services-closing",
+        }),
+        opacity: [0, 1],
+        ease: "outCubic",
+    })
 </script>
