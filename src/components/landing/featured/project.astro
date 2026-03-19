@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets"
+import type { FeaturedProject } from "../../../lib/featured"
+
+interface Props extends FeaturedProject {}
+
+const { title, image, tags, link } = Astro.props
+const id = `featured-${title
+    .toLowerCase()
+    .replace(/[^\w-]/g, "")
+    .replace(/\s+/g, "-")}`
+---
+
+<div
+    id={id}
+    data-title-id={id}
+    class='w-[90svw] md:h-[90svh] featured-container relative flex flex-col justify-end'
+>
+    <Image
+        src={image}
+        alt=''
+        class='md:-z-1 md:absolute top-0 left-0 md:object-cover md:h-full md:w-full'
+    />
+    <div class='w-full pt-4 md:p-6 md:pt-24 relative'>
+        <div class="hidden md:block -z-1 absolute top-0 left-0 w-full h-full bg-linear-to-t from-black to-transparent"/>
+        <h3
+            class='text-2xl md:text-7xl font-head mix-blend-difference uppercase text-white'
+        >
+            {title}
+        </h3>
+        <ul class='flex flex-col gap-2 md:gap-4 mt-2 md:mt-4'>
+            {
+                tags.map((tag) => (
+                    <li class='text-white border text-xs md:text-base md:border-2 px-2 py-1 w-max mix-blend-difference font-bold rounded-2xl'>
+                        {tag}
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>

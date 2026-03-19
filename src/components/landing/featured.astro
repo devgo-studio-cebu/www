@@ -1,0 +1,80 @@
+---
+import { featuredProjects } from "../../lib/featured"
+import Project from "./featured/project.astro"
+---
+
+<section
+    id='featured'
+    class='flex flex-col py-10 md:py-20 relative'
+>
+    <h2
+        id='featured-header'
+        class='font-head font-extrabold text-4xl md:text-8xl flex flex-col uppercase'
+    >
+        <span class='opacity-0'>featured</span>
+        <span class='ml-16 md:ml-48 opacity-0'>works</span>
+    </h2>
+    <div
+        id='featured-projects'
+        class='flex flex-col items-center w-full gap-10 md:gap-2 mt-10 opacity-0'
+    >
+        {featuredProjects.map((project) => <Project {...project} />)}
+    </div>
+</section>
+<script>
+    import { animate, onScroll, splitText, stagger } from "animejs"
+
+    // Header
+    animate("#featured-header span", {
+        autoplay: onScroll({
+            enter: "90% bottom",
+            target: "#featured-header",
+        }),
+        opacity: [0, 1],
+        translateX: [-100, 0],
+        ease: "outCubic",
+        delay: stagger(500),
+    })
+
+    animate("#featured-projects", {
+        autoplay: onScroll({
+            enter: "90% top",
+            target: "#featured-projects",
+        }),
+        opacity: [0, 1],
+        translateY: [50, 0],
+        ease: "outCubic",
+    })
+
+    // Projects
+    const projectContainers = document.querySelectorAll(".featured-container")
+    projectContainers.forEach((cont) => {
+        const id = (cont as HTMLElement).dataset.titleId
+
+        animate(`#${id}`, {
+            autoplay: onScroll({
+                sync: 0.25,
+                enter: "bottom top",
+                leave: "top bottom",
+                target: `#${id}`,
+            }),
+            scale: [0.9, 1, 0.9],
+            opacity: [0.6, 1, 0.6],
+            ease: "inOutQuad",
+        })
+
+        animate([`#${id} div h3`, `#${id} div ul li`], {
+            autoplay: onScroll({
+                sync: 0.25,
+                enter: "bottom top",
+                leave: "top bottom",
+                target: `#${id}`,
+            }),
+            scale: [0.9, 1, 1],
+            opacity: [0.6, 1, 0.6],
+            translateX: ["100%", 0, 0],
+            ease: "inOutQuad",
+            delay: stagger(100),
+        })
+    })
+</script>
