@@ -25,6 +25,10 @@ export const links: Links[] = [
         url: "#case-studies"
     },
     {
+        name: "Dashboard",
+        url: "https://dash.devgo.studio"
+    },
+    {
         name: "Contact Us",
         url: "#contact"
     }
