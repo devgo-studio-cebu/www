@@ -13,14 +13,16 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
         Your digital space, built for a life in motion
     </h2>
 
-    <div class='logo-infinite-scroll w-full overflow-hidden'>
+    <div
+        class='logo-infinite-scroll w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]'
+    >
         <div
-            class='logo-scroll-track flex w-max gap-x-12 px-6 opacity-40'
+            class='logo-scroll-track flex w-max flex-nowrap'
             id='logo-track'
         >
             {
-                [...logos, ...logos].map((logo) => (
-                    <div class='logo-item shrink-0 flex items-center justify-center grayscale'>
+                [...logos, ...logos, ...logos].map((logo) => (
+                    <div class='logo-item shrink-0 flex items-center justify-center grayscale opacity-40 pr-12'>
                         <Image
                             src={logo}
                             alt='Partner logo'
@@ -35,27 +37,29 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
 </section>
 
 <style>
-    .logo-scroll-track {
+    /* Prevents layout thrashing */
+    #logo-track {
         will-change: transform;
     }
 </style>
 
 <script>
-    // Import the specific animate function for V4
     import { animate } from "animejs"
 
     const track = document.getElementById("logo-track")
 
-    if (
-        track &&
-        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-        animate(track, {
-            translateX: [0, "-50%"],
-
-            duration: 40000,
-            easing: "linear",
-            loop: true,
-        })
-    }
+    // We wait for 'load' to ensure all image widths are calculated by the browser
+    window.addEventListener("load", () => {
+        if (
+            track &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+            animate(track, {
+                translateX: [0, "-33.33%"],
+                duration: 25000, // Speed: Higher is slower
+                ease: "linear",
+                loop: true,
+            })
+        }
+    })
 </script>
