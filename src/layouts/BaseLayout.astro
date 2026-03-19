@@ -7,6 +7,13 @@ import "@fontsource-variable/montserrat"
 import Footer from "../components/footer.astro"
 import Navbar from "../components/navbar.astro"
 import Seo from "../components/seo.astro"
+import type { SEOProps } from "../types/seo"
+
+interface Props {
+  seo?: Partial<SEOProps>;
+}
+
+const { seo } = Astro.props
 ---
 
 <html
@@ -29,8 +36,8 @@ import Seo from "../components/seo.astro"
             name='generator'
             content={Astro.generator}
         />
-        <title>DEVGO Studio</title>
-        <Seo />
+        <title>{seo?.title || 'DEVGO Studio'}</title>
+        <Seo seo={seo} />
     </head>
     <body class='w-svw flex flex-col relative'>
         <Navbar />
