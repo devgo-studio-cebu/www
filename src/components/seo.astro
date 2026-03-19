@@ -47,6 +47,18 @@ function generateJsonLd() {
     ]
   }
 }
+
+const meta = {
+  title: seo.title || defaultTitle,
+  description: seo.description || defaultDescription,
+  canonical: seo.canonical || siteUrl,
+  image: seo.image || defaultImage,
+  type: seo.type || 'website',
+  publishedTime: seo.publishedTime,
+  modifiedTime: seo.modifiedTime,
+  author: seo.author,
+  keywords: seo.keywords || ['devgo', 'studio', 'creative', 'digital']
+}
 ---
 
 <head>
@@ -54,6 +66,45 @@ function generateJsonLd() {
     src='https://analytics.ranlabs.space/api/script.js'
     data-site-id='1'
     defer
-  ></script>
+  />
   <script type='application/ld+json' set:html={JSON.stringify(generateJsonLd())} />
+
+  <!-- Primary Meta Tags -->
+  <title>{meta.title}</title>
+  <meta name='title' content={meta.title} />
+  <meta name='description' content={meta.description} />
+  <meta name='keywords' content={meta.keywords.join(', ')} />
+  <meta name='author' content={meta.author || 'DEVGO Studio'} />
+
+  <!-- Canonical URL -->
+  <link rel='canonical' href={meta.canonical} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property='og:type' content={meta.type} />
+  <meta property='og:url' content={meta.canonical} />
+  <meta property='og:title' content={meta.title} />
+  <meta property='og:description' content={meta.description} />
+  <meta property='og:image' content={meta.image} />
+  <meta property='og:site_name' content='DEVGO Studio' />
+  <meta property='og:locale' content='en_US' />
+
+  <!-- Twitter -->
+  <meta name='twitter:card' content='summary_large_image' />
+  <meta name='twitter:url' content={meta.canonical} />
+  <meta name='twitter:title' content={meta.title} />
+  <meta name='twitter:description' content={meta.description} />
+  <meta name='twitter:image' content={meta.image} />
+  <meta name='twitter:site' content='@devgostudio' />
+  <meta name='twitter:creator' content='@devgostudio' />
+
+  <!-- Article specific (if type is article) -->
+  {meta.type === 'article' && meta.publishedTime && (
+    <meta property='article:published_time' content={meta.publishedTime} />
+  )}
+  {meta.type === 'article' && meta.modifiedTime && (
+    <meta property='article:modified_time' content={meta.modifiedTime} />
+  )}
+  {meta.type === 'article' && meta.author && (
+    <meta property='article:author' content={meta.author} />
+  )}
 </head>
