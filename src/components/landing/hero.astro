@@ -1,5 +1,61 @@
+---
+import { Image } from "astro:assets"
+
+const logoFiles = import.meta.glob("/src/assets/logos/*", { eager: true })
+const logos = Object.values(logoFiles).map((mod: any) => mod.default)
+---
+
 <section
     id='top'
-    class='w-full h-svh'
+    class='w-full h-svh relative flex flex-col justify-end py-8 items-center'
 >
+    <h2 class='text-sm md:text-lg uppercase mb-12 opacity-80 tracking-widest'>
+        Your digital space, built for a life in motion
+    </h2>
+
+    <div class='logo-infinite-scroll w-full overflow-hidden'>
+        <div
+            class='logo-scroll-track flex w-max gap-x-12 px-6 opacity-40'
+            id='logo-track'
+        >
+            {
+                [...logos, ...logos].map((logo) => (
+                    <div class='logo-item shrink-0 flex items-center justify-center grayscale'>
+                        <Image
+                            src={logo}
+                            alt='Partner logo'
+                            class='w-auto h-10 md:h-14 object-contain'
+                            loading='eager'
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
 </section>
+
+<style>
+    .logo-scroll-track {
+        will-change: transform;
+    }
+</style>
+
+<script>
+    // Import the specific animate function for V4
+    import { animate } from "animejs"
+
+    const track = document.getElementById("logo-track")
+
+    if (
+        track &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+        animate(track, {
+            translateX: [0, "-50%"],
+
+            duration: 40000,
+            easing: "linear",
+            loop: true,
+        })
+    }
+</script>
