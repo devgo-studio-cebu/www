@@ -30,6 +30,9 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: FacebookBot
+Allow: /
+
 # Sitemap
 Sitemap: ${siteUrl}/sitemap-index.xml
 
