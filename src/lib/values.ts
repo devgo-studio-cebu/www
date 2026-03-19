@@ -45,11 +45,11 @@ export const socials: Links[] = [
     },
     {
         name: "Github",
-        url: "https://www.github.com/devgostudio"
+        url: "https://github.com/devgo-studio-cebu"
     },
     {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/company/devgostudio"
+        url: "https://www.linkedin.com/company/devgo-studio/"
     },
 ]
 

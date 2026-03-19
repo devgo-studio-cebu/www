@@ -9,12 +9,12 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
     id='top'
     class='w-full h-svh relative flex flex-col justify-end py-8 items-center'
 >
-    <h2 class='text-sm md:text-lg uppercase mb-12 opacity-80 tracking-widest'>
+    <h2 class='text-sm md:text-lg uppercase mb-12 opacity-80 text-center mx-6'>
         Your digital space, built for a life in motion
     </h2>
 
     <div
-        class='logo-infinite-scroll w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]'
+        class='logo-infinite-scroll opacity-0 w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]'
     >
         <div
             class='logo-scroll-track flex w-max flex-nowrap'
@@ -48,7 +48,6 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
 
     const track = document.getElementById("logo-track")
 
-    // We wait for 'load' to ensure all image widths are calculated by the browser
     window.addEventListener("load", () => {
         if (
             track &&
@@ -56,10 +55,23 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
         ) {
             animate(track, {
                 translateX: [0, "-33.33%"],
-                duration: 25000, // Speed: Higher is slower
+                duration: 25000,
                 ease: "linear",
                 loop: true,
             })
         }
+    })
+
+    // Intro Animations
+    animate("#top h2", {
+        opacity: [0, 1],
+        translateY: [20, 0],
+        ease: "outCubic",
+    })
+
+    animate(".logo-infinite-scroll", {
+        opacity: [0, 1],
+        ease: "outCubic",
+        delay: 500,
     })
 </script>

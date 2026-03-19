@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-astro"
     class='w-full px-4 py-2 md:px-5 md:py-3 flex flex-row justify-between items-center bg-bg border-b border-bg-secondary fixed top-0 z-50'
 >
     <a
+        id='devgo'
         href='#top'
         class='text-lg uppercase font-bold flex flex-row flex-nowrap gap-1 px-1 hover:bg-text hover:text-bg transition-colors'
         >devgo<span class='font-normal'>studio</span></a
@@ -22,7 +23,7 @@ import { Menu, X } from "lucide-astro"
                 .map((link) => (
                     <a
                         href={link.url}
-                        class='flex flex-row gap-1 hover:bg-text hover:text-bg px-1 transition-colors'
+                        class='flex flex-row gap-1 hover:bg-text hover:text-bg px-1 transition-colors opacity-0 nav-link'
                     >
                         {link.name}
                         {link.extra && (
@@ -35,6 +36,7 @@ import { Menu, X } from "lucide-astro"
         }
     </div>
     <a
+        id='nav-contact'
         href='mailto:official@devgo.studio'
         class='hidden md:block uppercase hover:bg-text hover:text-bg px-1 transition-colors'
     >
@@ -79,3 +81,33 @@ import { Menu, X } from "lucide-astro"
         </div>
     </div>
 </nav>
+<script>
+    import { animate, splitText, stagger } from "animejs"
+
+    // Name
+    const { chars: nameChars } = splitText("#devgo", {
+        chars: true,
+    })
+    animate(nameChars, {
+        opacity: [0, 1],
+        translateY: [10, 0],
+        delay: stagger(50),
+        ease: "outCirc",
+    })
+
+    // Links - Desktop
+    animate([".nav-link", "#nav-contact"], {
+        opacity: [0, 1],
+        translateY: [10, 0],
+        delay: stagger(300, { start: 500 }),
+        ease: "outCirc",
+    })
+
+    // Menu toggle - Mobile
+    animate(".icon-menu", {
+        opacity: [0, 1],
+        translateY: [10, 0],
+        delay: 500,
+        ease: "outCirc",
+    })
+</script>
