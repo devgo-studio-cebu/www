@@ -24,10 +24,17 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 # Sitemap
 Sitemap: ${siteUrl}/sitemap-index.xml
 
-# Disallow admin/private areas
+# Disallow admin/private areas for all crawlers
+User-agent: *
 Disallow: /api/
 Disallow: /_astro/
 Disallow: /draft/
