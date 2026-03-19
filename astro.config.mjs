@@ -1,11 +1,43 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from "astro/config"
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite"
 
-// https://astro.build/config
+import sitemap from "@astrojs/sitemap"
+
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  }
-});
+    site: "https://devgo.studio",
+
+    vite: {
+        // @ts-ignore
+        plugins: [tailwindcss()],
+    },
+
+    integrations: [sitemap()],
+
+    fonts: [
+        {
+            provider: fontProviders.local(),
+            name: "MonumentExtended",
+            cssVariable: "--font-monument-extended",
+            options: {
+                variants: [
+                    {
+                        src: [
+                            "./src/assets/fonts/MonumentExtended-Regular.otf",
+                        ],
+                        weight: "400",
+                        style: "normal",
+                    },
+                    {
+                        src: [
+                            "./src/assets/fonts/MonumentExtended-Ultrabold.otf",
+                        ],
+                        weight: "800",
+                        style: "normal",
+                    },
+                ],
+            },
+        },
+    ],
+})

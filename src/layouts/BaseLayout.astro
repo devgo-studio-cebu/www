@@ -1,0 +1,38 @@
+---
+import "../styles/global.css"
+
+import { Font } from "astro:assets"
+// @ts-ignore
+import "@fontsource-variable/montserrat"
+import Footer from "../components/footer.astro"
+import Navbar from "../components/navbar.astro"
+---
+
+<html
+    lang='en'
+    class='antialiased overscroll-y-none bg-bg text-text tracking-tight'
+>
+    <head>
+        <Font cssVariable='--font-monument-extended' />
+        <meta charset='utf-8' />
+        <link
+            rel='icon'
+            type='image/svg+xml'
+            href='/favicon.svg'
+        />
+        <meta
+            name='viewport'
+            content='width=device-width'
+        />
+        <meta
+            name='generator'
+            content={Astro.generator}
+        />
+        <title>DEVGO Studio</title>
+    </head>
+    <body class='w-svw flex flex-col relative'>
+        <Navbar />
+        <slot />
+        <Footer />
+    </body>
+</html>

@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme inline {
+    /* FONTS */
+    --font-sans: "Montserrat Variable", sans-serif;
+    --font-head: var(--font-monument-extended);
+    /* COLORS */
+    --color-bg: #040906;
+    --color-bg-secondary: #757575;
+    --color-text: #f5f5f5;
+    --color-primary: #2f6553;
+    --color-accent: #5fcba6;
+    /* DEFAULTS */
+    --default-transition-duration: 300ms;
+}

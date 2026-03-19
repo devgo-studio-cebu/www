@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets"
+
+import { links, socials } from "../lib/values"
+
+import desk from "../assets/images/mini-studio.png"
+import { ArrowRight } from "lucide-astro"
+---
+
+<section
+    id='footer'
+    class='grid p-6 gap-10 md:grid-cols-2 md:grid-rows-2 h-max'
+>
+    <div class='flex flex-col'>
+        <p class='uppercase text-sm md:text-base'>
+            got something you want to build?
+        </p>
+        <a
+            href='#contact'
+            class='font-head uppercase text-xl md:text-2xl flex flex-row flex-nowrap gap-4 items-center group hover:bg-text hover:text-bg transition-colors px-1 py-2'
+        >
+            just hit go
+            <div class='flex-1 h-full relative'>
+                <div
+                    class='w-max h-auto aspect-square bg-text rounded-full p-1 absolute left-0 group-hover:left-[calc(100%-2rem)] transition-all'
+                >
+                    <ArrowRight class='text-bg h-5 w-5 stroke-3' />
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class='w-full h-auto md:hidden brightness-200'>
+        <Image
+            src={desk}
+            alt=''
+            class='w-full select-none pointer-events-none'
+            loading='lazy'
+        />
+    </div>
+    <div class='flex flex-col space-y-2 text-2xl md:text-3xl md:row-span-2'>
+        {
+            links.map((link) => (
+                <a
+                    href={link.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    class='hover:text-bg-secondary transition-colors flex flex-row flex-nowrap items-start gap-1 uppercase'
+                >
+                    {link.name}{" "}
+                    {link.extra && (
+                        <span class='text-xs text-bg-secondary'>
+                            ({link.extra})
+                        </span>
+                    )}
+                </a>
+            ))
+        }
+    </div>
+    <div class='flex flex-col space-y-1 w-full place-self-end'>
+        <!-- Social Links -->
+        <div class='flex flex-row font-semibold text-sm sm:text-base space-x-1'>
+            {
+                socials.map((social, idx) => {
+                    if (idx !== socials.length - 1)
+                        return (
+                            <>
+                                <a
+                                    href={social.url}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    class='hover:text-bg-secondary transition-colors'
+                                >
+                                    {social.name}
+                                </a>
+                                <span class='text-bg-secondary'>,</span>
+                            </>
+                        )
+                    return (
+                        <a
+                            href={social.url}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            class='hover:text-bg-secondary transition-colors'
+                        >
+                            {social.name}
+                        </a>
+                    )
+                })
+            }
+        </div>
+        <!-- Copyright -->
+        <div class='text-xs sm:text-sm text-bg-secondary'>
+            &copy; {new Date().getFullYear()} DEVGO Studio. All rights reserved.
+        </div>
+    </div>
+</section>
