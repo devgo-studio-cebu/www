@@ -7,7 +7,7 @@ interface Links {
 export const links: Links[] = [
     {
         name: "Home",
-        url: "#hero"
+        url: "#top"
     },
     {
         name: "Showcase",
@@ -30,7 +30,7 @@ export const links: Links[] = [
     },
     {
         name: "Contact Us",
-        url: "#contact"
+        url: "mailto:official@devgo.studio"
     }
 ]
 

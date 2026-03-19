@@ -6,11 +6,12 @@ import { Font } from "astro:assets"
 import "@fontsource-variable/montserrat"
 import Footer from "../components/footer.astro"
 import Navbar from "../components/navbar.astro"
+import Seo from "../components/seo.astro"
 ---
 
 <html
     lang='en'
-    class='antialiased overscroll-y-none bg-bg text-text tracking-tight'
+    class='antialiased overflow-x-clip overscroll-y-none bg-bg text-text tracking-tight scroll-smooth'
 >
     <head>
         <Font cssVariable='--font-monument-extended' />
@@ -29,6 +30,7 @@ import Navbar from "../components/navbar.astro"
             content={Astro.generator}
         />
         <title>DEVGO Studio</title>
+        <Seo />
     </head>
     <body class='w-svw flex flex-col relative'>
         <Navbar />

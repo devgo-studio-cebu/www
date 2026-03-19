@@ -1,0 +1,81 @@
+---
+import { links } from "../lib/values"
+
+import { Menu, X } from "lucide-astro"
+---
+
+<nav
+    class='w-full px-4 py-2 md:px-6 md:py-3 flex flex-row justify-between items-center bg-bg border-b border-bg-secondary absolute top-0 z-50'
+>
+    <a
+        href='#top'
+        class='text-lg uppercase font-bold flex flex-row flex-nowrap gap-1 px-1 hover:bg-text hover:text-bg transition-colors'
+        >devgo<span class='font-normal'>studio</span></a
+    >
+    <div class='hidden md:flex flex-row text-base uppercase space-x-7'>
+        {
+            links
+                .filter(
+                    (link) =>
+                        link.name !== "Home" && link.name !== "Contact Us",
+                )
+                .map((link) => (
+                    <a
+                        href={link.url}
+                        class='flex flex-row gap-1 hover:bg-text hover:text-bg px-1 transition-colors'
+                    >
+                        {link.name}
+                        {link.extra && (
+                            <span class='text-[0.65rem] text-bg-secondary'>
+                                ({link.extra})
+                            </span>
+                        )}
+                    </a>
+                ))
+        }
+    </div>
+    <a
+        href='mailto:official@devgo.studio'
+        class='hidden md:block uppercase hover:bg-text hover:text-bg px-1 transition-colors'
+    >
+        Build With Us
+    </a>
+    <!-- Mobile -->
+    <div class='md:hidden'>
+        <input
+            type='checkbox'
+            id='menu-toggle'
+            class='peer sr-only'
+        />
+
+        <label
+            for='menu-toggle'
+            class='cursor-pointer block [&_.icon-close]:hidden peer-checked:[&_.icon-menu]:hidden peer-checked:[&_.icon-close]:block'
+            aria-label='Toggle menu'
+        >
+            <Menu class='icon-menu' />
+            <X class='icon-close' />
+        </label>
+        <div
+            class='md:hidden absolute top-0 left-full peer-checked:left-0 w-screen h-svh bg-bg -z-1 transition-all pt-16 flex flex-col items-center space-y-6 text-2xl uppercase font-medium'
+        >
+            {
+                links
+                    .filter((link) => link.name !== "Home")
+                    .map((link) => (
+                        <a
+                            href={link.url}
+                            class='flex flex-row items-start gap-1'
+                        >
+                            {link.name}
+                            {link.extra && (
+                                <span class='text-[0.65rem] text-bg-secondary'>
+                                    ({link.extra})
+                                </span>
+                            )}
+                        </a>
+                    ))
+            }
+        </div>
+    </div>
+</nav>
