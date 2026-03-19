@@ -52,3 +52,39 @@ export const socials: Links[] = [
         url: "https://www.linkedin.com/company/devgostudio"
     },
 ]
+
+import { AppWindow, Bot, Briefcase, Code, ShoppingCart } from 'lucide-astro'
+
+interface Services {
+    title: string
+    icon: typeof Briefcase
+    description: string
+}
+
+export const services: Services[] = [
+    {
+        title: "Portfolio Sites",
+        icon: Briefcase,
+        description: "Showcase your work with a stunning portfolio website."
+    },
+    {
+        title: "E-commerce Stores",
+        icon: ShoppingCart,
+        description: "Launch your online store with a sleek and user-friendly design."
+    },
+    {
+        title: "Dynamic Web Apps",
+        icon: AppWindow,
+        description: "Build interactive web applications tailored to your needs."
+    },
+    {
+        title: "AI Automation",
+        icon: Bot,
+        description: "Integrate AI to automate tasks and enhance user experience."
+    },
+    {
+        title: "Software & Mobile",
+        icon: Code,
+        description: "Develop custom software and mobile applications to bring your ideas to life."
+    }
+]

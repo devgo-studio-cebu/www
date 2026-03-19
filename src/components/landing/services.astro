@@ -1,14 +1,43 @@
+---
+import { services } from "../../lib/values"
+---
+
 <section
     id='services'
-    class='flex flex-col'
+    class='flex flex-col py-10 md:py-20 relative'
 >
     <h2
         class='font-head font-extrabold text-4xl md:text-8xl flex flex-col uppercase'
     >
         what we<span class='ml-16 md:ml-48'>offer</span>
     </h2>
-    <p class='mt-8 md:mt-14 md:text-2xl ml-6 mr-6 max-w-5xl'>
+    <p class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl'>
         From scalable websites to mobile apps and smart AI, we build tools that
         move your ideas forward and bring them to life.
     </p>
+    <div class='flex flex-col space-y-6 mx-6 md:mx-12 mt-8 md:mt-14 md:w-max'>
+        {
+            services.map((service) => (
+                <div class=''>
+                    <span class='flex flex-row flex-nowrap items-center gap-2 font-semibold text-lg'>
+                        <service.icon class='w-7 h-7 stroke-bg-secondary' />
+                        {service.title}
+                    </span>
+                    <p class='ml-9 mt-1 text-base text-bg-secondary text-wrap'>
+                        {service.description}
+                    </p>
+                    <div class='w-full h-0.5 bg-linear-to-r from-transparent via-bg-secondary to-transparent mt-2' />
+                </div>
+            ))
+        }
+    </div>
+    <p class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl'>
+        And much more. If you can dream it, we can build it.
+    </p>
 </section>
+
+<script>
+    import { animate } from "animejs"
+
+    
+</script>
