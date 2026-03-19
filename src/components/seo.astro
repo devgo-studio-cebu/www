@@ -1,7 +1,59 @@
+---
+import type { SEOProps, OrganizationSchema, WebsiteSchema } from '../types/seo'
+
+interface Props {
+  seo?: Partial<SEOProps>;
+}
+
+const { seo = {} } = Astro.props
+
+const siteUrl = 'https://devgo.studio'
+const defaultTitle = 'DEVGO Studio'
+const defaultDescription = 'A creative studio building digital experiences'
+const defaultImage = `${siteUrl}/og-image.png`
+
+const organizationSchema: OrganizationSchema = {
+  name: 'DEVGO Studio',
+  url: siteUrl,
+  logo: `${siteUrl}/logo.png`,
+  sameAs: [
+    // Add social links when available
+  ]
+}
+
+const websiteSchema: WebsiteSchema = {
+  name: seo.title || defaultTitle,
+  url: siteUrl,
+  description: seo.description || defaultDescription
+}
+
+function generateJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        ...organizationSchema
+      },
+      {
+        '@type': 'WebSite',
+        ...websiteSchema,
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${siteUrl}/search?q={search_term_string}`,
+          'query-input': 'required name=search_term_string'
+        }
+      }
+    ]
+  }
+}
+---
+
 <head>
-    <script
-        src='https://analytics.ranlabs.space/api/script.js'
-        data-site-id='1'
-        defer
-    ></script>
+  <script
+    src='https://analytics.ranlabs.space/api/script.js'
+    data-site-id='1'
+    defer
+  ></script>
+  <script type='application/ld+json' set:html={JSON.stringify(generateJsonLd())} />
 </head>
