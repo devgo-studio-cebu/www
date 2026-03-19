@@ -1,0 +1,42 @@
+import type { APIRoute } from 'astro'
+
+const siteUrl = 'https://devgo.studio'
+
+export const GET: APIRoute = () => {
+  const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# AI Crawlers (for AI governance)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap
+Sitemap: ${siteUrl}/sitemap-index.xml
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /draft/
+`
+
+  return new Response(robotsTxt, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+  })
+}
