@@ -11,7 +11,10 @@ import { ArrowRight } from "lucide-astro"
     id='footer'
     class='grid p-6 gap-10 md:grid-cols-2 md:grid-rows-2 h-max'
 >
-    <div class='flex flex-col'>
+    <div
+        id='footer-contact'
+        class='flex flex-col opacity-0'
+    >
         <p class='uppercase text-sm md:text-base'>
             got something you want to build?
         </p>
@@ -29,7 +32,10 @@ import { ArrowRight } from "lucide-astro"
             </div>
         </a>
     </div>
-    <div class='w-full h-auto md:hidden brightness-200'>
+    <div
+        id='footer-img'
+        class='w-full h-auto md:hidden brightness-200 opacity-0'
+    >
         <Image
             src={desk}
             alt=''
@@ -37,13 +43,16 @@ import { ArrowRight } from "lucide-astro"
             loading='lazy'
         />
     </div>
-    <div class='flex flex-col space-y-2 text-2xl md:text-3xl md:row-span-2'>
+    <div
+        id='footer-links'
+        class='flex flex-col space-y-2 text-2xl md:text-3xl md:row-span-2'
+    >
         {
             links.map((link) => (
                 <a
                     href={link.url}
                     rel='noopener noreferrer'
-                    class='hover:text-bg-secondary transition-colors flex flex-row flex-nowrap items-start gap-1 uppercase'
+                    class='footer-link hover:text-bg-secondary transition-colors flex flex-row flex-nowrap items-start gap-1 uppercase opacity-0'
                 >
                     {link.name}{" "}
                     {link.extra && (
@@ -55,7 +64,10 @@ import { ArrowRight } from "lucide-astro"
             ))
         }
     </div>
-    <div class='flex flex-col space-y-1 w-full place-self-end'>
+    <div
+        id='footer-socials'
+        class='flex flex-col space-y-1 w-full place-self-end opacity-0'
+    >
         <!-- Social Links -->
         <div class='flex flex-row font-semibold text-sm sm:text-base space-x-1'>
             {
@@ -93,3 +105,43 @@ import { ArrowRight } from "lucide-astro"
         </div>
     </div>
 </section>
+<script>
+    import { animate, onScroll, stagger } from "animejs"
+
+    const onScrollOptions = {
+        enter: "90% 20%",
+        target: "#footer",
+    }
+
+    // Contact
+    animate("#footer-contact", {
+        autoplay: onScroll(onScrollOptions),
+        opacity: [0, 1],
+        translateX: [-20, 0],
+        ease: "outCubic",
+    })
+
+    // Image
+    animate("#footer-img", {
+        autoplay: onScroll(onScrollOptions),
+        opacity: [0, 1],
+        ease: "outCubic",
+    })
+
+    // Links
+    animate(".footer-link", {
+        autoplay: onScroll(onScrollOptions),
+        opacity: [0, 1],
+        translateX: [-50, 0],
+        delay: stagger(100),
+        ease: "outCubic",
+    })
+
+    // Socials
+    animate("#footer-socials", {
+        autoplay: onScroll(onScrollOptions),
+        opacity: [0, 1],
+        translateY: [20, 0],
+        ease: "outCubic",
+    })
+</script>
