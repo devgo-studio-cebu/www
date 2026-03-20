@@ -1,18 +1,36 @@
 ---
 import { Image } from "astro:assets"
+import bg from "../../assets/images/hero.png"
 
 const logoFiles = import.meta.glob("/src/assets/logos/*", { eager: true })
 const logos = Object.values(logoFiles).map((mod: any) => mod.default)
+const bgSrc = bg.src
 ---
 
 <section
     id='top'
     class='w-full h-svh relative flex flex-col justify-end py-8 items-center'
 >
-    <h2 class='text-sm md:text-lg uppercase mb-12 opacity-0 text-center mx-6'>
+    <!-- BG -->
+    <div
+        class='ascii-container absolute -z-1 w-svw h-[calc(100svh-2.75rem)] md:h-[calc(100svh-3.25rem)] bottom-0 overflow-hidden'
+    >
+        <Image
+            src={bg}
+            alt=''
+            class='w-full h-full object-cover object-center'
+        />
+        <div
+            class='absolute bottom-0 left-0 w-full h-14 bg-linear-to-t from-bg to-transparent pointer-events-none'
+        >
+        </div>
+    </div>
+    <!-- Content -->
+    <h2
+        class='text-sm md:text-xl uppercase mb-12 opacity-0 text-center mx-6 font-head'
+    >
         Your digital space, built for a life in motion
     </h2>
-
     <div
         class='logo-infinite-scroll opacity-0 w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]'
     >
