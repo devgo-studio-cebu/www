@@ -31,7 +31,7 @@ Interactive installations, immersive web experiences, and innovative technology 
 
 # Contact
 
-- Email: hello@devgo.studio
+- Email: official@devgo.studio
 - Website: ${siteUrl}
 - Location: Remote-first studio
 

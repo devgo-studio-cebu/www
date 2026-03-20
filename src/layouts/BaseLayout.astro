@@ -10,7 +10,7 @@ import Seo from "../components/seo.astro"
 import type { SEOProps } from "../types/seo"
 
 interface Props {
-  seo?: Partial<SEOProps>;
+    seo?: Partial<SEOProps>
 }
 
 const { seo } = Astro.props
@@ -18,7 +18,7 @@ const { seo } = Astro.props
 
 <html
     lang='en'
-    class='antialiased overflow-x-clip overscroll-y-none bg-bg text-text tracking-tight scroll-smooth'
+    class='antialiased overflow-x-clip overscroll-y-none bg-bg text-text tracking-tight scroll-smooth scroll-pt-11 md:scroll-pt-13'
 >
     <head>
         <Font cssVariable='--font-monument-extended' />
@@ -36,7 +36,7 @@ const { seo } = Astro.props
             name='generator'
             content={Astro.generator}
         />
-        <title>{seo?.title || 'DEVGO Studio'}</title>
+        <title>{seo?.title || "DEVGO Studio"}</title>
         <Seo seo={seo} />
     </head>
     <body class='w-svw flex flex-col relative'>

@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets"
+import type { Project } from "../../../lib/projects"
+interface Props extends Project {}
+
+const { title, image, url } = Astro.props
+const id = `showcase-${title
+    .toLowerCase()
+    .replace(/[^\w-]/g, "")
+    .replace(/\s+/g, "-")}`
+---
+
+<a
+    id={id}
+    data-title-id={id}
+    href={url}
+    target='_blank'
+    class='showcase-container relative w-full h-auto aspect-square bg-bg-secondary hover:bg-bg transition-colors overflow-clip shadow-inner shadow-text/10 flex items-center justify-center md:p-4 group'
+>
+    <p
+        class='absolute top-4 left-4 font-head font-extrabold text-xl text-text uppercase tracking-wider hidden md:block'
+    >
+        {title}
+    </p>
+    <Image
+        src={image}
+        alt={title}
+        class='object-cover md:object-contain w-full h-full md:w-4/5 md:h-4/5 group-hover:w-full group-hover:h-full transition-all'
+    />
+</a>

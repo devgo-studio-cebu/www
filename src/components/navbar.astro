@@ -67,7 +67,7 @@ import { Menu, X } from "lucide-astro"
                     .map((link) => (
                         <a
                             href={link.url}
-                            class='flex flex-row items-start gap-1'
+                            class='mobile-link flex flex-row items-start gap-1'
                         >
                             {link.name}
                             {link.extra && (
@@ -82,7 +82,7 @@ import { Menu, X } from "lucide-astro"
     </div>
 </nav>
 <script>
-    import { animate, splitText, stagger } from "animejs"
+    import { animate, splitText, stagger, utils } from "animejs"
 
     // Name
     const { chars: nameChars } = splitText("#devgo", {
@@ -109,5 +109,14 @@ import { Menu, X } from "lucide-astro"
         translateY: [10, 0],
         delay: 500,
         ease: "outCirc",
+    })
+
+    utils.$(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => {
+            const checkbox = document.getElementById(
+                "menu-toggle",
+            ) as HTMLInputElement | null
+            if (checkbox) checkbox.checked = false
+        })
     })
 </script>

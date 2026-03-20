@@ -19,11 +19,11 @@ export const links: Links[] = [
         extra: "6",
         url: "#reviews"
     },
-    {
-        name: "Case Studies",
-        extra: "14",
-        url: "#case-studies"
-    },
+    // {
+    //     name: "Case Studies",
+    //     extra: "14",
+    //     url: "#case-studies"
+    // },
     {
         name: "Dashboard",
         url: "https://dash.devgo.studio"
