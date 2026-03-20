@@ -54,8 +54,8 @@ import Project from "./featured/project.astro"
         animate(`#${id}`, {
             autoplay: onScroll({
                 sync: 0.25,
-                enter: "bottom top",
-                leave: "top bottom",
+                enter: "bottom -10%",
+                leave: "top 80%",
                 target: `#${id}`,
             }),
             scale: [0.9, 1, 0.9],
@@ -66,8 +66,8 @@ import Project from "./featured/project.astro"
         animate([`#${id} div h3`, `#${id} div ul li`], {
             autoplay: onScroll({
                 sync: 0.25,
-                enter: "bottom top",
-                leave: "top bottom",
+                enter: "bottom -10%",
+                leave: "top 80%",
                 target: `#${id}`,
             }),
             scale: [0.9, 1, 1],
