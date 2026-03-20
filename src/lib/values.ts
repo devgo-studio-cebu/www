@@ -11,8 +11,8 @@ export const links: Links[] = [
     },
     {
         name: "Showcase",
-        extra: "14",
-        url: "#showcase"
+        extra: projects.length.toString(),
+        url: "/showcase"
     },
     {
         name: "Reviews",
@@ -53,38 +53,39 @@ export const socials: Links[] = [
     },
 ]
 
-import { AppWindow, Bot, Briefcase, Code, ShoppingCart } from 'lucide-astro'
+import { AppWindow, Bot, Globe, ShoppingCart, TabletSmartphone } from 'lucide-astro'
+import { projects } from './projects'
 
 interface Services {
     title: string
-    icon: typeof Briefcase
+    icon: typeof Globe
     description: string
 }
 
 export const services: Services[] = [
     {
-        title: "Portfolio Sites",
-        icon: Briefcase,
-        description: "Showcase your work with a stunning portfolio website."
+        title: "Website Development",
+        icon: Globe,
+        description: "High-performance websites and web applications for global businesses—optimized for speed, scalability, and SEO"
     },
     {
-        title: "E-commerce Stores",
+        title: "E-Commerce",
         icon: ShoppingCart,
-        description: "Launch your online store with a sleek and user-friendly design."
-    },
-    {
-        title: "Dynamic Web Apps",
-        icon: AppWindow,
-        description: "Build interactive web applications tailored to your needs."
+        description: "Secure, scalable e-commerce platforms with conversion-focused design and seamless payment integrations"
     },
     {
         title: "AI Automation",
         icon: Bot,
-        description: "Integrate AI to automate tasks and enhance user experience."
+        description: "AI-powered automation solutions that streamline operations, reduce costs, and improve efficiency at scale"
     },
     {
-        title: "Software & Mobile",
-        icon: Code,
-        description: "Develop custom software and mobile applications to bring your ideas to life."
-    }
+        title: "Mobile Development",
+        icon: TabletSmartphone,
+        description: "High-performing iOS and Android apps delivering seamless, scalable, and user-centric experiences"
+    },
+    {
+        title: "Software Development",
+        icon: AppWindow,
+        description: "Custom software solutions for startups and enterprises—enabling digital transformation and scalable operations"
+    },
 ]

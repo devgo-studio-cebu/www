@@ -5,7 +5,7 @@ import Project from "./featured/project.astro"
 
 <section
     id='featured'
-    class='flex flex-col py-10 md:py-20 relative max-w-svw overflow-x-clip'
+    class='flex flex-col py-10 relative max-w-svw overflow-x-clip'
 >
     <h2
         id='featured-header'
@@ -22,7 +22,7 @@ import Project from "./featured/project.astro"
     </div>
 </section>
 <script>
-    import { animate, onScroll, splitText, stagger } from "animejs"
+    import { animate, onScroll, stagger } from "animejs"
 
     // Header
     animate("#featured-header span", {

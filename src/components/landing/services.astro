@@ -4,31 +4,26 @@ import { services } from "../../lib/values"
 
 <section
     id='services'
-    class='flex flex-col py-10 md:py-20 relative'
+    class='flex flex-col py-10 relative'
 >
     <h2
         id='services-header'
         class='font-head font-extrabold text-4xl md:text-8xl flex flex-col uppercase'
     >
-        <span
-            class='opacity-0'
-            >what we</span
-        >
-        <span
-            class='ml-16 md:ml-48 opacity-0'
-            >offer</span
-        >
+        <span class='opacity-0'>what we</span>
+        <span class='ml-16 md:ml-48 opacity-0'>offer</span>
     </h2>
     <p
         id='services-intro'
         class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl'
     >
-        From scalable websites to mobile apps and smart AI, we build tools that
-        move your ideas forward and bring them to life.
+        We deliver scalable web, mobile, and AI-powered solutions for businesses
+        worldwide. We enable startups, SMEs, and enterprises to innovate,
+        automate, and grow within a digital-first economy.
     </p>
     <div
         id='services-list'
-        class='flex flex-col space-y-6 mx-6 md:mx-12 mt-8 md:mt-14 md:w-max'
+        class='flex flex-col space-y-6 mx-6 md:mx-12 mt-8 md:mt-14 md:w-3/4'
     >
         {
             services.map((service) => (
@@ -45,12 +40,6 @@ import { services } from "../../lib/values"
             ))
         }
     </div>
-    <p
-        id='services-closing'
-        class='mt-8 md:mt-14 md:text-2xl mx-6 md:mx-12 max-w-5xl opacity-0'
-    >
-        And much more. If you can dream it, we can build it.
-    </p>
 </section>
 
 <script>
@@ -94,15 +83,5 @@ import { services } from "../../lib/values"
         translateX: [-100, 0],
         ease: "outCubic",
         delay: stagger(300),
-    })
-
-    // Closing
-    animate("#services-closing", {
-        autoplay: onScroll({
-            enter: "90% top",
-            target: "#services-closing",
-        }),
-        opacity: [0, 1],
-        ease: "outCubic",
     })
 </script>

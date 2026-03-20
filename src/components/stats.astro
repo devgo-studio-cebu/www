@@ -1,0 +1,97 @@
+<section
+    id='stats'
+    class='w-full py-6 opacity-0'
+>
+    <div
+        class='border-y border-bg-secondary w-full grid grid-cols-2 md:grid-cols-4 font-head text-xs md:text-sm'
+    >
+        <!-- Stat 1 -->
+        <div
+            id='stats-proj'
+            class='border-r border-b border-bg-secondary md:border-b-0 p-4 text-center uppercase flex items-center justify-center'
+        >
+            0+ Projects Completed
+        </div>
+        <!-- Stat 2 -->
+        <div
+            id='stats-satis'
+            class='border-r border-b border-bg-secondary md:border-b-0 p-4 text-center uppercase flex items-center justify-center'
+        >
+            0% Client Satisfaction
+        </div>
+        <!-- Stat 3 -->
+        <div
+            id='stats-exp'
+            class='border-r border-bg-secondary p-4 text-center uppercase flex items-center justify-center'
+        >
+            0+ Years Experience
+        </div>
+        <!-- Stat 4 -->
+        <div
+            id='stats-speed'
+            class='p-4 text-center uppercase flex items-center justify-center'
+        >
+            0x Faster Turnaround
+        </div>
+    </div>
+</section>
+<!-- 20+ Projects Completed 98% Client Satisfaction 3+ Years Experience 2x Faster Turnaround -->
+<script>
+    import { animate, onScroll, utils } from "animejs"
+
+    animate("#stats", {
+        autoplay: onScroll({
+            enter: "bottom center",
+        }),
+        opacity: [0, 1],
+        ease: "outQuad",
+        onComplete: () => {
+            // Animate Stats
+            const stats = { proj: 0, satis: 0, exp: 0, speed: 0 }
+
+            const [$proj] = utils.$("#stats-proj")
+            animate([$proj, stats], {
+                proj: [0, 20],
+                duration: 1000,
+                modifier: utils.roundPad(0),
+                easing: "outQuad",
+                onUpdate: () => {
+                    $proj.textContent = `${stats.proj}+ Projects Completed`
+                },
+            })
+
+            const [$satis] = utils.$("#stats-satis")
+            animate([$satis, stats], {
+                satis: [0, 98],
+                duration: 1000,
+                modifier: utils.roundPad(0),
+                easing: "outQuad",
+                onUpdate: () => {
+                    $satis.textContent = `${stats.satis}% Client Satisfaction`
+                },
+            })
+
+            const [$exp] = utils.$("#stats-exp")
+            animate([$exp, stats], {
+                exp: [0, 3],
+                duration: 1000,
+                modifier: utils.roundPad(0),
+                easing: "outQuad",
+                onUpdate: () => {
+                    $exp.textContent = `${stats.exp}+ Years Experience`
+                },
+            })
+
+            const [$speed] = utils.$("#stats-speed")
+            animate([$speed, stats], {
+                speed: [0, 2],
+                duration: 1000,
+                modifier: utils.roundPad(0),
+                easing: "outQuad",
+                onUpdate: () => {
+                    $speed.textContent = `${stats.speed}x Faster Turnaround`
+                },
+            })
+        },
+    })
+</script>

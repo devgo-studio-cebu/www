@@ -28,10 +28,13 @@ const bgSrc = bg.src
     </div>
     <!-- Content -->
     <h2
-        class='text-sm md:text-xl uppercase mb-12 opacity-0 text-center mx-6 font-head'
+        class='text-sm md:text-xl uppercase mb-4 opacity-0 text-center mx-6 font-head'
     >
-        Your digital space, built for a life in motion
+        Your Partner in AI, Software, and Digital Growth
     </h2>
+    <h3 class='md:text-xs uppercase mb-4 opacity-0 text-center mx-6 font-head font-extrabold'>
+        Trusted By
+    </h3>
     <div
         class='logo-infinite-scroll opacity-0 w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]'
     >
@@ -311,10 +314,17 @@ const bgSrc = bg.src
         opacity: [0, 1],
         translateY: [20, 0],
         ease: "outCubic",
+        delay: 500
+    })
+    animate("#top h3", {
+        opacity: [0, .4],
+        translateY: [20, 0],
+        ease: "outCubic",
+        delay: 800
     })
     animate(".logo-infinite-scroll", {
         opacity: [0, 1],
         ease: "outCubic",
-        delay: 500,
+        delay: 1100,
     })
 </script>
