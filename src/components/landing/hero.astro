@@ -14,12 +14,13 @@ const bgSrc = bg.src
     <!-- BG -->
     <div
         class='ascii-container absolute -z-1 w-svw h-[calc(100svh-2.75rem)] md:h-[calc(100svh-3.25rem)] bottom-0 overflow-hidden'
+        id='hero-wrapper'
     >
-        <Image
-            src={bg}
-            alt=''
-            class='w-full h-full object-cover object-center'
-        />
+        <canvas
+            id='hero-canvas'
+            data-src={bg.src}
+            class='w-full h-full object-cover'
+        ></canvas>
         <div
             class='absolute bottom-0 left-0 w-full h-14 bg-linear-to-t from-bg to-transparent pointer-events-none'
         >
@@ -92,4 +93,153 @@ const bgSrc = bg.src
         ease: "outCubic",
         delay: 500,
     })
+
+    class Particle {
+        constructor(x, y, color, size) {
+            this.x = Math.random() * window.innerWidth // Start from random for "intro" feel
+            this.y = Math.random() * window.innerHeight
+            this.originX = x
+            this.originY = y
+            this.color = color
+            this.size = size
+            this.friction = 0.9
+            this.ease = 0.15
+            this.dx = 0
+            this.dy = 0
+        }
+
+        draw(ctx) {
+            ctx.fillStyle = this.color
+            ctx.beginPath()
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+            ctx.fill()
+        }
+
+        update(mouse) {
+            const dx = mouse.x - this.x
+            const dy = mouse.y - this.y
+            const distance = Math.sqrt(dx * dx + dy * dy)
+            const force = (mouse.radius - distance) / mouse.radius
+
+            if (distance < mouse.radius) {
+                this.dx -= dx * force
+                this.dy -= dy * force
+            }
+
+            this.dx *= this.friction
+            this.dy *= this.friction
+
+            this.x += this.dx + (this.originX - this.x) * this.ease
+            this.y += this.dy + (this.originY - this.y) * this.ease
+        }
+    }
+
+    const canvas = document.getElementById("hero-canvas")
+    const ctx = canvas.getContext("2d", { willReadFrequently: true })
+    const wrapper = document.getElementById("hero-wrapper")
+    let particles = []
+    let animationId
+    const mouse = { x: -1000, y: -1000, radius: 120 }
+
+    function init() {
+        const img = new Image()
+        img.src = canvas.dataset.src
+        img.onload = () => {
+            // Cancel existing loop
+            if (animationId) cancelAnimationFrame(animationId)
+
+            // Match canvas dimensions to display size
+            canvas.width = wrapper.clientWidth
+            canvas.height = wrapper.clientHeight
+
+            // Use a temporary canvas to maintain aspect ratio for sampling
+            const tempCanvas = document.createElement("canvas")
+            const tempCtx = tempCanvas.getContext("2d")
+            tempCanvas.width = canvas.width
+            tempCanvas.height = canvas.height
+
+            // "Object-cover" logic for the canvas
+            const imgRatio = img.width / img.height
+            const canvasRatio = canvas.width / canvas.height
+            let drawWidth, drawHeight, offsetX, offsetY
+
+            if (imgRatio > canvasRatio) {
+                drawHeight = canvas.height
+                drawWidth = canvas.height * imgRatio
+                offsetX = (canvas.width - drawWidth) / 2
+                offsetY = 0
+            } else {
+                drawWidth = canvas.width
+                drawHeight = canvas.width / imgRatio
+                offsetX = 0
+                offsetY = (canvas.height - drawHeight) / 2
+            }
+
+            tempCtx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
+            const data = tempCtx.getImageData(
+                0,
+                0,
+                canvas.width,
+                canvas.height,
+            ).data
+
+            particles = []
+            // RESOLUTION: Smaller gap = higher resolution.
+            // 4 is high detail, 8 is "low poly"
+            const gap = window.innerWidth < 768 ? 6 : 4
+
+            for (let y = 0; y < canvas.height; y += gap) {
+                for (let x = 0; x < canvas.width; x += gap) {
+                    const index = (y * canvas.width + x) * 4
+                    const r = data[index]
+                    const g = data[index + 1]
+                    const b = data[index + 2]
+                    const a = data[index + 3]
+
+                    // Sampling threshold - lower this to see more dark details
+                    if (a > 0 && r + g + b > 15) {
+                        // Brightness boost to make colors pop
+                        const color = `rgb(${Math.min(r * 1.2, 255)},${Math.min(g * 1.2, 255)},${Math.min(b * 1.2, 255)})`
+                        particles.push(new Particle(x, y, color, gap * 0.4))
+                    }
+                }
+            }
+            animateParticles()
+        }
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(mouse)
+            particles[i].draw(ctx)
+        }
+        animationId = requestAnimationFrame(animateParticles)
+    }
+
+    // Event Listeners
+    window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX
+        mouse.y = e.clientY - (window.innerHeight - canvas.height)
+    })
+
+    // Mobile Support
+    window.addEventListener(
+        "touchmove",
+        (e) => {
+            mouse.x = e.touches[0].clientX
+            mouse.y =
+                e.touches[0].clientY - (window.innerHeight - canvas.height)
+        },
+        { passive: true },
+    )
+
+    // Responsiveness: Debounced resize
+    let resizeTimer
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer)
+        resizeTimer = setTimeout(init, 200)
+    })
+
+    init()
 </script>
