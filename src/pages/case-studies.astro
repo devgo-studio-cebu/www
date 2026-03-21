@@ -16,18 +16,32 @@ const seoProps = {
 <BaseLayout seo={seoProps}>
     <section
         id='top'
-        class='relative mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'
+        class='relative mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden opacity-0'
     >
-        <div class='particle-container absolute inset-0 -z-1' id='particles-wrapper'>
-            <canvas id='particle-canvas' class='w-full h-full'></canvas>
-            <div class="absolute bg-linear-to-t from-bg from-0% to-50% to-transparent w-full h-full top-0 left-0"></div>
+        <div
+            class='particle-container absolute inset-0 -z-1'
+            id='particles-wrapper'
+        >
+            <canvas
+                id='particle-canvas'
+                class='w-full h-full'
+            ></canvas>
+            <div
+                class='absolute bg-linear-to-t from-bg from-0% to-50% to-transparent w-full h-full top-0 left-0'
+            >
+            </div>
         </div>
-        <h1 class='relative text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+        <h1
+            class='relative text-3xl md:text-5xl lg:text-7xl font-head uppercase'
+        >
             Case Studies
         </h1>
     </section>
 
-    <section class='grid grid-cols-1 md:grid-cols-2 border-y border-bg-secondary'>
+    <section
+        id='case-studies'
+        class='grid grid-cols-1 md:grid-cols-2 border-y border-bg-secondary opacity-0'
+    >
         {
             caseStudies.map((entry, idx) => (
                 <a
@@ -57,6 +71,34 @@ const seoProps = {
 </BaseLayout>
 
 <script>
+    // Transitions
+    import { animate, onScroll, stagger } from "animejs"
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches
+    if (!prefersReducedMotion) {
+        // Header
+        animate("#top", {
+            opacity: [0, 1],
+            ease: "outQuad",
+            delay: 500,
+        })
+
+        // Case Study Cards
+        animate("#case-studies", {
+            opacity: [0, 1],
+            delay: 900,
+            ease: "outQuad",
+        })
+
+        animate("#case-studies a", {
+            opacity: [0, 1],
+            ease: "outQuad",
+            delay: stagger(100, { start: 900 }),
+        })
+    }
+
+    // Wave Particle Background using PIXI.js
     import * as PIXI from "pixi.js"
 
     interface ParticleData {
@@ -156,14 +198,21 @@ const seoProps = {
             for (let i = 0; i < this.particles.length; i++) {
                 const p = this.particles[i]
 
-                const wave1 = Math.sin(time * p.speed + p.baseX * 0.015) * p.amplitude
-                const wave2 = Math.cos(time * p.speed * 0.7 + p.baseY * 0.012) * p.amplitude * 0.6
+                const wave1 =
+                    Math.sin(time * p.speed + p.baseX * 0.015) * p.amplitude
+                const wave2 =
+                    Math.cos(time * p.speed * 0.7 + p.baseY * 0.012) *
+                    p.amplitude *
+                    0.6
                 const wave3 = Math.sin(time * 0.3 + p.phase) * 8
 
                 p.sprite.x = p.baseX + wave1 + wave3
                 p.sprite.y = p.baseY + wave2
 
-                const alpha = 0.25 + Math.sin(time * 0.8 + p.phase) * 0.2 + Math.cos(time * 0.5 + p.baseX * 0.01) * 0.15
+                const alpha =
+                    0.25 +
+                    Math.sin(time * 0.8 + p.phase) * 0.2 +
+                    Math.cos(time * 0.5 + p.baseX * 0.01) * 0.15
                 p.sprite.alpha = Math.max(0.1, alpha)
             }
 
@@ -171,7 +220,9 @@ const seoProps = {
         }
     }
 
-    const canvas = document.getElementById("particle-canvas") as HTMLCanvasElement
+    const canvas = document.getElementById(
+        "particle-canvas",
+    ) as HTMLCanvasElement
     const wrapper = document.getElementById("particles-wrapper") as HTMLElement
 
     if (
