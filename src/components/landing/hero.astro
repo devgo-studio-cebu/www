@@ -32,7 +32,9 @@ const bgSrc = bg.src
     >
         Your Partner in AI, Software, and Digital Growth
     </h2>
-    <h3 class='md:text-xs uppercase mb-4 opacity-0 text-center mx-6 font-head font-extrabold'>
+    <h3
+        class='md:text-xs uppercase mb-4 opacity-0 text-center mx-6 font-head font-extrabold'
+    >
         Trusted By
     </h3>
     <div
@@ -296,9 +298,12 @@ const bgSrc = bg.src
             track &&
             !window.matchMedia("(prefers-reduced-motion: reduce)").matches
         ) {
+            // Count how many logos are visible in the viewport to adjust animation duration for consistent speed
+            const logoCount = track.children.length / 2
+
             animate(track, {
                 translateX: [0, "-33.33%"],
-                duration: 25000,
+                duration: logoCount * 2000, // 2 seconds per logo
                 ease: "linear",
                 loop: true,
             })
@@ -314,13 +319,13 @@ const bgSrc = bg.src
         opacity: [0, 1],
         translateY: [20, 0],
         ease: "outCubic",
-        delay: 500
+        delay: 500,
     })
     animate("#top h3", {
-        opacity: [0, .4],
+        opacity: [0, 0.4],
         translateY: [20, 0],
         ease: "outCubic",
-        delay: 800
+        delay: 800,
     })
     animate(".logo-infinite-scroll", {
         opacity: [0, 1],
