@@ -31,16 +31,30 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
 >
     <section
         id='top'
-        class='relative mt-11 md:mt-13 md:pt-20 pb-4 md:pb-10 w-full flex flex-col-reverse gap-4 md:flex-row md:px-6 overflow-hidden'
+        class='relative mt-11 md:mt-13 md:pt-20 pb-4 md:pb-10 w-full flex flex-col-reverse gap-4 md:flex-row md:px-6 overflow-hidden opacity-0'
     >
-        <div class='wave-bg absolute inset-0 -z-1' id='wave-wrapper'>
-            <canvas id='wave-canvas' class='w-full h-full'></canvas>
+        <div
+            class='wave-bg absolute inset-0 -z-1'
+            id='wave-wrapper'
+        >
+            <canvas
+                id='wave-canvas'
+                class='w-full h-full'
+            ></canvas>
         </div>
         <div class='w-full md:max-w-2/3'>
-            <h1 class='text-3xl md:5xl lg:text-7xl font-head uppercase'>{title}</h1>
-            <h2 class='md:text-lg font-medium'>{subtitle}</h2>
+            <h1 class='text-3xl md:5xl lg:text-7xl font-head uppercase'>
+                {title}
+            </h1>
+            <h2
+                id='subtitle'
+                class='md:text-lg font-medium'
+            >
+                {subtitle}
+            </h2>
             <p
-                class='font-semibold font-head opacity-60 tracking-wider text-sm md:text-base'
+                id='year'
+                class='font-semibold font-head tracking-wider text-sm md:text-base opacity-0'
             >
                 {year}
             </p>
@@ -56,12 +70,43 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
             )
         }
     </section>
-    <section class='px-2 md:px-6 prose prose-invert max-w-none prose-sm md:prose-base'>
+    <section
+        id='content'
+        class='px-2 md:px-6 prose prose-invert max-w-none prose-sm md:prose-base opacity-0'
+    >
         <Content />
     </section>
 </BaseLayout>
 
 <script>
+    // Transitions
+    import { animate, splitText, stagger } from "animejs"
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches
+    if (!prefersReducedMotion) {
+        animate("#top", {
+            opacity: [0, 1],
+            ease: "outQuad",
+            delay: 500,
+        })
+        const { words } = splitText("#subtitle", { words: true })
+        animate([words, "#year"], {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            ease: "outQuart",
+            delay: stagger(30, { start: 900 }),
+        })
+        animate("#content", {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            ease: "outQuad",
+            delay: 1200,
+        })
+    }
+
+    // Pixi.js Flow Field Background
     import * as PIXI from "pixi.js"
 
     class PerlinNoise {
@@ -76,7 +121,10 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
             for (let i = 255; i > 0; i--) {
                 seed = (seed * 16807) % 2147483647
                 n = seed % (i + 1)
-                    ;[this.permutation[i], this.permutation[n]] = [this.permutation[n], this.permutation[i]]
+                ;[this.permutation[i], this.permutation[n]] = [
+                    this.permutation[n],
+                    this.permutation[i],
+                ]
             }
             for (let i = 0; i < 512; i++) {
                 this.p[i] = this.permutation[i & 255]
@@ -99,7 +147,7 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
         }
 
         noise(x: number, y: number) {
-            const X = Math.floor(x) &255
+            const X = Math.floor(x) & 255
             const Y = Math.floor(y) & 255
             x -= Math.floor(x)
             y -= Math.floor(y)
@@ -108,8 +156,16 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
             const A = this.p[X] + Y
             const B = this.p[X + 1] + Y
             return this.lerp(
-                this.lerp(this.grad(this.p[A], x, y), this.grad(this.p[B], x - 1, y), u),
-                this.lerp(this.grad(this.p[A + 1], x, y - 1), this.grad(this.p[B + 1], x - 1, y - 1), u),
+                this.lerp(
+                    this.grad(this.p[A], x, y),
+                    this.grad(this.p[B], x - 1, y),
+                    u,
+                ),
+                this.lerp(
+                    this.grad(this.p[A + 1], x, y - 1),
+                    this.grad(this.p[B + 1], x - 1, y - 1),
+                    u,
+                ),
                 v,
             )
         }
@@ -117,7 +173,13 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
 
     class FlowFieldBg {
         private app: PIXI.Application
-        private particles: { sprite: PIXI.Sprite; x: number; y: number; speed: number; phase: number }[] = []
+        private particles: {
+            sprite: PIXI.Sprite
+            x: number
+            y: number
+            speed: number
+            phase: number
+        }[] = []
         private container: PIXI.Container
         private dotTexture: PIXI.Texture | null = null
         private perlin = new PerlinNoise()
@@ -201,11 +263,18 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
             for (const p of this.particles) {
                 const noiseScale = 0.002
                 const angle =
-                    this.perlin.noise(p.x * noiseScale + time * 0.3, p.y * noiseScale + time * 0.25) *
+                    this.perlin.noise(
+                        p.x * noiseScale + time * 0.3,
+                        p.y * noiseScale + time * 0.25,
+                    ) *
                     Math.PI *
                     6
 
-                const turbulence = this.perlin.noise(p.x * 0.005 + time * 0.5, p.y * 0.005 + time * 0.4) * 0.5
+                const turbulence =
+                    this.perlin.noise(
+                        p.x * 0.005 + time * 0.5,
+                        p.y * 0.005 + time * 0.4,
+                    ) * 0.5
 
                 p.x += Math.cos(angle + turbulence) * p.speed
                 p.y += Math.sin(angle + turbulence) * p.speed
@@ -218,8 +287,9 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
                 p.sprite.x = p.x
                 p.sprite.y = p.y
 
-                const organicAlpha = Math.sin(time * 1.2 + p.phase + p.x * 0.003) * 0.15
-                p.sprite.alpha =0.18 + organicAlpha
+                const organicAlpha =
+                    Math.sin(time * 1.2 + p.phase + p.x * 0.003) * 0.15
+                p.sprite.alpha = 0.18 + organicAlpha
             }
         }
     }

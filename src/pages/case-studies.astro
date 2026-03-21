@@ -46,7 +46,7 @@ const seoProps = {
             caseStudies.map((entry, idx) => (
                 <a
                     href={`/case-studies/${entry.id.replace(/\.(md|mdx)$/, "")}`}
-                    class={`relative overflow-clip group p-6 border-bg-secondary ${idx % 2 === 0 ? "md:border-r" : ""}`}
+                    class={`relative overflow-clip group p-6 border-bg-secondary opacity-0 ${idx % 2 === 0 ? "md:border-r" : ""}`}
                 >
                     <div class='aspect-video relative overflow-hidden'>
                         <Image
@@ -72,7 +72,7 @@ const seoProps = {
 
 <script>
     // Transitions
-    import { animate, onScroll, stagger } from "animejs"
+    import { animate, onScroll, stagger, utils } from "animejs"
     const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
     ).matches
@@ -91,10 +91,14 @@ const seoProps = {
             ease: "outQuad",
         })
 
-        animate("#case-studies a", {
-            opacity: [0, 1],
-            ease: "outQuad",
-            delay: stagger(100, { start: 900 }),
+        utils.$("#case-studies a").forEach((el) => {
+            animate(el, {
+                autoplay: onScroll({
+                    enter: "90% top",
+                }),
+                opacity: [0, 1],
+                ease: "outQuad",
+            })
         })
     }
 
