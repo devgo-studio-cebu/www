@@ -1,3 +1,9 @@
+import { AppWindow, Bot, Globe, ShoppingCart, TabletSmartphone } from 'lucide-astro'
+import { projects } from './projects'
+
+const caseStudyFiles = import.meta.glob('/src/content/case-studies/*.{md,mdx}')
+const caseStudyCount = Object.keys(caseStudyFiles).length
+
 interface Links {
     name: string
     extra?: string
@@ -7,7 +13,7 @@ interface Links {
 export const links: Links[] = [
     {
         name: "Home",
-        url: "#top"
+        url: "/#top"
     },
     {
         name: "Showcase",
@@ -17,13 +23,13 @@ export const links: Links[] = [
     {
         name: "Reviews",
         extra: "6",
-        url: "#reviews"
+        url: "/#reviews"
     },
-    // {
-    //     name: "Case Studies",
-    //     extra: "14",
-    //     url: "#case-studies"
-    // },
+    {
+        name: "Case Studies",
+        extra: caseStudyCount.toString(),
+        url: "/case-studies"
+    },
     {
         name: "Dashboard",
         url: "https://dash.devgo.studio"
@@ -52,9 +58,6 @@ export const socials: Links[] = [
         url: "https://www.linkedin.com/company/devgo-studio/"
     },
 ]
-
-import { AppWindow, Bot, Globe, ShoppingCart, TabletSmartphone } from 'lucide-astro'
-import { projects } from './projects'
 
 interface Services {
     title: string

@@ -5,37 +5,19 @@ import tailwindcss from "@tailwindcss/vite"
 
 import sitemap from "@astrojs/sitemap"
 
+import mdx from "@astrojs/mdx"
+
 export default defineConfig({
     site: "https://devgo.studio",
 
     vite: {
-        // @ts-ignore
-        plugins: [tailwindcss()],
+        plugins: [
+            // @ts-expect-error Tailwind CSS Vite plugin types may not match Astro's Vite config
+            tailwindcss(),
+        ],
     },
 
-    integrations: [
-        sitemap({
-            changefreq: 'weekly',
-            priority: 0.7,
-            lastmod: new Date(),
-            filter: (page) => !page.includes('/draft/') && !page.includes('/private/'),
-            customPages: [
-                'https://devgo.studio/',
-                'https://devgo.studio/about',
-                'https://devgo.studio/services',
-                'https://devgo.studio/contact',
-            ],
-            serialize(item) {
-                if (item.url.includes('about')) {
-                    item.priority = 0.9
-                }
-                if (item.url.includes('services')) {
-                    item.priority = 0.8
-                }
-                return item
-            },
-        }),
-    ],
+    integrations: [sitemap(), mdx()],
 
     fonts: [
         {
