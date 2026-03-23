@@ -45,11 +45,11 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
         >
             {
                 [...logos, ...logos, ...logos].map((logo) => (
-                    <div class='logo-item shrink-0 flex items-center justify-center grayscale opacity-40 pr-12'>
+                    <div class='logo-item shrink-0 flex items-center justify-center opacity-40 pr-12 relative'>
                         <Image
                             src={logo}
                             alt='Partner logo'
-                            class='w-auto h-10 md:h-14 object-contain'
+                            class='w-auto h-10 md:h-14 object-contain grayscale'
                             loading='eager'
                         />
                     </div>
