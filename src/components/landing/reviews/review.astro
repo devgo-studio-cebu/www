@@ -1,0 +1,38 @@
+---
+import ArrowUpRight from "lucide-astro/ArrowUpRight"
+import type { Review } from "../../../lib/reviews"
+interface Props extends Review {}
+
+const { review, name, company, link } = Astro.props
+---
+
+<div
+    class='review-item w-[85svw] max-w-lg p-8 md:rounded-2xl border-r md:border border-bg-secondary backdrop-blur-xs bg-bg/5 opacity-0'
+>
+    <p class='font-medium text-pretty text-justify'>
+        <span class='text-primary font-head italic text-lg'> " </span>
+        {review}
+        <span class='text-primary font-head italic text-lg'> " </span>
+    </p>
+    <p class='mt-4 text-xl text-text font-bold'>
+        {name}
+    </p>
+    <p class='text-text/60 font-semibold text-sm'>
+        {company}
+    </p>
+    {
+        link && (
+            <a
+                href={link}
+                target='_blank'
+                rel='noopener noreferrer'
+                class='mt-4 w-max flex flex-row items-center gap-3 text-sm md:text-lg font-head tracking-wide uppercase bg-transparent hover:bg-text hover:text-bg transition-colors'
+            >
+                Visit
+                <span class='h-full aspect-square rounded-full bg-text text-bg'>
+                    <ArrowUpRight class='stroke-3' />
+                </span>
+            </a>
+        )
+    }
+</div>

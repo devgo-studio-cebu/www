@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets"
+import { reviews } from "../../lib/reviews"
+import bg from "../../assets/images/mini-studio.png"
+import { ArrowUpRight } from "lucide-astro"
+import Review from "./reviews/review.astro"
+---
+
+<section
+    id='reviews'
+    class='flex flex-col py-10 relative max-w-svw overflow-x-clip'
+>
+    <h2
+        id='reviews-header'
+        class='font-head font-extrabold text-4xl md:text-8xl flex flex-col uppercase'
+    >
+        <span class='opacity-0'>in their</span>
+        <span class='ml-16 md:ml-48 opacity-0'>words</span>
+    </h2>
+    <Image
+        src={bg}
+        alt=''
+        class='absolute w-svw -z-1 bottom-0 hidden md:block'
+    />
+    <div
+        id='review-container'
+        class='md:px-10 mt-10 flex flex-row md:gap-10 overflow-x-auto border-y border-bg-secondary md:border-none'
+    >
+        <div class='flex flex-row md:flex-col md:gap-10'>
+            {
+                reviews
+                    .filter((_, index) => index % 2 === 0)
+                    .map((item) => <Review {...item} />)
+            }
+        </div>
+        <div class='flex flex-row md:flex-col md:gap-10 md:mt-40'>
+            {
+                reviews
+                    .filter((_, index) => index % 2 === 1)
+                    .map((item) => <Review {...item} />)
+            }
+        </div>
+    </div>
+</section>
+<script>
+    import { animate, onScroll, stagger } from "animejs"
+
+    // Header
+    animate("#reviews-header span", {
+        autoplay: onScroll({
+            enter: "90% bottom",
+            target: "#reviews-header",
+        }),
+        opacity: [0, 1],
+        translateX: [-100, 0],
+        ease: "outCubic",
+        delay: stagger(500),
+    })
+
+    // Reviews
+    animate(".review-item", {
+        autoplay: onScroll({
+            enter: "90% top",
+            target: "#review-container",
+        }),
+        opacity: [0, 1],
+        translateY: [50, 0],
+        ease: "outCubic",
+        delay: stagger(300),
+    })
+</script>

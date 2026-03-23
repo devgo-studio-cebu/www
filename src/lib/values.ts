@@ -1,5 +1,6 @@
 import { AppWindow, Bot, Globe, ShoppingCart, TabletSmartphone } from 'lucide-astro'
 import { projects } from './projects'
+import { reviews } from './reviews'
 
 const caseStudyFiles = import.meta.glob('/src/content/case-studies/*.{md,mdx}')
 const caseStudyCount = Object.keys(caseStudyFiles).length
@@ -15,14 +16,14 @@ export const links: Links[] = [
         name: "Home",
         url: "/#top"
     },
-    {
-        name: "Showcase",
-        extra: projects.length.toString(),
-        url: "/showcase"
-    },
+    // {
+    //     name: "Showcase",
+    //     extra: projects.length.toString(),
+    //     url: "/showcase"
+    // },
     {
         name: "Reviews",
-        extra: "6",
+        extra: reviews.length.toString(),
         url: "/#reviews"
     },
     {
