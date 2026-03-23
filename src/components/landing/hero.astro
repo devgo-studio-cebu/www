@@ -4,7 +4,6 @@ import bg from "../../assets/images/hero.png"
 
 const logoFiles = import.meta.glob("/src/assets/logos/*", { eager: true })
 const logos = Object.values(logoFiles).map((mod: any) => mod.default)
-const bgSrc = bg.src
 ---
 
 <section
@@ -107,6 +106,11 @@ const bgSrc = bg.src
             this.originY = y
         }
 
+        public applyForce(fx: number, fy: number) {
+            this.dx += fx
+            this.dy += fy
+        }
+
         public update(mouse: MouseState) {
             const dx = mouse.x - this.sprite.x
             const dy = mouse.y - this.sprite.y
@@ -131,7 +135,7 @@ const bgSrc = bg.src
     class HeroEngine {
         private app: PIXI.Application
         private particles: Particle[] = []
-        private container: PIXI.Container // Switched to standard Container
+        private container: PIXI.Container
         private mouse: MouseState = { x: -1000, y: -1000, radius: 150 }
         private isInitialized: boolean = false
         private dotTexture: PIXI.Texture | null = null
@@ -267,12 +271,36 @@ const bgSrc = bg.src
                 this.mouse.y = y - rect.top
             }
 
+            // Desktop: Particles repel from cursor
             window.addEventListener("mousemove", (e) =>
                 updateMouse(e.clientX, e.clientY),
             )
+
+            // Mobile: Burst on touch
             window.addEventListener(
-                "touchmove",
-                (e) => updateMouse(e.touches[0].clientX, e.touches[0].clientY),
+                "touchstart",
+                (e) => {
+                    const rect = this.canvas.getBoundingClientRect()
+                    const x = e.touches[0].clientX - rect.left
+                    const y = e.touches[0].clientY - rect.top
+                    
+                    const burstRadius = 120
+                    const burstForce = 25
+                    
+                    for (const particle of this.particles) {
+                        const dx = particle.sprite.x - x
+                        const dy = particle.sprite.y - y
+                        const dist = Math.sqrt(dx * dx + dy * dy)
+                        
+                        if (dist < burstRadius && dist > 0) {
+                            const force = (burstRadius - dist) / burstRadius
+                            particle.applyForce(
+                                (dx / dist) * burstForce * force,
+                                (dy / dist) * burstForce * force,
+                            )
+                        }
+                    }
+                },
                 { passive: true },
             )
 
@@ -280,7 +308,6 @@ const bgSrc = bg.src
             window.addEventListener("resize", () => {
                 clearTimeout(timer)
                 timer = window.setTimeout(() => {
-                    // DON'T re-init the app, just rebuild the particles
                     this.buildGrid()
                 }, 250)
             })
