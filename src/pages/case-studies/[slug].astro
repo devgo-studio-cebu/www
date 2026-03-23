@@ -80,7 +80,7 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
 
 <script>
     // Transitions
-    import { animate, splitText, stagger } from "animejs"
+    import { animate, splitText, stagger, utils } from "animejs"
 
     const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -103,6 +103,10 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
             translateY: [20, 0],
             ease: "outQuad",
             delay: 1200,
+        })
+    } else {
+        utils.set("#top, #subtitle, #year, #content", {
+            opacity: 1,
         })
     }
 

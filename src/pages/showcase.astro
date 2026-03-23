@@ -1,16 +1,26 @@
 ---
-import { getCollection } from "astro:content"
 import { Image } from "astro:assets"
 import BaseLayout from "../layouts/BaseLayout.astro"
 
-const caseStudies = await getCollection("case-studies")
-
 const seoProps = {
-    title: "Case Studies | DEVGO Studio",
-    description:
-        "Explore our portfolio of successful projects and see how we help businesses achieve their goals.",
+    title: "Showcase | DEVGO Studio",
     type: "website" as const,
 }
+
+import { projects } from "../lib/showcase"
+import { Link } from "lucide-astro"
+
+// Sort projects by year (descending) and group by year
+const projectsByYear = projects
+    .sort((a, b) => b.year - a.year)
+    .reduce((acc, project) => {
+        const yearGroup = acc.get(project.year) || []
+        yearGroup.push(project)
+        acc.set(project.year, yearGroup)
+        return acc
+    }, new Map<number, typeof projects>())
+
+const sortedYears = Array.from(projectsByYear.keys())
 ---
 
 <BaseLayout seo={seoProps}>
@@ -34,38 +44,71 @@ const seoProps = {
         <h1
             class='relative text-3xl md:text-5xl lg:text-7xl font-head uppercase'
         >
-            Case Studies
+            Showcase
         </h1>
     </section>
 
     <section
-        id='case-studies'
-        class='grid grid-cols-1 md:grid-cols-2 border-y border-bg-secondary opacity-0'
+        id='showcase'
+        class='w-full max-w-svw'
     >
         {
-            caseStudies.map((entry, idx) => (
-                <a
-                    href={`/case-studies/${entry.id.replace(/\.(md|mdx)$/, "")}`}
-                    class={`relative overflow-clip group p-6 border-bg-secondary opacity-0 ${idx % 2 === 0 ? "md:border-r" : ""}`}
-                >
-                    <div class='aspect-video relative overflow-hidden'>
-                        <Image
-                            src={entry.data.image}
-                            alt={entry.data.title}
-                            class='w-full h-full object-contain md:blur-xs group-hover:blur-none transition-all'
-                        />
-                        <div class='absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent' />
-                    </div>
-                    <div class='absolute w-full h-full bottom-0 left-0 p-4 flex flex-col justify-end mix-blend-difference text-white'>
-                        <h2 class='font-head text-sm md:text-xl uppercase'>
-                            {entry.data.title}
+            sortedYears.map((year) => {
+                const yearProjects = projectsByYear.get(year)
+                if (!yearProjects) return null
+                return (
+                    <div class='showcase-group mb-12 opacity-0'>
+                        <h2 class='showcase-year text-2xl md:text-6xl font-head font-extrabold tracking-wide'>
+                            {year}
                         </h2>
-                        <span class='font-bold text-xs md:text-sm opacity-80'>
-                            {entry.data.year} — {entry.data.category}
-                        </span>
+                        <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+                            {yearProjects.map((project) => {
+                                if (project.url)
+                                    return (
+                                        <a
+                                            href={project.url}
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            class='showcase-item w-full h-full relative group opacity-0'
+                                        >
+                                            <Image
+                                                src={project.image}
+                                                alt=''
+                                                class='w-full h-full object-cover'
+                                            />
+                                            <p class='absolute bottom-0 left-0 right-0 text-3xl font-head uppercase p-4 pt-10 bg-linear-to-t from-bg to-transparent group-hover:opacity-0 transition-opacity'>
+                                                <span class='mix-blend-difference'>
+                                                    {project.title}
+                                                </span>
+                                            </p>
+                                            <div class='absolute z-1 bg-primary w-full h-full bottom-0 left-0 mix-blend-lighten flex items-center justify-center group-hover:opacity-100 transition-opacity opacity-0'>
+                                                <span class='font-bold text-4xl md:text-2xl uppercase flex flex-row flex-nowrap items-center gap-2'>
+                                                    Visit Project
+                                                    <Link class='stroke-3 h-10 w-10 md:h-6 md:w-6 stroke-accent' />
+                                                </span>
+                                            </div>
+                                        </a>
+                                    )
+
+                                return (
+                                    <div class='showcase-item w-full h-full relative group opacity-0'>
+                                        <Image
+                                            src={project.image}
+                                            alt=''
+                                            class='w-full h-full object-cover'
+                                        />
+                                        <p class='absolute bottom-0 left-0 right-0 text-3xl font-head uppercase p-4 pt-10 bg-linear-to-t from-bg to-transparent'>
+                                            <span class='mix-blend-difference'>
+                                                {project.title}
+                                            </span>
+                                        </p>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                </a>
-            ))
+                )
+            })
         }
     </section>
 </BaseLayout>
@@ -84,24 +127,21 @@ const seoProps = {
             delay: 500,
         })
 
-        // Case Study Cards
-        animate("#case-studies", {
-            opacity: [0, 1],
-            delay: 900,
-            ease: "outQuad",
-        })
-
-        utils.$("#case-studies a").forEach((el) => {
-            animate(el, {
+        // Showcase Items
+        utils.$(".showcase-group").forEach((group) => {
+            animate([group, group.querySelectorAll(".showcase-item")], {
                 autoplay: onScroll({
                     enter: "90% top",
+                    target: group,
                 }),
                 opacity: [0, 1],
-                ease: "outQuad",
+                delay: stagger(300),
             })
         })
     } else {
-        utils.set("#top, #case-studies, #case-studies a", {
+        // If user prefers reduced motion, just set opacity to 1 without animation
+        utils.set("#top", { opacity: 1 })
+        utils.set([utils.$(".showcase-group"), utils.$(".showcase-item")], {
             opacity: 1,
         })
     }
