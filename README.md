@@ -1,7 +1,7 @@
 # DEVGO Studio Website
 
-[![Version](https://img.shields.io/badge/version-2026.0.1-blue)](https://github.com/your-org/www)
-[![Astro](https://img.shields.io/badge/Astro-6.0.6-BC52EE?logo=astro)](https://astro.build)
+[![Version](https://img.shields.io/badge/version-2026.1.2-blue)](https://github.com/your-org/www)
+[![Astro](https://img.shields.io/badge/Astro-6.1.4-BC52EE?logo=astro)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![Deployed on Dokploy](https://img.shields.io/badge/Deployed%20on-Dokploy-2563EB?logo=docker)](https://dokploy.com)
 
@@ -22,9 +22,9 @@ The official website for DEVGO Studio - a creative software development and digi
 ## Project Details
 
 **Project Name:** DEVGO Studio Website  
-**Version:** 2026.1.0
-**Live URL:** https://devgo.studio  
-**Repository:** https://github.com/devgo/www
+**Version:** 2026.1.2
+**Live URL:** https://test.devgo.studio  
+**Repository:** https://github.com/devgo-studi-cebu/www
 
 ### What We Do
 
@@ -56,7 +56,7 @@ DEVGO Studio is a full-service digital agency specializing in:
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Astro](https://astro.build) | 6.0.6 | Static site generator & framework |
+| [Astro](https://astro.build) | 6.1.2 | Static site generator & framework |
 | [TypeScript](https://typescriptlang.org) | 5.x | Type-safe JavaScript |
 | [Tailwind CSS](https://tailwindcss.com) | v4 | Utility-first CSS framework |
 | [Bun](https://bun.sh) | 1.2 | Fast JavaScript runtime & package manager |
