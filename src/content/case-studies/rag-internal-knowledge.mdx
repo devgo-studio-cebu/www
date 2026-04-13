@@ -1,0 +1,63 @@
+---
+title: 'Internal Knowledge AI Assistant (RAG System)'
+subtitle: "A retrieval-based AI system that allows teams to query internal documents and receive accurate, context-based answers instantly."
+client: 'Operations-Heavy Business'
+pubDate: 2026-04-14
+year: 2026
+category: 'AI Automation'
+services:
+    - 'AI Integration'
+    - 'Knowledge Management'
+    - 'Document Processing'
+    - 'Internal Tools Development'
+stack: [
+    'RAG Pipeline',
+    'Vector Database',
+    'LLM',
+    'Embedding Model'
+]
+image: '../../assets/case-studies/rag-internal-knowledge/cover.png'
+isPrivate: false
+---
+{/* Imports */}
+import { Image } from 'astro:assets';
+
+import cover from '../../assets/case-studies/rag-internal-knowledge/cover.png';
+
+{/* Content */}
+# RAG Internal Knowledge Assistant
+
+<Image src={cover} alt="RAG Internal Knowledge Assistant" class="w-full rounded-lg shadow-lg my-8" />
+
+## The Challenge
+
+Employees relied on manual searching across documents and SOPs, resulting in wasted time and inconsistent answers. Critical information was scattered across multiple systems, making it difficult for teams to find what they needed quickly.
+
+## Our Solution
+
+We built a retrieval-augmented generation (RAG) system that allows teams to query internal documents and receive accurate, context-based answers instantly. The system indexes all internal knowledge and uses AI to generate grounded responses from the source material.
+
+### How It Works
+
+1. A user asks a question through the assistant interface
+2. The query is embedded into a vector representation
+3. The system retrieves the most relevant documents from the vector database
+4. AI generates an answer using the retrieved data
+5. The response is displayed with context and source references
+
+### Key Features
+
+- **Vector Search** - Documents are indexed and searchable through semantic similarity, not just keyword matching
+- **Context-Aware Answers** - Responses are grounded in actual internal documents, reducing hallucination
+- **Instant Retrieval** - Answers are delivered in seconds, replacing manual document searches
+- **Scalable Knowledge Base** - New documents can be added and indexed without rebuilding the system
+
+## Results
+
+- Reduced search time by **70 to 90%**
+- Improved accuracy of internal responses
+- Increased team productivity and onboarding speed
+
+## Conclusion
+
+We built a RAG-powered assistant that gives teams instant, accurate answers from internal knowledge sources. This eliminated the need for manual document searching and ensured consistent, reliable information across the organization.
