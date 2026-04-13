@@ -5,6 +5,9 @@ WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
+# CACHEBUST forces Docker to skip cached layers below this line.
+# Use: docker build --build-arg CACHEBUST=$(date +%s) ...
+ARG CACHEBUST=0
 COPY . .
 RUN bun run build
 
