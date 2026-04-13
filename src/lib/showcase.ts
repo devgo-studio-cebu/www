@@ -1,19 +1,19 @@
-import groundsph from '../assets/works/groundsph.png'
+import hopethreads from '../assets/works/hopethreads.png'
 import palms from '../assets/works/palms-agency-global.png'
 import serialkitten from '../assets/works/serialkitten.png'
 
 export interface Project {
     title: string
-    image: typeof groundsph
+    image: typeof hopethreads
     url?: string
     year: number
 }
 
 export const projects: Project[] = [
     {
-        title: "Grounds.ph",
-        image: groundsph,
-        url: "https://grounds.ph",
+        title: "Hopethreads",
+        image: hopethreads,
+        url: "https://hopethreads.au",
         year: 2026
     },
     {

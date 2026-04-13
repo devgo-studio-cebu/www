@@ -1,20 +1,20 @@
-import groundsph from '../assets/works/groundsph.png'
+import hopethreads from '../assets/works/hopethreads.png'
 import palms from '../assets/works/palms-agency-global.png'
 import serialkitten from '../assets/works/serialkitten.png'
 
 export interface FeaturedProject {
     title: string,
-    image: typeof groundsph,
+    image: typeof hopethreads,
     tags: string[],
     link?: string
 }
 
 export const featuredProjects: FeaturedProject[] = [
     {
-        title: "Grounds.ph",
-        image: groundsph,
-        tags: ["Website", "UI/UX Design"],
-        link: "https://grounds.ph"
+        title: "Hopethreads",
+        image: hopethreads,
+        tags: ["Website", "Store", "UI/UX Design"],
+        link: "https://hopethreads.au"
     },
     {
         title: "Palms Agency Global",
