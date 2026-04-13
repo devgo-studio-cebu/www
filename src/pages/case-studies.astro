@@ -11,6 +11,8 @@ const seoProps = {
         "Explore our portfolio of successful projects and see how we help businesses achieve their goals.",
     type: "website" as const,
 }
+
+const isProd = import.meta.env.PROD
 ---
 
 <BaseLayout seo={seoProps}>
@@ -40,32 +42,38 @@ const seoProps = {
 
     <section
         id='case-studies'
-        class='grid grid-cols-1 md:grid-cols-2 border-y border-bg-secondary opacity-0'
+        class='grid grid-cols-1 md:grid-cols-2 border-t border-bg-secondary opacity-0'
     >
         {
-            caseStudies.map((entry, idx) => (
-                <a
-                    href={`/case-studies/${entry.id.replace(/\.(md|mdx)$/, "")}`}
-                    class={`relative overflow-clip group p-6 border-bg-secondary opacity-0 ${idx % 2 === 0 ? "md:border-r" : ""}`}
-                >
-                    <div class='aspect-video relative overflow-hidden'>
-                        <Image
-                            src={entry.data.image}
-                            alt={entry.data.title}
-                            class='w-full h-full object-contain md:blur-xs group-hover:blur-none transition-all'
-                        />
-                        <div class='absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent' />
-                    </div>
-                    <div class='absolute w-full h-full bottom-0 left-0 p-4 flex flex-col justify-end mix-blend-difference text-white'>
-                        <h2 class='font-head text-sm md:text-xl uppercase'>
-                            {entry.data.title}
-                        </h2>
-                        <span class='font-bold text-xs md:text-sm opacity-80'>
-                            {entry.data.year} — {entry.data.category}
-                        </span>
-                    </div>
-                </a>
-            ))
+            caseStudies
+                .filter((entry) => isProd ? !entry.filePath?.includes("/example.mdx") : true)
+                .map((entry, idx) => (
+                    <a
+                        href={`/case-studies/${entry.id.replace(/\.(md|mdx)$/, "")}`}
+                        class={`relative overflow-clip group p-6 border-bg-secondary opacity-0 border-b ${idx % 2 === 0 ? "md:border-r" : ""}`}
+                    >
+                        <div class='aspect-video relative overflow-hidden'>
+                            {entry.data.image ? (
+                                <Image
+                                    src={entry.data.image}
+                                    alt={entry.data.title}
+                                    class='w-full h-full object-contain md:blur-xs group-hover:blur-none transition-all'
+                                />
+                            ) : (
+                                <div class='w-full h-full bg-linear-to-br from-gray-700 to-gray-900' />
+                            )}
+                            <div class='absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent' />
+                        </div>
+                        <div class='absolute w-full h-full bottom-0 left-0 p-4 flex flex-col justify-end mix-blend-difference text-white'>
+                            <h2 class='font-head text-sm md:text-xl uppercase'>
+                                {entry.data.title}
+                            </h2>
+                            <span class='font-bold text-xs md:text-sm opacity-80'>
+                                {entry.data.year} — {entry.data.category}
+                            </span>
+                        </div>
+                    </a>
+                ))
         }
     </section>
 </BaseLayout>

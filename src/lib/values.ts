@@ -23,7 +23,7 @@ export const links: Links[] = [
     },
     {
         name: "Case Studies",
-        extra: caseStudyCount.toString(),
+        extra: `${caseStudyCount - 1}`,
         url: "/case-studies"
     },
     {

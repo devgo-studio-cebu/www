@@ -15,7 +15,7 @@ const caseStudies = defineCollection({
         services: z.array(z.string()),
         stack: z.array(z.string()),
 
-        image: image(),
+        image: image().optional(),
         isPrivate: z.boolean().default(false),
         link: z.string().url().optional(),
     })

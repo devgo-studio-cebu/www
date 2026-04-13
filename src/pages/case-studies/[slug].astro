@@ -5,11 +5,17 @@ import { Image } from "astro:assets"
 
 export async function getStaticPaths() {
     const caseStudies = await getCollection("case-studies")
+    
+    const isProd = import.meta.env.PROD
 
-    return caseStudies.map((entry) => ({
-        params: { slug: entry.id.replace(/\.(md|mdx)$/, "") },
-        props: { entry },
-    }))
+    return caseStudies
+        .filter((entry) =>
+            isProd ? !entry.filePath?.includes("/example.mdx") : true,
+        )
+        .map((entry) => ({
+            params: { slug: entry.id.replace(/\.(md|mdx)$/, "") },
+            props: { entry },
+        }))
 }
 
 const { entry } = Astro.props
@@ -42,7 +48,7 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
                 class='w-full h-full'
             ></canvas>
         </div>
-        <div class='w-full md:max-w-2/3'>
+        <div class=`w-full ${image ? "md:max-w-2/3" : ""}`>
             <h1 class='text-3xl md:5xl lg:text-7xl font-head uppercase'>
                 {title}
             </h1>
@@ -72,7 +78,7 @@ const { title, subtitle, client, pubDate, year, category, services, image } =
     </section>
     <section
         id='content'
-        class='px-2 md:px-6 prose prose-invert max-w-none prose-sm md:prose-base opacity-0'
+        class='px-2 md:px-6 prose prose-invert max-w-none prose-sm md:prose-base opacity-0 pb-10'
     >
         <Content />
     </section>
