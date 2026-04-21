@@ -7,11 +7,6 @@ interface Props {
 }
 
 const { items } = Astro.props
-
-const allItems = items.flatMap((item) => [
-    item,
-    ...item.children,
-])
 ---
 
 <div class="md:hidden sticky top-11 z-40 bg-bg/95 backdrop-blur-sm border-b border-bg-secondary">
