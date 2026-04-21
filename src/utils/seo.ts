@@ -1,4 +1,4 @@
-import type { SEOProps, OrganizationSchema, WebsiteSchema, PersonSchema } from '../types/seo'
+import type { SEOProps, OrganizationSchema, PersonSchema } from '../types/seo'
 
 export const siteUrl = 'https://devgo.studio'
 export const siteName = 'DEVGO Studio'

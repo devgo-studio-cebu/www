@@ -4,7 +4,7 @@ import type { FeaturedProject } from "../../../lib/featured"
 
 interface Props extends FeaturedProject {}
 
-const { title, image, tags, link } = Astro.props
+const { title, image } = Astro.props
 const id = `featured-${title
     .toLowerCase()
     .replace(/[^\w-]/g, "")

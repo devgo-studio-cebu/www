@@ -170,7 +170,6 @@ import logoSrc from "../../assets/images/logo.svg"
 
         constructor(
             private canvas: HTMLCanvasElement,
-            private wrapper: HTMLElement,
         ) {}
 
         public async init() {
@@ -318,10 +317,7 @@ import logoSrc from "../../assets/images/logo.svg"
 
     if (particleCanvas && particleWrapper) {
         const initEngine = () => {
-            const engine = new ParticleLogoEngine(
-                particleCanvas,
-                particleWrapper,
-            )
+            const engine = new ParticleLogoEngine(particleCanvas)
             engine.init()
         }
 
