@@ -4,16 +4,36 @@ import type { Review } from "../../../lib/reviews"
 interface Props extends Review {}
 
 const { review, name, company, link } = Astro.props
+
+const MAX_CHARS = 200
+const isLong = review.length > MAX_CHARS
+
+// Truncate at word boundary
+let truncated = review
+if (isLong) {
+    const slice = review.slice(0, MAX_CHARS)
+    const lastSpace = slice.lastIndexOf(' ')
+    truncated = lastSpace > 0 ? slice.slice(0, lastSpace) : slice
+}
 ---
 
 <div
     class='review-item w-[85svw] max-w-lg p-8 md:rounded-2xl border-r md:border border-bg-secondary md:backdrop-blur-xs bg-bg/5 opacity-0'
 >
-    <p class='font-medium text-pretty'>
-        <span class='text-primary font-head italic text-lg'> " </span>
-        {review}
-        <span class='text-primary font-head italic text-lg'> " </span>
-    </p>
+    <div class='review-content overflow-hidden transition-all duration-300 ease-out'>
+        <p class='font-medium text-pretty leading-relaxed'>
+            <span class='text-primary font-head italic text-lg'> " </span>
+            <span class='review-text' data-expanded='false' data-full={review} data-truncated={truncated}>
+                {truncated}
+            </span>
+            {isLong && (
+                <button class='see-more-btn inline-flex items-center gap-1 ml-1 text-sm font-semibold text-primary hover:text-primary/80 transition-colors bg-transparent border-none p-0 cursor-pointer'>
+                    ...see more
+                </button>
+            )}
+            <span class='text-primary font-head italic text-lg'> " </span>
+        </p>
+    </div>
     <p class='mt-4 text-xl text-text font-bold'>
         {name}
     </p>
@@ -36,3 +56,50 @@ const { review, name, company, link } = Astro.props
         )
     }
 </div>
+
+<script>
+    document.querySelectorAll('.see-more-btn').forEach((btn) => {
+        const content = btn.closest('.review-content') as HTMLElement
+        const textSpan = content?.querySelector('.review-text') as HTMLElement
+        if (!content || !textSpan) return
+
+        // Pre-calculate and store the full height for smoother expansion
+        const fullText = textSpan.dataset.full || ''
+        const truncatedText = textSpan.dataset.truncated || ''
+
+        // Create a temporary element to measure full height without affecting layout
+        const measureHeight = (text: string) => {
+            const temp = document.createElement('div')
+            temp.style.cssText = 'position: absolute; visibility: hidden; width: ' + content.offsetWidth + 'px;'
+            temp.innerHTML = '<p class="font-medium text-pretty leading-relaxed">" ' + text + ' "</p>'
+            document.body.appendChild(temp)
+            const height = temp.offsetHeight
+            document.body.removeChild(temp)
+            return height
+        }
+
+        const truncatedHeight = content.offsetHeight
+        const fullHeight = measureHeight(fullText)
+
+        btn.addEventListener('click', () => {
+            const isExpanded = textSpan.dataset.expanded === 'true'
+
+            if (isExpanded) {
+                content.style.maxHeight = truncatedHeight + 'px'
+                textSpan.textContent = truncatedText
+                textSpan.dataset.expanded = 'false'
+                btn.innerHTML = '...see more'
+                setTimeout(() => { content.style.maxHeight = '' }, 300)
+            } else {
+                content.style.maxHeight = truncatedHeight + 'px'
+                // Force reflow
+                content.offsetHeight
+                content.style.maxHeight = fullHeight + 'px'
+                textSpan.textContent = fullText
+                textSpan.dataset.expanded = 'true'
+                btn.innerHTML = 'show less'
+                setTimeout(() => { content.style.maxHeight = '' }, 300)
+            }
+        })
+    })
+</script>
