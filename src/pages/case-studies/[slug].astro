@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro"
 import { Image } from "astro:assets"
 import TocSidebar from "../../components/case-study/TocSidebar.astro"
 import TocMobile from "../../components/case-study/TocMobile.astro"
+import ReadingProgress from "../../components/case-study/ReadingProgress.astro"
 import TocObserver from "../../components/case-study/TocObserver.astro"
 import CaseMeta from "../../components/case-study/CaseMeta.astro"
 import { buildToc } from "../../utils/toc"
@@ -80,6 +81,7 @@ const tocItems = buildToc(
     </section>
 
     <TocMobile items={tocItems} />
+    <ReadingProgress />
 
     <section class='grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-6 px-2 md:px-6'>
         <TocSidebar items={tocItems} />
