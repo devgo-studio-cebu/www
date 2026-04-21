@@ -25,7 +25,7 @@ const { items, currentSlug } = Astro.props
                     <a
                         href={`#${item.slug}`}
                         class:list={[
-                            "block py-1 px-2 rounded transition-colors hover:text-accent hover:bg-bg-secondary/10",
+                            "block py-1 px-2 transition-colors hover:text-accent hover:bg-bg-secondary/10",
                             currentSlug === item.slug
                                 ? "text-accent font-medium border-l-2 border-accent pl-3"
                                 : "text-text/60",
@@ -40,7 +40,7 @@ const { items, currentSlug } = Astro.props
                                     <a
                                         href={`#${child.slug}`}
                                         class:list={[
-                                            "block py-0.5 px-2 rounded text-xs transition-colors hover:text-accent hover:bg-bg-secondary/10",
+                                            "block py-0.5 px-2 text-xs transition-colors hover:text-accent hover:bg-bg-secondary/10",
                                             currentSlug === child.slug
                                                 ? "text-accent font-medium border-l-2 border-accent pl-3"
                                                 : "text-text/40",
