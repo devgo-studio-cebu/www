@@ -14,3 +14,46 @@
     /* DEFAULTS */
     --default-transition-duration: 300ms;
 }
+
+@layer components {
+    .prose h2 {
+        @apply font-head uppercase tracking-wide text-lg md:text-2xl mt-12 mb-4 pb-2 border-b border-bg-secondary/20;
+    }
+
+    .prose h3 {
+        @apply font-head uppercase tracking-wide text-base md:text-xl mt-8 mb-3;
+    }
+
+    .prose h2::before {
+        content: "";
+        @apply inline-block w-2 h-2 rounded-full bg-accent mr-2 align-middle;
+    }
+
+    .prose blockquote {
+        @apply border-l-2 border-accent/40 pl-4 italic text-text/70;
+    }
+
+    .prose ul {
+        @apply list-disc space-y-1;
+    }
+
+    .prose ol {
+        @apply list-decimal space-y-1;
+    }
+
+    .prose strong {
+        @apply text-accent font-bold;
+    }
+
+    .prose a {
+        @apply text-accent hover:text-accent/80 underline underline-offset-2 transition-colors;
+    }
+
+    .prose code {
+        @apply bg-bg-secondary/15 text-accent px-1.5 py-0.5 rounded text-xs md:text-sm;
+    }
+
+    .prose pre {
+        @apply bg-bg-secondary/10 border border-bg-secondary/20 rounded-lg;
+    }
+}
