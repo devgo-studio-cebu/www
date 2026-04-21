@@ -12,7 +12,6 @@ export default defineConfig({
 
     vite: {
         plugins: [
-            // @ts-expect-error Tailwind CSS Vite plugin types may not match Astro's Vite config
             tailwindcss(),
         ],
     },
