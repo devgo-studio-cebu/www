@@ -2,10 +2,14 @@
 import { getCollection, render } from "astro:content"
 import BaseLayout from "../../layouts/BaseLayout.astro"
 import { Image } from "astro:assets"
+import TocSidebar from "../../components/case-study/TocSidebar.astro"
+import TocMobile from "../../components/case-study/TocMobile.astro"
+import TocObserver from "../../components/case-study/TocObserver.astro"
+import { buildToc } from "../../utils/toc"
+import { ArrowLeft } from "lucide-astro"
 
 export async function getStaticPaths() {
     const caseStudies = await getCollection("case-studies")
-    
     const isProd = import.meta.env.PROD
 
     return caseStudies
@@ -19,11 +23,18 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props
-
-const { Content } = await render(entry)
+const { Content, headings } = await render(entry)
 
 const { title, subtitle, pubDate, year, category, services, image } =
     entry.data
+
+const tocItems = buildToc(
+    headings.map((h) => ({
+        depth: h.depth,
+        slug: h.slug,
+        text: h.text,
+    }))
+)
 ---
 
 <BaseLayout
@@ -39,49 +50,47 @@ const { title, subtitle, pubDate, year, category, services, image } =
         id='top'
         class='relative mt-11 md:mt-13 md:pt-20 pb-4 md:pb-10 w-full flex flex-col-reverse gap-4 md:flex-row md:px-6 overflow-hidden opacity-0'
     >
-        <div
-            class='wave-bg absolute inset-0 -z-1'
-            id='wave-wrapper'
-        >
-            <canvas
-                id='wave-canvas'
-                class='w-full h-full'
-            ></canvas>
+        <div class='wave-bg absolute inset-0 -z-1' id='wave-wrapper'>
+            <canvas id='wave-canvas' class='w-full h-full'></canvas>
         </div>
         <div class=`w-full ${image ? "md:max-w-2/3" : ""}`>
+            <a
+                href='/case-studies'
+                class='inline-flex items-center gap-1 text-sm text-bg-secondary hover:text-accent transition-colors mb-3'
+            >
+                <ArrowLeft class='w-4 h-4' />
+                Case Studies
+            </a>
             <h1 class='text-3xl md:5xl lg:text-7xl font-head uppercase'>
                 {title}
             </h1>
-            <h2
-                id='subtitle'
-                class='md:text-lg font-medium'
-            >
+            <h2 id='subtitle' class='md:text-lg font-medium'>
                 {subtitle}
             </h2>
-            <p
-                id='year'
-                class='font-semibold font-head tracking-wider text-sm md:text-base opacity-0'
-            >
+            <p id='year' class='font-semibold font-head tracking-wider text-sm md:text-base opacity-0'>
                 {year}
             </p>
         </div>
-        {
-            image && (
-                <div class='w-full md:max-w-1/3'>
-                    <Image
-                        src={image}
-                        alt=''
-                    />
-                </div>
-            )
-        }
+        {image && (
+            <div class='w-full md:max-w-1/3'>
+                <Image src={image} alt='' />
+            </div>
+        )}
     </section>
-    <section
-        id='content'
-        class='px-2 md:px-6 prose prose-invert max-w-none prose-sm md:prose-base opacity-0 pb-10'
-    >
-        <Content />
+
+    <TocMobile items={tocItems} />
+
+    <section class='grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-6 px-2 md:px-6'>
+        <TocSidebar items={tocItems} />
+        <article
+            id='content'
+            class='md:col-span-10 prose prose-invert max-w-none prose-sm md:prose-base opacity-0 pb-10'
+        >
+            <Content />
+        </article>
     </section>
+
+    <TocObserver />
 </BaseLayout>
 
 <script>
