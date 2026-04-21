@@ -5,6 +5,7 @@ import { Image } from "astro:assets"
 import TocSidebar from "../../components/case-study/TocSidebar.astro"
 import TocMobile from "../../components/case-study/TocMobile.astro"
 import TocObserver from "../../components/case-study/TocObserver.astro"
+import CaseMeta from "../../components/case-study/CaseMeta.astro"
 import { buildToc } from "../../utils/toc"
 import { ArrowLeft } from "lucide-astro"
 
@@ -25,7 +26,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props
 const { Content, headings } = await render(entry)
 
-const { title, subtitle, pubDate, year, category, services, image } =
+const { title, subtitle, pubDate, year, category, services, stack, image } =
     entry.data
 
 const tocItems = buildToc(
@@ -86,6 +87,7 @@ const tocItems = buildToc(
             id='content'
             class='md:col-span-10 prose prose-invert max-w-none prose-sm md:prose-base opacity-0 pb-10'
         >
+            <CaseMeta year={year} category={category} services={services} stack={stack} />
             <Content />
         </article>
     </section>

@@ -1,0 +1,34 @@
+---
+import { Tag, Layers, Calendar } from "lucide-astro"
+
+interface Props {
+    year: number
+    category: string
+    services: string[]
+    stack: string[]
+}
+
+const { year, category, services, stack } = Astro.props
+---
+
+<div class="flex flex-wrap gap-3 text-sm py-4 border-b border-bg-secondary/30 mb-6">
+    <div class="flex items-center gap-1.5 text-bg-secondary">
+        <Calendar class="w-3.5 h-3.5" />
+        <span>{year}</span>
+    </div>
+    <div class="flex items-center gap-1.5 text-bg-secondary">
+        <Tag class="w-3.5 h-3.5" />
+        <span class="text-accent">{category}</span>
+    </div>
+    <div class="flex items-center gap-1.5 text-bg-secondary">
+        <Layers class="w-3.5 h-3.5" />
+        <div class="flex flex-wrap gap-1">
+            {stack.map((tech, i) => (
+                <span>
+                    <span class="text-text/70">{tech}</span>
+                    {i < stack.length - 1 && <span class="text-bg-secondary">·</span>}
+                </span>
+            ))}
+        </div>
+    </div>
+</div>
