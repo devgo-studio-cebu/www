@@ -1,0 +1,59 @@
+---
+import type { TocItem } from "../../utils/toc"
+import { FileText } from "lucide-astro"
+
+interface Props {
+    items: TocItem[]
+    currentSlug?: string
+}
+
+const { items, currentSlug } = Astro.props
+---
+
+<nav
+    class="hidden md:block md:col-span-2 lg:col-span-2 xl:col-span-2"
+    aria-label="Table of contents"
+>
+    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-4 pl-2">
+        <div class="flex items-center gap-2 mb-4 text-sm uppercase tracking-wider text-bg-secondary font-semibold">
+            <FileText class="w-4 h-4" />
+            <span>Chapters</span>
+        </div>
+        <ul class="space-y-1 text-sm">
+            {items.map((item) => (
+                <li>
+                    <a
+                        href={`#${item.slug}`}
+                        class:list={[
+                            "block py-1 px-2 rounded transition-colors hover:text-accent hover:bg-bg-secondary/10",
+                            currentSlug === item.slug
+                                ? "text-accent font-medium border-l-2 border-accent pl-3"
+                                : "text-text/60",
+                        ]}
+                    >
+                        {item.text}
+                    </a>
+                    {item.children.length > 0 && (
+                        <ul class="ml-3 mt-1 space-y-0.5">
+                            {item.children.map((child) => (
+                                <li>
+                                    <a
+                                        href={`#${child.slug}`}
+                                        class:list={[
+                                            "block py-0.5 px-2 rounded text-xs transition-colors hover:text-accent hover:bg-bg-secondary/10",
+                                            currentSlug === child.slug
+                                                ? "text-accent font-medium border-l-2 border-accent pl-3"
+                                                : "text-text/40",
+                                        ]}
+                                    >
+                                        {child.text}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </li>
+            ))}
+        </ul>
+    </div>
+</nav>
