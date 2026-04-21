@@ -64,6 +64,7 @@ const meta = {
 <head>
     <!-- Analytics -->
     <script
+        is:inline
         src='https://analytics.devgo.studio/api/script.js'
         data-site-id='ab2d9599be3f'
         defer
@@ -71,6 +72,7 @@ const meta = {
 
     <!-- JSON-LD Schema -->
     <script
+        is:inline
         type='application/ld+json'
         set:html={JSON.stringify(generateJsonLd())}
     />
