@@ -1,31 +1,34 @@
-import hopethreads from '../assets/works/hopethreads.png'
-import palms from '../assets/works/palms-agency-global.png'
-import serialkitten from '../assets/works/serialkitten.png'
+import hopethreadsImg from '../assets/works/hopethreads.png'
+import palmsImg from '../assets/works/palms-agency-global.png'
+import serialkittenImg from '../assets/works/serialkitten.png'
 
 export interface FeaturedProject {
-    title: string,
-    image: typeof hopethreads,
-    tags: string[],
+    title: string
+    image: typeof hopethreadsImg
+    tags: string[]
     link?: string
 }
 
+// NOTE: When the content collection supports image fields, this should derive
+// from getCollection("case-studies") instead. For now, this is the single
+// manifest for homepage featured projects.
 export const featuredProjects: FeaturedProject[] = [
     {
         title: "Hopethreads",
-        image: hopethreads,
+        image: hopethreadsImg,
         tags: ["Website", "Store", "UI/UX Design"],
-        link: "https://hopethreads.au"
+        link: "https://hopethreads.au",
     },
     {
         title: "Palms Agency Global",
-        image: palms,
+        image: palmsImg,
         tags: ["Website", "UI/UX Design"],
-        link: "https://palms-agency-global.com"
+        link: "https://palms-agency-global.com",
     },
     {
         title: "Serial Kitten",
-        image: serialkitten,
+        image: serialkittenImg,
         tags: ["Website", "UI/UX Design"],
-        link: "https://serialkitten.com"
-    }
+        link: "https://serialkitten.com",
+    },
 ]
