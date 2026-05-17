@@ -64,6 +64,14 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
     #logo-track {
         will-change: transform;
     }
+
+    #hero-canvas {
+      opacity: 0;
+      transition: opacity 600ms ease-out;
+    }
+    #hero-canvas.active {
+      opacity: 1;
+    }
 </style>
 
 <script>
@@ -177,6 +185,12 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
 
             this.addListeners()
             this.isInitialized = true
+        }
+
+        public activate() {
+            if (!this.isInitialized) return
+            const canvas = this.canvas
+            canvas.classList.add("active")
         }
 
         private async buildGrid() {
@@ -319,6 +333,9 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
     const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement
     const wrapper = document.getElementById("hero-wrapper") as HTMLElement
 
+    // Initialize engine reference (populated on load)
+    let engine: HeroEngine
+
     // Logo Infinite Scroll
     window.addEventListener("load", () => {
         if (
@@ -336,27 +353,42 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
             })
         }
 
-        // Initialize Pixi Engine
-        const engine = new HeroEngine(canvas, wrapper)
+        // Initialize Pixi Engine (canvas hidden via CSS)
+        engine = new HeroEngine(canvas, wrapper)
         engine.init()
     })
 
-    // Intro UI Animations
-    animate("#top h2", {
-        opacity: [0, 1],
-        translateY: [20, 0],
-        ease: "outCubic",
-        delay: 500,
-    })
-    animate("#top h3", {
-        opacity: [0, 0.4],
-        translateY: [20, 0],
-        ease: "outCubic",
-        delay: 800,
-    })
-    animate(".logo-infinite-scroll", {
-        opacity: [0, 1],
-        ease: "outCubic",
-        delay: 1100,
+    // Activate hero when loading intro completes
+    function onLoadingComplete() {
+        if (engine) engine.activate()
+        window.removeEventListener("loading:complete", onLoadingComplete)
+    }
+
+    // Race condition guard: if loading already complete, activate immediately
+    if ((window as any).__loadingComplete) {
+        if (engine) engine.activate()
+    } else {
+        window.addEventListener("loading:complete", onLoadingComplete)
+    }
+
+    // Intro UI Animations — play after loading overlay completes
+    window.addEventListener("loading:complete", () => {
+        animate("#top h2", {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            ease: "outCubic",
+            delay: 500,
+        })
+        animate("#top h3", {
+            opacity: [0, 0.4],
+            translateY: [20, 0],
+            ease: "outCubic",
+            delay: 800,
+        })
+        animate(".logo-infinite-scroll", {
+            opacity: [0, 1],
+            ease: "outCubic",
+            delay: 1100,
+        })
     })
 </script>

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 4/10 completed — Phase 3 dot multiplication + color shift implemented (20→55 dots).
+> **CURRENT PROGRESS:** Task 5/10 completed — Minimum hold time (1.5s) added. Reduced-motion guard already in place from Task 2.
 
 ---
 
@@ -439,7 +439,7 @@ git commit -m "feat(loading): add Phase 3 multiplication + color shift"
 
 The reduced-motion check was already added in Task 2. This task adds a minimum hold time so the intro doesn't flash on fast connections.
 
-- [ ] **Step 1: Wrap the full animation sequence in a minimum-hold promise**
+- [x] **Step 1: Wrap the full animation sequence in a minimum-hold promise**
 
 In `loading-overlay.astro`, modify the script's execution section. Replace the direct timeline creation with a minimum-hold wrapper:
 
