@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 7/10 completed — Navbar animations wrapped in loading:complete listener.
+> **CURRENT PROGRESS:** Task 8/10 completed — BaseLayout mount verified, race condition guard added for pages without overlay.
 
 ---
 
@@ -806,7 +806,7 @@ git commit -m "feat(loading): navbar animations wait for loading:complete event"
 **Files:**
 - Modify: `src/layouts/BaseLayout.astro`
 
-- [ ] **Step 1: Clean up the BaseLayout mount and add the race condition flag**
+- [x] **Step 1: Clean up the BaseLayout mount and add the race condition flag**
 
 In `src/layouts/BaseLayout.astro`, the `LoadingOverlay` was added in Task 2. Verify it's positioned as the first child of `<body>` before `<Navbar />`:
 
@@ -843,7 +843,7 @@ Add after `<LoadingOverlay />` in the body:
         </script>
 ```
 
-- [ ] **Step 2: Verify full flow**
+- [x] **Step 2: Verify full flow**
 
 Hard-refresh the homepage. Expected end-to-end flow:
 1. Black screen with 3 pulsing dots + "Loading" text
@@ -852,7 +852,7 @@ Hard-refresh the homepage. Expected end-to-end flow:
 4. Overlay fades, hero canvas fades in, navbar + hero text animate in
 5. Page is fully interactive
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/layouts/BaseLayout.astro

@@ -9,10 +9,10 @@
   class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bg"
   aria-live="polite"
 >
-  <div id="loading-dots" class="relative flex items-center justify-center">
-    <div class="loading-dot absolute" style="width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
-    <div class="loading-dot absolute" style="width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
-    <div class="loading-dot absolute" style="width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
+  <div id="loading-dots">
+    <div class="loading-dot" style="position:absolute;width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
+    <div class="loading-dot" style="position:absolute;width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
+    <div class="loading-dot" style="position:absolute;width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
   </div>
   <p
     id="loading-text"
@@ -21,6 +21,36 @@
     Loading
   </p>
 </div>
+
+<style>
+    #loading-overlay {
+        transition: opacity 400ms ease-out;
+    }
+
+    #loading-dots {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .loading-dot {
+        transition: none;
+    }
+
+    .spawned-dot {
+        transition: none;
+    }
+
+    /* Mobile: slightly larger dots for visibility */
+    @media (max-width: 768px) {
+        .loading-dot {
+            width: 10px !important;
+            height: 10px !important;
+        }
+    }
+</style>
 
 <script>
   import { animate, createTimeline, stagger } from "animejs"
