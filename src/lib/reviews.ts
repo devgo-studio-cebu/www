@@ -15,15 +15,5 @@ export const reviews: Review[] = [
         name: "Trevor Sederiosa",
         company: "Founder of Noteworthy",
         review: "Working with DEVGO Studio was smooth and collaborative from start to finish. While it took some time to plan everything out, the team stayed patient, professional, and fully engaged the whole way through. They really took the time to understand our vision, listened to our ideas, and added thoughtful creative input that elevated the final result. Communication was always clear, revisions were handled quickly, and the site they built feels fresh, true to our brand, and something we're genuinely proud of. Couldn't be happier with how it turned out, highly recommend their team!"
-    },
-    {
-        name: "Pizza Palace",
-        company: "777 Intl",
-        review: "DEVGO Studio didn't just build a website—they brought our vision to life. Clean, fast, and built to convert. Would highly recommend."
-    },
-    {
-        name: "Cookie$",
-        company: "",
-        review: "Great to work with"
     }
 ]
