@@ -1,0 +1,23 @@
+---
+// LoadingOverlay.astro
+// Full-screen loading intro — Particle Density Morph
+// Uses animejs v4 timeline to animate dots from sparse → dense
+---
+
+<div
+  id="loading-overlay"
+  class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bg"
+  aria-live="polite"
+>
+  <div id="loading-dots" class="relative flex items-center justify-center">
+    <div class="loading-dot absolute" style="width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
+    <div class="loading-dot absolute" style="width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
+    <div class="loading-dot absolute" style="width:8px;height:8px;background:var(--color-accent);border-radius:50%;"></div>
+  </div>
+  <p
+    id="loading-text"
+    class="mt-6 text-[10px] uppercase tracking-[4px] text-bg-secondary opacity-0 font-head"
+  >
+    Loading
+  </p>
+</div>

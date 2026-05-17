@@ -5,6 +5,7 @@ import { Font } from "astro:assets"
 // @ts-ignore
 import "@fontsource-variable/montserrat"
 import Footer from "../components/footer.astro"
+import LoadingOverlay from "../components/loading-overlay.astro"
 import Navbar from "../components/navbar.astro"
 import Seo from "../components/seo.astro"
 import type { SEOProps } from "../types/seo"
@@ -40,6 +41,7 @@ const { seo } = Astro.props
         <Seo seo={seo} />
     </head>
     <body class='w-svw flex flex-col relative'>
+        <LoadingOverlay />
         <Navbar />
         <slot />
         <Footer />
