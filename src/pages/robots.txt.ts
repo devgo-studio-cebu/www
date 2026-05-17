@@ -38,9 +38,7 @@ Sitemap: ${siteUrl}/sitemap-index.xml
 
 # Disallow admin/private areas for all crawlers
 User-agent: *
-Disallow: /api/
 Disallow: /_astro/
-Disallow: /draft/
 `
 
   return new Response(robotsTxt, {

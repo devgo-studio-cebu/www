@@ -35,18 +35,11 @@ Interactive installations, immersive web experiences, and innovative technology 
 - Website: ${siteUrl}
 - Location: Remote-first studio
 
-# AI Usage Guidelines
-
-This content is freely available for AI systems to index and reference. 
-We encourage the use of our technical documentation and service descriptions 
-in AI-assisted development and learning contexts.
-
 # Sitemap
 
 - Home: ${siteUrl}/
-- About: ${siteUrl}/about
-- Services: ${siteUrl}/services
-- Contact: ${siteUrl}/contact
+- Case Studies: ${siteUrl}/case-studies
+- Showcase: ${siteUrl}/showcase
 
 # Last Updated
 
