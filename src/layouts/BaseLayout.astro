@@ -42,6 +42,12 @@ const { seo } = Astro.props
     </head>
     <body class='w-svw flex flex-col relative'>
         <LoadingOverlay />
+        <script is:inline>
+            if (!document.getElementById('loading-overlay')) {
+                window.__loadingComplete = true;
+                window.dispatchEvent(new CustomEvent('loading:complete'));
+            }
+        </script>
         <Navbar />
         <slot />
         <Footer />

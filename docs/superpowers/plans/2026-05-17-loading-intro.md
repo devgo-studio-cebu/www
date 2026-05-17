@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 6/10 completed — Hero pre-init in background, activate on loading:complete, intro UI animations wrapped.
+> **CURRENT PROGRESS:** Task 7/10 completed — Navbar animations wrapped in loading:complete listener.
 
 ---
 
@@ -688,7 +688,7 @@ git commit -m "feat(loading): hero pre-init in background + activate on loading:
 
 The navbar animations (splitText character reveal, nav-link stagger) currently start immediately. They should wait for the loading overlay to complete so they don't play behind the overlay.
 
-- [ ] **Step 1: Wrap navbar animations in loading:complete listener**
+- [x] **Step 1: Wrap navbar animations in loading:complete listener**
 
 In `src/components/navbar.astro`, find the `<script>` block and wrap the animation calls with the loading event:
 
@@ -788,11 +788,11 @@ With:
     })
 ```
 
-- [ ] **Step 2: Verify navbar animations wait for loading**
+- [x] **Step 2: Verify navbar animations wait for loading**
 
 Hard-refresh. Expected: Navbar is invisible during loading overlay. After overlay fades, navbar text animates in with the character-by-character stagger.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/navbar.astro
