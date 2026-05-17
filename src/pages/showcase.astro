@@ -73,7 +73,11 @@ const sortedYears = Array.from(projectsByYear.keys())
                                         >
                                             <Image
                                                 src={project.image}
-                                                alt=''
+                                                alt={project.title}
+                                                width={1920}
+                                                height={1080}
+                                                loading='lazy'
+                                                decoding='async'
                                                 class='w-full h-full object-cover'
                                             />
                                             <p class='absolute bottom-0 left-0 right-0 text-3xl font-head uppercase p-4 pt-10 bg-linear-to-t from-bg to-transparent group-hover:opacity-0 transition-opacity'>
@@ -94,7 +98,11 @@ const sortedYears = Array.from(projectsByYear.keys())
                                     <div class='showcase-item w-full h-full relative group opacity-0'>
                                         <Image
                                             src={project.image}
-                                            alt=''
+                                            alt={project.title}
+                                            width={1920}
+                                            height={1080}
+                                            loading='lazy'
+                                            decoding='async'
                                             class='w-full h-full object-cover'
                                         />
                                         <p class='absolute bottom-0 left-0 right-0 text-3xl font-head uppercase p-4 pt-10 bg-linear-to-t from-bg to-transparent'>

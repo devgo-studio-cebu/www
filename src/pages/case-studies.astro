@@ -57,6 +57,10 @@ const isProd = import.meta.env.PROD
                                 <Image
                                     src={entry.data.image}
                                     alt={entry.data.title}
+                                    width={1920}
+                                    height={1080}
+                                    loading='lazy'
+                                    decoding='async'
                                     class='w-full h-full object-contain md:blur-xs group-hover:blur-none transition-all'
                                 />
                             ) : (

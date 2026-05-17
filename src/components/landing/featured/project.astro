@@ -18,7 +18,11 @@ const id = `featured-${title
 >
     <Image
         src={image}
-        alt=''
+        alt={title}
+        width={1920}
+        height={1080}
+        loading='lazy'
+        decoding='async'
         class='md:-z-1 md:absolute top-0 left-0 md:object-cover md:h-full md:w-full'
     />
     <div class='w-full pt-4 md:p-6 md:pt-24 relative'>
