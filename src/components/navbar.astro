@@ -90,9 +90,21 @@ import { Menu, X } from "lucide-astro"
 <script>
     import { animate, splitText, stagger, utils } from "animejs"
 
-    // Only run entrance animations on initial page load, not on View Transitions
-    if (!document.querySelector("#navbar")?.dataset?.animated) {
-        // Name
+    // Always make navbar visible immediately (handles View Transitions)
+    const setVisible = (sel: string) => {
+        document.querySelectorAll(sel).forEach((el) => {
+            (el as HTMLElement).style.opacity = "1"
+            ;(el as HTMLElement).style.transform = "translateY(0)"
+        })
+    }
+    setVisible("#devgo")
+    setVisible(".nav-link, #nav-contact")
+    setVisible(".icon-menu")
+
+    // Entrance animation: play once per session (window survives View Transitions)
+    if (!window.__navAnimated) {
+        window.__navAnimated = true
+
         const { chars: nameChars } = splitText("#devgo", {
             chars: true,
         })
@@ -103,7 +115,6 @@ import { Menu, X } from "lucide-astro"
             ease: "outCirc",
         })
 
-        // Links - Desktop
         animate([".nav-link", "#nav-contact"], {
             opacity: [0, 1],
             translateY: [10, 0],
@@ -111,23 +122,12 @@ import { Menu, X } from "lucide-astro"
             ease: "outCirc",
         })
 
-        // Menu toggle - Mobile
         animate(".icon-menu", {
             opacity: [0, 1],
             translateY: [10, 0],
             delay: 500,
             ease: "outCirc",
         })
-
-        document.querySelector("#navbar")?.setAttribute("data-animated", "true")
-    } else {
-        // On View Transitions, set final state immediately
-        const nav = document.querySelector("#navbar")
-        if (nav) {
-            utils.set("#devgo", { opacity: 1, translateY: 0 })
-            utils.set([".nav-link", "#nav-contact"], { opacity: 1, translateY: 0 })
-            utils.set(".icon-menu", { opacity: 1, translateY: 0 })
-        }
     }
 
     const menuToggle = document.getElementById("menu-toggle") as HTMLInputElement | null

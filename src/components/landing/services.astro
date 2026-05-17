@@ -125,8 +125,6 @@ import logoSrc from "../../assets/images/logo.svg"
         engine.init()
     }
 
-    // Cleanup on Astro page swap
-    document.addEventListener("astro:before-swap", () => {
-        manager.destroyAll()
-    })
+    // Deduplicated cleanup on Astro page swap
+    manager.setupSwapCleanup()
 </script>

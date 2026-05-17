@@ -82,6 +82,17 @@ class AnimationManager {
     getEngine(id: string): PixiEngine | undefined {
         return this.engines.get(id)
     }
+
+    /**
+     * Register a single astro:before-swap cleanup handler (deduplicated).
+     * Call once per page — prevents listener accumulation across View Transitions.
+     */
+    setupSwapCleanup(): void {
+        if ((window as any).__astroSwapHandler) return
+        const handler = () => this.destroyAll()
+        ;(window as any).__astroSwapHandler = handler
+        document.addEventListener("astro:before-swap", handler)
+    }
 }
 
 // Singleton — one manager per page load
