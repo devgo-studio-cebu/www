@@ -49,6 +49,8 @@ import { Menu, X } from "lucide-astro"
             type='checkbox'
             id='menu-toggle'
             class='peer sr-only'
+            aria-expanded='false'
+            aria-controls='mobile-menu'
         />
 
         <label
@@ -60,7 +62,10 @@ import { Menu, X } from "lucide-astro"
             <X class='icon-close' />
         </label>
         <div
+            id='mobile-menu'
             class='md:hidden absolute top-0 left-full peer-checked:left-0 w-screen h-lvh bg-bg -z-1 transition-all pt-16 flex flex-col items-center space-y-6 text-2xl uppercase font-medium'
+            role='navigation'
+            aria-label='Mobile navigation'
         >
             {
                 links
@@ -112,12 +117,31 @@ import { Menu, X } from "lucide-astro"
         ease: "outCirc",
     })
 
+    const menuToggle = document.getElementById("menu-toggle") as HTMLInputElement | null
+    if (menuToggle) {
+        // Sync aria-expanded with checkbox state
+        menuToggle.addEventListener("change", () => {
+            menuToggle.setAttribute(
+                "aria-expanded",
+                menuToggle.checked ? "true" : "false",
+            )
+        })
+
+        // Close on Escape
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && menuToggle.checked) {
+                menuToggle.checked = false
+                menuToggle.setAttribute("aria-expanded", "false")
+            }
+        })
+    }
+
     utils.$(".mobile-link").forEach((link) => {
         link.addEventListener("click", () => {
-            const checkbox = document.getElementById(
-                "menu-toggle",
-            ) as HTMLInputElement | null
-            if (checkbox) checkbox.checked = false
+            if (menuToggle) {
+                menuToggle.checked = false
+                menuToggle.setAttribute("aria-expanded", "false")
+            }
         })
     })
 </script>
