@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 2/10 completed — Phase 1 pulse animation, timeline, and reduced-motion guard implemented.
+> **CURRENT PROGRESS:** Task 3/10 completed — Phase 2 dot expansion implemented (3→20 dots via concentric rings).
 
 ---
 
@@ -235,7 +235,7 @@ git commit -m "feat(loading): add Phase 1 pulse animation + mount in BaseLayout"
 **Files:**
 - Modify: `src/components/loading-overlay.astro`
 
-- [ ] **Step 1: Add the expansion logic and timeline calls**
+- [x] **Step 1: Add the expansion logic and timeline calls**
 
 Add the following code inside the `<script>` block of `loading-overlay.astro`, BEFORE the timeline definition (after the `dotPool` initialization and the reduced-motion check, but before `const tl = createTimeline(...)`):
 
@@ -314,14 +314,14 @@ Then add the `.call()` to the timeline. After the Phase 1 `tl.add()` calls, add:
   tl.call(() => runExpansion(), PHASE_DURATIONS.pulse)
 ```
 
-- [ ] **Step 2: Verify Phase 2 in the browser**
+- [x] **Step 2: Verify Phase 2 in the browser**
 
 Refresh the dev page. Expected:
 - 0.0s–0.8s: 3 dots pulse
 - 0.8s: ~17 new dots spawn at center and drift outward in 2 rings
 - After 1.6s: 20 dots visible on screen, no further animation (Phase 3 not yet)
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/loading-overlay.astro

@@ -196,6 +196,72 @@
     })
   }
 
+  // --- PHASE 3: MULTIPLICATION ---
+  function generateMultiplicationPositions(count: number): { x: number; y: number }[] {
+    const positions: { x: number; y: number }[] = []
+    const centerX = cx()
+    const centerY = cy()
+    const maxR = Math.min(vw(), vh()) * 0.35
+    const rings = 4
+
+    for (let ring = 1; ring <= rings; ring++) {
+      const r = (ring / rings) * maxR
+      const dotsInRing = Math.ceil(count / rings)
+      const offset = ring % 2 === 0 ? 0.3 : 0 // stagger rings
+      for (let i = 0; i < dotsInRing && positions.length < count; i++) {
+        const angle = (2 * Math.PI * i) / dotsInRing + offset
+        positions.push({
+          x: centerX + Math.cos(angle) * r,
+          y: centerY + Math.sin(angle) * r,
+        })
+      }
+    }
+    return positions
+  }
+
+  // Hero-inspired color palette (warm desk tones + accent)
+  const heroColors = [ACCENT, PRIMARY, "#8b6914", "#c4a35a", GRAY, PRIMARY, ACCENT, "#3a2a1a", "#d4c4a0", PRIMARY]
+
+  function runMultiplication() {
+    const newDotCount = 35 // 20 existing + 35 new ≈ 55 total
+    const positions = generateMultiplicationPositions(newDotCount)
+
+    for (let i = 0; i < newDotCount; i++) {
+      const pos = positions[i]
+      // Interpolate color: start accent, shift toward hero palette
+      const colorT = Math.random() * 0.6 + 0.2 // 0.2–0.8 blend
+      const heroColor = heroColors[i % heroColors.length]
+      const color = lerpColor(ACCENT, heroColor, colorT)
+      const size = 2 + Math.random() * 5 // 2-7px (smaller = denser feel)
+
+      // Start from a random existing dot's position for a "splitting" feel
+      const parentDot = dotPool[Math.floor(Math.random() * dotPool.length)]
+      const startX = parentDot.x
+      const startY = parentDot.y
+
+      const dot = createDot(startX, startY, size, color)
+      dotsContainer.appendChild(dot)
+      dotPool.push({ el: dot, x: pos.x, y: pos.y, color, size })
+
+      animate(dot, {
+        opacity: [0, 0.4 + Math.random() * 0.6],
+        left: [startX - size / 2, pos.x - size / 2],
+        top: [startY - size / 2, pos.y - size / 2],
+        scale: [0, 1],
+        duration: PHASE_DURATIONS.multiply,
+        delay: Math.random() * 300,
+        ease: "outCirc",
+      })
+    }
+
+    // Fade "Loading" text out during multiplication
+    animate("#loading-text", {
+      opacity: [1, 0],
+      duration: 400,
+      ease: "outCirc",
+    })
+  }
+
   // --- TIMELINE ---
   const tl = createTimeline({
     onComplete: () => {
@@ -230,5 +296,8 @@
 
   // Phase 2: Expand dots
   tl.call(() => runExpansion(), PHASE_DURATIONS.pulse)
+
+  // Phase 3: Multiply dots
+  tl.call(() => runMultiplication(), PHASE_DURATIONS.pulse + PHASE_DURATIONS.expand)
   } // end runLoadingAnimation()
 </script>
