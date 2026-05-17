@@ -130,6 +130,72 @@
 
   // --- MAIN ANIMATION (wrapped in function for clean reduced-motion bypass) ---
   function runLoadingAnimation() {
+  // --- PHASE 2: EXPANSION ---
+  // Generate positions in 2 concentric rings around center
+  function generateExpansionPositions(count: number): { x: number; y: number }[] {
+    const positions: { x: number; y: number }[] = []
+    const centerX = cx()
+    const centerY = cy()
+    const rings = 2
+    const innerR = Math.min(vw(), vh()) * 0.08
+    const outerR = Math.min(vw(), vh()) * 0.16
+
+    for (let ring = 0; ring < rings; ring++) {
+      const r = ring === 0 ? innerR : outerR
+      const dotsInRing = ring === 0 ? Math.ceil(count * 0.4) : Math.ceil(count * 0.6)
+      for (let i = 0; i < dotsInRing && positions.length < count; i++) {
+        const angle = (2 * Math.PI * i) / dotsInRing + ring * 0.5
+        positions.push({
+          x: centerX + Math.cos(angle) * r,
+          y: centerY + Math.sin(angle) * r,
+        })
+      }
+    }
+    return positions
+  }
+
+  function runExpansion() {
+    const newDotCount = 17 // 3 existing + 17 new = 20 total
+    const positions = generateExpansionPositions(newDotCount)
+
+    // Color palette for expansion dots
+    const colors = [ACCENT, PRIMARY, ACCENT, PRIMARY, GRAY, ACCENT, PRIMARY, ACCENT, PRIMARY, GRAY, ACCENT, PRIMARY, ACCENT, PRIMARY, GRAY, ACCENT, PRIMARY]
+
+    for (let i = 0; i < newDotCount; i++) {
+      const pos = positions[i]
+      const color = colors[i % colors.length]
+      const size = 4 + Math.random() * 4 // 4-8px
+      const dot = createDot(cx(), cy(), size, color)
+      dotsContainer.appendChild(dot)
+
+      dotPool.push({ el: dot, x: pos.x, y: pos.y, color, size })
+
+      // Animate each new dot from center to its ring position
+      animate(dot, {
+        opacity: [0, 0.6 + Math.random() * 0.4],
+        left: [cx() - size / 2, pos.x - size / 2],
+        top: [cy() - size / 2, pos.y - size / 2],
+        scale: [0, 1],
+        duration: PHASE_DURATIONS.expand,
+        delay: stagger(30, { start: Math.random() * 200 }),
+        ease: "outCirc",
+      })
+    }
+
+    // Also animate the 3 original dots outward slightly
+    const originalPositions = generateExpansionPositions(3)
+    initialDots.forEach((dot, i) => {
+      const pos = originalPositions[i]
+      animate(dot, {
+        left: [dot.style.left, `${pos.x - 4}px`],
+        top: [dot.style.top, `${pos.y - 4}px`],
+        opacity: [1, 0.7],
+        duration: PHASE_DURATIONS.expand,
+        ease: "outCirc",
+      })
+    })
+  }
+
   // --- TIMELINE ---
   const tl = createTimeline({
     onComplete: () => {
@@ -161,5 +227,8 @@
     duration: 400,
     ease: "outCirc",
   }, 300)
+
+  // Phase 2: Expand dots
+  tl.call(() => runExpansion(), PHASE_DURATIONS.pulse)
   } // end runLoadingAnimation()
 </script>

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 1/10 completed — LoadingOverlay component structure created and mounted in BaseLayout.
+> **CURRENT PROGRESS:** Task 2/10 completed — Phase 1 pulse animation, timeline, and reduced-motion guard implemented.
 
 ---
 
@@ -64,7 +64,7 @@ git commit -m "feat(loading): create LoadingOverlay component structure"
 **Files:**
 - Modify: `src/components/loading-overlay.astro`
 
-- [ ] **Step 1: Add the animejs script with timeline and Phase 1 animation**
+- [x] **Step 1: Add the animejs script with timeline and Phase 1 animation**
 
 Add the following `<script>` block inside `src/components/loading-overlay.astro`, after the closing `</div>` of `#loading-overlay`:
 
@@ -214,14 +214,14 @@ Add the following `<script>` block inside `src/components/loading-overlay.astro`
 
 **Note:** The `throw new Error("REDUCED_MOTION_SKIP")` at the end of the reduced-motion block intentionally stops execution of the rest of the script. The timeline and subsequent phases won't be set up — only the simple fade runs.
 
-- [ ] **Step 2: Verify Phase 1 runs in the browser**
+- [x] **Step 2: Verify Phase 1 runs in the browser**
 
 Mount the component temporarily in BaseLayout to test:
 - Add `import LoadingOverlay from "../components/loading-overlay.astro"` and `<LoadingOverlay />` as the first child of `<body>` in `src/layouts/BaseLayout.astro`
 - Run dev server, refresh page
 - Expected: 3 green dots pulse at center, "Loading" text fades in, then nothing else happens (Phases 2-3 not yet implemented)
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/loading-overlay.astro src/layouts/BaseLayout.astro
