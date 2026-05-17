@@ -100,8 +100,13 @@ import { ArrowRight } from "lucide-astro"
             }
         </div>
         <!-- Copyright -->
-        <div class='text-xs sm:text-sm text-bg-secondary'>
-            &copy; {new Date().getFullYear()} DEVGO Studio. All rights reserved.
+        <div class='text-xs sm:text-sm text-bg-secondary flex flex-col gap-1'>
+            <span>&copy; {new Date().getFullYear()} DEVGO Studio. All rights reserved.</span>
+            <span class='flex gap-2'>
+                <a href='/privacy' class='hover:text-text transition-colors'>Privacy Policy</a>
+                <span>·</span>
+                <a href='/terms' class='hover:text-text transition-colors'>Terms of Service</a>
+            </span>
         </div>
     </div>
 </section>

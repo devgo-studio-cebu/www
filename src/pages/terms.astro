@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+
+const seoProps = {
+    title: "Terms of Service | DEVGO Studio",
+    description: "Terms of service for DEVGO Studio.",
+    type: "website" as const,
+}
+---
+
+<BaseLayout seo={seoProps}>
+    <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-10 md:pb-20 w-full px-2 md:px-6 max-w-4xl mx-auto'>
+        <h1 class='text-3xl md:text-5xl font-head uppercase mb-8'>Terms of Service</h1>
+        <div class='prose prose-invert max-w-none text-base md:text-lg space-y-6'>
+            <p><em>Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+
+            <h2>Overview</h2>
+            <p>By accessing and using the DEVGO Studio website, you agree to these terms. If you do not agree, please do not use our website.</p>
+
+            <h2>Intellectual Property</h2>
+            <p>All content on this website, including text, images, code, and designs, is the property of DEVGO Studio unless otherwise noted. You may not reproduce, distribute, or create derivative works without written permission.</p>
+
+            <h2>Services</h2>
+            <p>DEVGO Studio provides digital services including web development, mobile app development, and AI automation solutions. Specific terms for client projects are outlined in individual service agreements.</p>
+
+            <h2>Limitation of Liability</h2>
+            <p>DEVGO Studio is not liable for any damages arising from the use of this website. We provide the site "as is" without warranties of any kind.</p>
+
+            <h2>External Links</h2>
+            <p>Our website may contain links to external sites. We are not responsible for the content or practices of those sites.</p>
+
+            <h2>Changes to These Terms</h2>
+            <p>We reserve the right to modify these terms at any time. Continued use of the website after changes constitutes acceptance.</p>
+
+            <h2>Contact</h2>
+            <p>For questions about these terms, contact us at <a href='mailto:official@devgo.studio'>official@devgo.studio</a>.</p>
+        </div>
+    </section>
+</BaseLayout>

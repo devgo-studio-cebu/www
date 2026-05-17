@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+
+const seoProps = {
+    title: "Privacy Policy | DEVGO Studio",
+    description: "Privacy policy for DEVGO Studio.",
+    type: "website" as const,
+}
+---
+
+<BaseLayout seo={seoProps}>
+    <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-10 md:pb-20 w-full px-2 md:px-6 max-w-4xl mx-auto'>
+        <h1 class='text-3xl md:text-5xl font-head uppercase mb-8'>Privacy Policy</h1>
+        <div class='prose prose-invert max-w-none text-base md:text-lg space-y-6'>
+            <p><em>Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+
+            <h2>Information We Collect</h2>
+            <p>DEVGO Studio collects minimal information when you visit our website. We may collect:</p>
+            <ul>
+                <li><strong>Usage Data:</strong> Anonymous page views and interaction data via our analytics service to understand how visitors use our site.</li>
+                <li><strong>Contact Information:</strong> If you contact us via email, we store your email address and message content to respond to your inquiry.</li>
+            </ul>
+
+            <h2>How We Use Your Information</h2>
+            <p>We use collected information to:</p>
+            <ul>
+                <li>Improve our website and user experience</li>
+                <li>Respond to inquiries and provide requested services</li>
+                <li>Comply with legal obligations</li>
+            </ul>
+
+            <h2>Cookies</h2>
+            <p>Our website uses analytics cookies to measure site traffic. These cookies do not personally identify you. You may disable cookies in your browser settings.</p>
+
+            <h2>Third-Party Services</h2>
+            <p>We use third-party analytics tools to measure site performance. These services collect anonymous usage data and are subject to their own privacy policies.</p>
+
+            <h2>Data Retention</h2>
+            <p>We retain contact information only as long as necessary to respond to your inquiry. Analytics data is aggregated and anonymized.</p>
+
+            <h2>Your Rights</h2>
+            <p>You have the right to request access to, correction of, or deletion of your personal data. Contact us at <a href='mailto:official@devgo.studio'>official@devgo.studio</a> for any privacy-related requests.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>We may update this policy from time to time. Changes will be posted on this page with an updated date.</p>
+
+            <h2>Contact</h2>
+            <p>For questions about this privacy policy, contact us at <a href='mailto:official@devgo.studio'>official@devgo.studio</a>.</p>
+        </div>
+    </section>
+</BaseLayout>
