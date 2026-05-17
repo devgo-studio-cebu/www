@@ -57,48 +57,41 @@ if (isLong) {
     }
 </div>
 
+<style>
+    .review-content {
+        max-height: 120px;
+        overflow: hidden;
+        transition: max-height 300ms ease-out;
+    }
+    .review-content.expanded {
+        max-height: none;
+    }
+</style>
+
 <script>
     document.querySelectorAll('.see-more-btn').forEach((btn) => {
         const content = btn.closest('.review-content') as HTMLElement
         const textSpan = content?.querySelector('.review-text') as HTMLElement
         if (!content || !textSpan) return
 
-        // Pre-calculate and store the full height for smoother expansion
         const fullText = textSpan.dataset.full || ''
         const truncatedText = textSpan.dataset.truncated || ''
-
-        // Create a temporary element to measure full height without affecting layout
-        const measureHeight = (text: string) => {
-            const temp = document.createElement('div')
-            temp.style.cssText = 'position: absolute; visibility: hidden; width: ' + content.offsetWidth + 'px;'
-            temp.innerHTML = '<p class="font-medium text-pretty leading-relaxed">" ' + text + ' "</p>'
-            document.body.appendChild(temp)
-            const height = temp.offsetHeight
-            document.body.removeChild(temp)
-            return height
-        }
-
-        const truncatedHeight = content.offsetHeight
-        const fullHeight = measureHeight(fullText)
 
         btn.addEventListener('click', () => {
             const isExpanded = textSpan.dataset.expanded === 'true'
 
             if (isExpanded) {
-                content.style.maxHeight = truncatedHeight + 'px'
                 textSpan.textContent = truncatedText
                 textSpan.dataset.expanded = 'false'
                 btn.innerHTML = '...see more'
-                setTimeout(() => { content.style.maxHeight = '' }, 300)
+                content.style.maxHeight = ''
+                content.classList.remove('expanded')
             } else {
-                content.style.maxHeight = truncatedHeight + 'px'
-                // Force reflow
-                content.offsetHeight
-                content.style.maxHeight = fullHeight + 'px'
                 textSpan.textContent = fullText
                 textSpan.dataset.expanded = 'true'
                 btn.innerHTML = 'show less'
-                setTimeout(() => { content.style.maxHeight = '' }, 300)
+                content.style.maxHeight = 'none'
+                content.classList.add('expanded')
             }
         })
     })
