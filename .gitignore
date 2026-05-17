@@ -24,3 +24,10 @@ pnpm-debug.log*
 .idea/
 
 .omc/
+
+# AI Agents
+.pi/
+.superpowers/
+
+# Editor config
+.vscode/
