@@ -8,6 +8,8 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
+> **CURRENT PROGRESS:** Task 1/10 completed — LoadingOverlay component structure created and mounted in BaseLayout.
+
 ---
 
 ### Task 1: Create LoadingOverlay component structure + styles
@@ -15,7 +17,7 @@
 **Files:**
 - Create: `src/components/loading-overlay.astro`
 
-- [ ] **Step 1: Create the component file with HTML structure and styles**
+- [x] **Step 1: Create the component file with HTML structure and styles**
 
 ```astro
 ---
@@ -43,12 +45,12 @@
 </div>
 ```
 
-- [ ] **Step 2: Verify the component renders in the dev server**
+- [x] **Step 2: Verify the component renders in the dev server**
 
 Run: `cd /Users/adrianbonpin/Documents/Code/devgo/www && bun run dev`
 Expected: Dev server starts. Don't navigate yet — the component isn't mounted.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/loading-overlay.astro
