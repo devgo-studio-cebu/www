@@ -1,0 +1,69 @@
+<h2>✓ Final Design: Particle Density Morph (Variation C)</h2>
+<p class="subtitle">2.8s loading intro. Abstract dots expand into PixiJS hero grid. animejs v4. "Loading is just the hero at low-resolution."</p>
+
+<div class="section" style="background:#0a0f0b;border:1px solid #2f655330;border-radius:4px;padding:1.5rem;">
+  <h3 style="color:#5fcba6;margin-bottom:1rem;">Animation Timeline (2.8s)</h3>
+  
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+      <div style="min-width:60px;font-weight:700;color:#5fcba6;font-size:13px;">0.0s</div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:#f5f5f5;">Phase 1: Pulse</div>
+        <div style="font-size:13px;color:#aaa;">3 accent-green dots (#5fcba6) pulse in sequence at center. "Loading" text fades in below. Minimum hold: 1.5s on fast connections.</div>
+      </div>
+      <div style="color:#757575;font-size:12px;">800ms</div>
+    </div>
+    
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+      <div style="min-width:60px;font-weight:700;color:#5fcba6;font-size:13px;">0.8s</div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:#f5f5f5;">Phase 2: Expansion</div>
+        <div style="font-size:13px;color:#aaa;">Dots drift apart to coarse grid positions. New dots spawn from originals via <code>anime({ create })</code>. Count: 3 → ~20. <code>translateX/Y + scale: [1, 0.6]</code> with <code>stagger</code>.</div>
+      </div>
+      <div style="color:#757575;font-size:12px;">800ms</div>
+    </div>
+    
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+      <div style="min-width:60px;font-weight:700;color:#5fcba6;font-size:13px;">1.6s</div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:#f5f5f5;">Phase 3: Multiplication</div>
+        <div style="font-size:13px;color:#aaa;">Dots continue splitting and drifting to final hero positions. Colors interpolate from #5fcba6 → hero pixel colors. Count: ~20 → ~50+.</div>
+      </div>
+      <div style="color:#757575;font-size:12px;">800ms</div>
+    </div>
+    
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+      <div style="min-width:60px;font-weight:700;color:#5fcba6;font-size:13px;">2.4s</div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:#f5f5f5;">Phase 4: Resolution Match</div>
+        <div style="font-size:13px;color:#aaa;">Loading overlay fades (400ms). PixiJS hero canvas takes over. Last loading dots dissolve into corresponding hero particle positions. No hard cut.</div>
+      </div>
+      <div style="color:#757575;font-size:12px;">400ms</div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:1.5rem;padding:1rem;background:#0a0f0b;border-radius:4px;border:1px solid #2f655330;">
+  <h3 style="color:#f5f5f5;margin-bottom:0.75rem;">Design Decisions</h3>
+  <ul style="color:#ccc;font-size:13px;line-height:1.7;">
+    <li><strong style="color:#5fcba6;">No text formation</strong> — Dots stay abstract throughout. The hero already has DEVGO branding; the intro is a transition, not a billboard.</li>
+    <li><strong style="color:#5fcba6;">Dev: No skip logic</strong> — Always play full intro in development. Skip for returning visitors will be gated behind an env flag or commented out.</li>
+    <li><strong style="color:#5fcba6;">Minimum hold</strong> — 1.5s minimum display time, even if assets load instantly. Prevents flash-of-loading.</li>
+    <li><strong style="color:#5fcba6;">Hero pre-initialization</strong> — PixiJS app starts in background (opacity: 0, pointer-events: none) during loading. Fades in when overlay completes.</li>
+    <li><strong style="color:#5fcba6;">animejs v4 API</stromg> — Use <code>anime()</code> with <code>.create</code> option for dot multiplication, <code>stagger()</code> for sequenced reveals, and <code>.outExpo</code> easing for the fade.</li>
+  </ul>
+</div>
+
+<div style="margin-top:1.5rem;padding:1rem;background:#0a0f0b;border-radius:4px;border:1px solid #2f655330;">
+  <h3 style="color:#f5f5f5;margin-bottom:0.75rem;">What Gets Built</h3>
+  <ul style="color:#ccc;font-size:13px;line-height:1.7;">
+    <li><strong>New component:</strong> <code>LoadingOverlay.astro</code> — fixed fullscreen container, z-index above navigation, houses animejs dot animations.</li>
+    <li><strong>Modified:</strong> <code>BaseLayout.astro</code> — mount <code>LoadingOverlay</code> at body start, coordinate with hero script for completion signal.</li>
+    <li><strong>Modified:</strong> <code>hero.astro</code> — initialize PixiJS in background, await load completion, trigger overlay teardown.</li>
+    <li><strong>Assets:</strong> None. Purely animejs + CSS.</li>
+  </ul>
+</div>
+
+<div style="margin-top:1.5rem;text-align:center;">
+  <p style="color:#f5f5f5;font-size:14px;"><strong>Ready to proceed?</strong> This design matches your existing dark theme, PixiJS particle grid hero, and animejs v4 patterns.</p>
+</div>

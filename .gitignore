@@ -24,7 +24,3 @@ pnpm-debug.log*
 .idea/
 
 .omc/
-
-# AI Agents
-.pi/
-.superpowers/
