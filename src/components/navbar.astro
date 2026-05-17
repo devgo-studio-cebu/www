@@ -85,33 +85,45 @@ import { Menu, X } from "lucide-astro"
 <script>
     import { animate, splitText, stagger, utils } from "animejs"
 
-    // Name
+    // Split text ahead of time (DOM preparation), but delay animations until loading completes
     const { chars: nameChars } = splitText("#devgo", {
         chars: true,
     })
-    animate(nameChars, {
-        opacity: [0, 1],
-        translateY: [10, 0],
-        delay: stagger(50),
-        ease: "outCirc",
-    })
 
-    // Links - Desktop
-    animate([".nav-link", "#nav-contact"], {
-        opacity: [0, 1],
-        translateY: [10, 0],
-        delay: stagger(300, { start: 500 }),
-        ease: "outCirc",
-    })
+    function runNavAnimations() {
+        // Name
+        animate(nameChars, {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: stagger(50),
+            ease: "outCirc",
+        })
 
-    // Menu toggle - Mobile
-    animate(".icon-menu", {
-        opacity: [0, 1],
-        translateY: [10, 0],
-        delay: 500,
-        ease: "outCirc",
-    })
+        // Links - Desktop
+        animate([".nav-link", "#nav-contact"], {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: stagger(300, { start: 500 }),
+            ease: "outCirc",
+        })
 
+        // Menu toggle - Mobile
+        animate(".icon-menu", {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: 500,
+            ease: "outCirc",
+        })
+    }
+
+    // Wait for loading overlay to complete, then run navbar animations
+    if ((window as any).__loadingComplete) {
+        runNavAnimations()
+    } else {
+        window.addEventListener("loading:complete", runNavAnimations)
+    }
+
+    // Mobile menu toggle (no animation dependency)
     utils.$(".mobile-link").forEach((link) => {
         link.addEventListener("click", () => {
             const checkbox = document.getElementById(

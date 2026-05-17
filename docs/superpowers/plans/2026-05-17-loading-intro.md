@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 5/10 completed — Minimum hold time (1.5s) added. Reduced-motion guard already in place from Task 2.
+> **CURRENT PROGRESS:** Task 6/10 completed — Hero pre-init in background, activate on loading:complete, intro UI animations wrapped.
 
 ---
 
@@ -491,7 +491,7 @@ Currently the hero script initializes the PixiJS engine inside `window.addEventL
 1. **Pre-init**: Create the app, build the grid, but keep the canvas hidden
 2. **Activate**: Fade in the canvas and start mouse/touch listeners when `loading:complete` fires
 
-- [ ] **Step 1: Modify the hero script to support background init + event-driven activation**
+- [x] **Step 1: Modify the hero script to support background init + event-driven activation**
 
 In `src/components/landing/hero.astro`, find the `<script>` block and make these changes:
 
@@ -663,7 +663,7 @@ With:
     })
 ```
 
-- [ ] **Step 2: Verify hero activation after loading**
+- [x] **Step 2: Verify hero activation after loading**
 
 Hard-refresh the browser. Expected:
 - Loading overlay plays full 2.8s
@@ -672,7 +672,7 @@ Hard-refresh the browser. Expected:
 - Mouse repulsion works on the particle grid
 - Touch burst works on mobile
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/landing/hero.astro
