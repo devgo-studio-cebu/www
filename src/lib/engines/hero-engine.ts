@@ -69,6 +69,9 @@ export class HeroEngine implements PixiEngine {
     private isInitialized: boolean = false
     private dotTexture: PIXI.Texture | null = null
     private resizeTimer: number | null = null
+    private boundMouseMoveHandler: ((e: MouseEvent) => void) | null = null
+    private boundTouchStartHandler: ((e: TouchEvent) => void) | null = null
+    private boundResizeHandler: (() => void) | null = null
 
     constructor(
         private canvas: HTMLCanvasElement,
@@ -109,6 +112,18 @@ export class HeroEngine implements PixiEngine {
 
     public destroy() {
         if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
+        if (this.boundMouseMoveHandler) {
+            window.removeEventListener("mousemove", this.boundMouseMoveHandler)
+            this.boundMouseMoveHandler = null
+        }
+        if (this.boundTouchStartHandler) {
+            window.removeEventListener("touchstart", this.boundTouchStartHandler)
+            this.boundTouchStartHandler = null
+        }
+        if (this.boundResizeHandler) {
+            window.removeEventListener("resize", this.boundResizeHandler)
+            this.boundResizeHandler = null
+        }
         this.particles = []
         if (this.app.destroy) {
             this.app.destroy(true, { children: true, texture: true })
@@ -200,42 +215,42 @@ export class HeroEngine implements PixiEngine {
             this.mouse.y = y - rect.top
         }
 
-        window.addEventListener("mousemove", (e) =>
-            updateMouse(e.clientX, e.clientY),
-        )
+        this.boundMouseMoveHandler = (e: MouseEvent) =>
+            updateMouse(e.clientX, e.clientY)
+        window.addEventListener("mousemove", this.boundMouseMoveHandler)
 
-        window.addEventListener(
-            "touchstart",
-            (e) => {
-                const rect = this.canvas.getBoundingClientRect()
-                const x = e.touches[0].clientX - rect.left
-                const y = e.touches[0].clientY - rect.top
+        this.boundTouchStartHandler = (e: TouchEvent) => {
+            const rect = this.canvas.getBoundingClientRect()
+            const x = e.touches[0].clientX - rect.left
+            const y = e.touches[0].clientY - rect.top
 
-                const burstRadius = 120
-                const burstForce = 25
+            const burstRadius = 120
+            const burstForce = 25
 
-                for (const particle of this.particles) {
-                    const dx = particle.sprite.x - x
-                    const dy = particle.sprite.y - y
-                    const dist = Math.sqrt(dx * dx + dy * dy)
+            for (const particle of this.particles) {
+                const dx = particle.sprite.x - x
+                const dy = particle.sprite.y - y
+                const dist = Math.sqrt(dx * dx + dy * dy)
 
-                    if (dist < burstRadius && dist > 0) {
-                        const force = (burstRadius - dist) / burstRadius
-                        particle.applyForce(
-                            (dx / dist) * burstForce * force,
-                            (dy / dist) * burstForce * force,
-                        )
-                    }
+                if (dist < burstRadius && dist > 0) {
+                    const force = (burstRadius - dist) / burstRadius
+                    particle.applyForce(
+                        (dx / dist) * burstForce * force,
+                        (dy / dist) * burstForce * force,
+                    )
                 }
-            },
-            { passive: true },
-        )
+            }
+        }
+        window.addEventListener("touchstart", this.boundTouchStartHandler, {
+            passive: true,
+        })
 
-        window.addEventListener("resize", () => {
+        this.boundResizeHandler = () => {
             if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
             this.resizeTimer = window.setTimeout(() => {
                 this.buildGrid()
             }, 250)
-        })
+        }
+        window.addEventListener("resize", this.boundResizeHandler)
     }
 }

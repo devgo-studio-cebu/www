@@ -17,6 +17,7 @@ export class WaveParticleBg implements PixiEngine {
     private dotTexture: PIXI.Texture | null = null
     private isInitialized = false
     private resizeTimer: number | null = null
+    private boundResizeHandler: (() => void) | null = null
 
     constructor(
         private canvas: HTMLCanvasElement,
@@ -46,16 +47,21 @@ export class WaveParticleBg implements PixiEngine {
         this.buildGrid()
         this.animate()
 
-        window.addEventListener("resize", () => {
+        this.boundResizeHandler = () => {
             if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
             this.resizeTimer = window.setTimeout(() => this.buildGrid(), 250)
-        })
+        }
+        window.addEventListener("resize", this.boundResizeHandler)
 
         this.isInitialized = true
     }
 
     public destroy() {
         if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
+        if (this.boundResizeHandler) {
+            window.removeEventListener("resize", this.boundResizeHandler)
+            this.boundResizeHandler = null
+        }
         this.particles = []
         if (this.app.destroy) {
             this.app.destroy(true, { children: true, texture: true })

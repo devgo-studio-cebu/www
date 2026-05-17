@@ -79,6 +79,7 @@ export class FlowFieldBg implements PixiEngine {
     private perlin = new PerlinNoise()
     private isInitialized = false
     private resizeTimer: number | null = null
+    private boundResizeHandler: (() => void) | null = null
 
     constructor(
         private canvas: HTMLCanvasElement,
@@ -108,20 +109,25 @@ export class FlowFieldBg implements PixiEngine {
         this.createParticles()
         this.app.ticker.add(() => this.animate())
 
-        window.addEventListener("resize", () => {
+        this.boundResizeHandler = () => {
             if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
             this.resizeTimer = window.setTimeout(() => {
                 this.container.removeChildren()
                 this.particles = []
                 this.createParticles()
             }, 250)
-        })
+        }
+        window.addEventListener("resize", this.boundResizeHandler)
 
         this.isInitialized = true
     }
 
     public destroy() {
         if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
+        if (this.boundResizeHandler) {
+            window.removeEventListener("resize", this.boundResizeHandler)
+            this.boundResizeHandler = null
+        }
         this.particles = []
         if (this.app.destroy) {
             this.app.destroy(true, { children: true, texture: true })

@@ -61,6 +61,7 @@ export class ParticleLogoEngine implements PixiEngine {
     private focalLength: number = 400
     private isInitialized: boolean = false
     private resizeTimer: number | null = null
+    private boundResizeHandler: (() => void) | null = null
 
     constructor(
         private canvas: HTMLCanvasElement,
@@ -90,18 +91,23 @@ export class ParticleLogoEngine implements PixiEngine {
 
         this.app.ticker.add(() => this.update())
 
-        window.addEventListener("resize", () => {
+        this.boundResizeHandler = () => {
             if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
             this.resizeTimer = window.setTimeout(() => {
                 this.buildParticles()
             }, 250)
-        })
+        }
+        window.addEventListener("resize", this.boundResizeHandler)
 
         this.isInitialized = true
     }
 
     public destroy() {
         if (this.resizeTimer !== null) clearTimeout(this.resizeTimer)
+        if (this.boundResizeHandler) {
+            window.removeEventListener("resize", this.boundResizeHandler)
+            this.boundResizeHandler = null
+        }
         this.particles = []
         if (this.app && this.app.destroy) {
             this.app.destroy(true, { children: true, texture: true })

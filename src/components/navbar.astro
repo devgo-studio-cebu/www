@@ -90,32 +90,45 @@ import { Menu, X } from "lucide-astro"
 <script>
     import { animate, splitText, stagger, utils } from "animejs"
 
-    // Name
-    const { chars: nameChars } = splitText("#devgo", {
-        chars: true,
-    })
-    animate(nameChars, {
-        opacity: [0, 1],
-        translateY: [10, 0],
-        delay: stagger(50),
-        ease: "outCirc",
-    })
+    // Only run entrance animations on initial page load, not on View Transitions
+    if (!document.querySelector("#navbar")?.dataset?.animated) {
+        // Name
+        const { chars: nameChars } = splitText("#devgo", {
+            chars: true,
+        })
+        animate(nameChars, {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: stagger(50),
+            ease: "outCirc",
+        })
 
-    // Links - Desktop
-    animate([".nav-link", "#nav-contact"], {
-        opacity: [0, 1],
-        translateY: [10, 0],
-        delay: stagger(300, { start: 500 }),
-        ease: "outCirc",
-    })
+        // Links - Desktop
+        animate([".nav-link", "#nav-contact"], {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: stagger(300, { start: 500 }),
+            ease: "outCirc",
+        })
 
-    // Menu toggle - Mobile
-    animate(".icon-menu", {
-        opacity: [0, 1],
-        translateY: [10, 0],
-        delay: 500,
-        ease: "outCirc",
-    })
+        // Menu toggle - Mobile
+        animate(".icon-menu", {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: 500,
+            ease: "outCirc",
+        })
+
+        document.querySelector("#navbar")?.setAttribute("data-animated", "true")
+    } else {
+        // On View Transitions, set final state immediately
+        const nav = document.querySelector("#navbar")
+        if (nav) {
+            utils.set("#devgo", { opacity: 1, translateY: 0 })
+            utils.set([".nav-link", "#nav-contact"], { opacity: 1, translateY: 0 })
+            utils.set(".icon-menu", { opacity: 1, translateY: 0 })
+        }
+    }
 
     const menuToggle = document.getElementById("menu-toggle") as HTMLInputElement | null
     if (menuToggle) {
