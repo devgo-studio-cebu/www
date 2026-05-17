@@ -12,13 +12,18 @@ const defaultTitle = "DEVGO Studio"
 const defaultDescription = "A creative studio building digital experiences"
 const defaultImage = `${siteUrl}/og-image.png`
 
+const socialUrls = [
+    "https://www.facebook.com/devgostudio",
+    "https://www.instagram.com/devgostudio",
+    "https://github.com/devgo-studio-cebu",
+    "https://www.linkedin.com/company/devgo-studio/",
+]
+
 const organizationSchema: OrganizationSchema = {
     name: "DEVGO Studio",
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
-    sameAs: [
-        // Add social links when available
-    ],
+    sameAs: socialUrls,
 }
 
 const websiteSchema: WebsiteSchema = {
@@ -28,23 +33,44 @@ const websiteSchema: WebsiteSchema = {
 }
 
 function generateJsonLd() {
-    return {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
+    const graph: any[] = [
+        {
+            "@type": "Organization",
+            ...organizationSchema,
+        },
+        {
+            "@type": "WebSite",
+            ...websiteSchema,
+        },
+    ]
+
+    if (meta.type === "article" && meta.publishedTime) {
+        graph.push({
+            "@type": "Article",
+            headline: meta.title,
+            description: meta.description,
+            url: meta.canonical,
+            image: meta.image,
+            datePublished: meta.publishedTime,
+            dateModified: meta.modifiedTime || meta.publishedTime,
+            author: {
                 "@type": "Organization",
-                ...organizationSchema,
+                name: "DEVGO Studio",
             },
-            {
-                "@type": "WebSite",
-                ...websiteSchema,
-                potentialAction: {
-                    "@type": "SearchAction",
-                    target: `${siteUrl}/search?q={search_term_string}`,
-                    "query-input": "required name=search_term_string",
+            publisher: {
+                "@type": "Organization",
+                name: "DEVGO Studio",
+                logo: {
+                    "@type": "ImageObject",
+                    url: `${siteUrl}/logo.png`,
                 },
             },
-        ],
+        })
+    }
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": graph,
     }
 }
 
