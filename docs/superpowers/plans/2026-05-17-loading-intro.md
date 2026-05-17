@@ -8,7 +8,7 @@
 
 **Tech Stack:** Astro, animejs v4 (`animate`, `createTimeline`, `stagger`), Tailwind CSS v4, PixiJS v8 (existing hero)
 
-> **CURRENT PROGRESS:** Task 3/10 completed — Phase 2 dot expansion implemented (3→20 dots via concentric rings).
+> **CURRENT PROGRESS:** Task 4/10 completed — Phase 3 dot multiplication + color shift implemented (20→55 dots).
 
 ---
 
@@ -335,7 +335,7 @@ git commit -m "feat(loading): add Phase 2 dot expansion animation"
 **Files:**
 - Modify: `src/components/loading-overlay.astro`
 
-- [ ] **Step 1: Add the multiplication logic and timeline call**
+- [x] **Step 1: Add the multiplication logic and timeline call**
 
 Add the following code inside the `<script>` block, after the `runExpansion()` function but before the timeline definition:
 
@@ -414,7 +414,7 @@ Then add the `.call()` to the timeline. After the Phase 2 `tl.call()`, add:
   tl.call(() => runMultiplication(), PHASE_DURATIONS.pulse + PHASE_DURATIONS.expand)
 ```
 
-- [ ] **Step 2: Verify Phase 3 in the browser**
+- [x] **Step 2: Verify Phase 3 in the browser**
 
 Refresh the dev page. Expected:
 - 0.0s–0.8s: Phase 1 (3 dots pulse)
@@ -423,7 +423,7 @@ Refresh the dev page. Expected:
 - "Loading" text fades out
 - 2.4s: Phase 4 (overlay fade + dismiss) — already implemented in the timeline `onComplete`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/loading-overlay.astro

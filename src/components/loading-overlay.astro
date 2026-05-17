@@ -121,11 +121,25 @@
     })
   }
 
+  // --- MINIMUM HOLD ---
+  // Ensure at least 1.5s of loading is shown, even on fast connections
+  const MINIMUM_HOLD = 1500
+  const pageStart = performance.now()
+
+  async function waitForMinimumHold() {
+    const elapsed = performance.now() - pageStart
+    if (elapsed < MINIMUM_HOLD) {
+      await new Promise((resolve) => setTimeout(resolve, MINIMUM_HOLD - elapsed))
+    }
+  }
+
+  // --- RUN ---
   if (reducedMotion) {
     handleReducedMotion()
-    // Don't run the full animation — return early
   } else {
-    runLoadingAnimation()
+    waitForMinimumHold().then(() => {
+      runLoadingAnimation()
+    })
   }
 
   // --- MAIN ANIMATION (wrapped in function for clean reduced-motion bypass) ---
