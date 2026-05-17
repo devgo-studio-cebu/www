@@ -2,6 +2,8 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **CURRENT PROGRESS:** ✅ Tasks 1-4 complete. Starting Task 5.
+
 **Goal:** Remediate all P0 and P1 issues, and deliver P2 improvements identified in the architectural audit of devgo.studio.
 
 **Architecture:** Extract duplicated PIXI.js engines into shared modules under `src/lib/engines/`, introduce a centralized AnimationManager for lifecycle control, add Astro View Transitions for cross-page navigation, fix routing (404, redirects), clean content (reviews, llms.txt), harden security (SRI), and improve accessibility and SEO.
@@ -57,7 +59,7 @@
 **Files:**
 - Modify: `src/components/seo.astro:8-14`
 
-- [ ] **Step 1: Fetch the analytics script and compute its SHA-384 hash**
+- [x] **Step 1: Fetch the analytics script and compute its SHA-384 hash**
 
 Run:
 ```bash
@@ -65,7 +67,7 @@ curl -s https://analytics.devgo.studio/api/script.js | openssl dgst -sha384 -bin
 ```
 Expected: A base64 string (e.g., `abcdef1234...==`)
 
-- [ ] **Step 2: Update the analytics script tag in `seo.astro`**
+- [x] **Step 2: Update the analytics script tag in `seo.astro`**
 
 Find this block in `src/components/seo.astro`:
 ```html
@@ -89,7 +91,7 @@ Replace with (substituting the hash from Step 1):
 ></script>
 ```
 
-- [ ] **Step 3: Build and verify the script tag renders correctly**
+- [x] **Step 3: Build and verify the script tag renders correctly**
 
 Run:
 ```bash
@@ -98,7 +100,7 @@ grep -A5 'analytics.devgo.studio' dist/index.html | head -8
 ```
 Expected: The `<script>` tag includes `integrity=` and `crossorigin=` attributes.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/components/seo.astro
@@ -112,7 +114,7 @@ git commit -m "security: add SRI integrity hash to analytics script"
 **Files:**
 - Modify: `src/lib/reviews.ts`
 
-- [ ] **Step 1: Remove the two placeholder reviews from `src/lib/reviews.ts`**
+- [x] **Step 1: Remove the two placeholder reviews from `src/lib/reviews.ts`**
 
 Find:
 ```typescript
@@ -156,7 +158,7 @@ export const reviews: Review[] = [
 ]
 ```
 
-- [ ] **Step 2: Build and verify review count**
+- [x] **Step 2: Build and verify review count**
 
 Run:
 ```bash
@@ -164,7 +166,7 @@ bun run build
 ```
 Expected: Build succeeds. The navbar reviews count will automatically update to `(2)` since `values.ts` derives it from `reviews.length`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/lib/reviews.ts
@@ -180,7 +182,7 @@ git commit -m "content: remove placeholder review entries"
 **Files:**
 - Create: `src/pages/404.astro`
 
-- [ ] **Step 1: Create `src/pages/404.astro`**
+- [x] **Step 1: Create `src/pages/404.astro`**
 
 ```astro
 ---
@@ -218,7 +220,7 @@ const seoProps = {
 </BaseLayout>
 ```
 
-- [ ] **Step 2: Update nginx to serve a proper 404**
+- [x] **Step 2: Update nginx to serve a proper 404**
 
 Modify `nginx.conf`. Replace the entire `location /` block:
 
@@ -238,7 +240,7 @@ Replace with:
     }
 ```
 
-- [ ] **Step 3: Build and verify 404 page exists**
+- [x] **Step 3: Build and verify 404 page exists**
 
 Run:
 ```bash
@@ -248,7 +250,7 @@ cat dist/404.html | grep -c "404"
 ```
 Expected: `dist/404.html` exists and contains "404" text.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/pages/404.astro nginx.conf
@@ -263,7 +265,7 @@ git commit -m "feat: add custom 404 page and fix nginx fallback"
 - Modify: `src/pages/llms.txt.ts`
 - Modify: `src/pages/robots.txt.ts`
 
-- [ ] **Step 1: Fix `src/pages/llms.txt.ts` to reflect actual routes**
+- [x] **Step 1: Fix `src/pages/llms.txt.ts` to reflect actual routes**
 
 Find the `# Sitemap` section:
 ```typescript
@@ -294,7 +296,7 @@ in AI-assisted development and learning contexts.
 
 ```
 
-- [ ] **Step 2: Fix `src/pages/robots.txt.ts` — remove unused `/draft/` disallow**
+- [x] **Step 2: Fix `src/pages/robots.txt.ts` — remove unused `/draft/` disallow**
 
 Find:
 ```typescript
@@ -312,7 +314,7 @@ User-agent: *
 Disallow: /_astro/
 ```
 
-- [ ] **Step 3: Build and verify**
+- [x] **Step 3: Build and verify**
 
 Run:
 ```bash
@@ -322,7 +324,7 @@ curl -s http://localhost:4321/robots.txt 2>/dev/null || cat dist/robots.txt
 ```
 Expected: `llms.txt` no longer contains `/about`, `/services`, `/contact`. `robots.txt` no longer contains `/draft/` or `/api/`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/pages/llms.txt.ts src/pages/robots.txt.ts
