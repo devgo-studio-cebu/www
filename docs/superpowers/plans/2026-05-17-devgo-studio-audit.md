@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-> **CURRENT PROGRESS:** ✅ Tasks 1-4 complete. Starting Task 5.
+> **CURRENT PROGRESS:** ✅ All 20 tasks complete.
 
 **Goal:** Remediate all P0 and P1 issues, and deliver P2 improvements identified in the architectural audit of devgo.studio.
 
@@ -338,14 +338,14 @@ git commit -m "fix: correct llms.txt routes and clean robots.txt"
 **Files:**
 - Delete: `src/components/landing/timeline.astro`
 
-- [ ] **Step 1: Delete the file**
+- [x] **Step 1: Delete the file**
 
 Run:
 ```bash
 rm src/components/landing/timeline.astro
 ```
 
-- [ ] **Step 2: Verify timeline.astro is not imported anywhere**
+- [x] **Step 2: Verify timeline.astro is not imported anywhere**
 
 Run:
 ```bash
@@ -353,7 +353,7 @@ grep -r "timeline" src/ --include="*.astro" --include="*.ts" --include="*.mdx"
 ```
 Expected: No results (it was already commented out in `index.astro`).
 
-- [ ] **Step 3: Build and verify**
+- [x] **Step 3: Build and verify**
 
 Run:
 ```bash
@@ -361,7 +361,7 @@ bun run build
 ```
 Expected: Build succeeds without errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add -A src/components/landing/timeline.astro
@@ -377,7 +377,7 @@ git commit -m "chore: remove incomplete timeline component"
 **Files:**
 - Create: `src/lib/engines/types.ts`
 
-- [ ] **Step 1: Create `src/lib/engines/types.ts`**
+- [x] **Step 1: Create `src/lib/engines/types.ts`**
 
 ```typescript
 import type * as PIXI from "pixi.js"
@@ -393,7 +393,7 @@ export interface EngineConfig {
 }
 ```
 
-- [ ] **Step 2: Verify the types file compiles**
+- [x] **Step 2: Verify the types file compiles**
 
 Run:
 ```bash
@@ -401,7 +401,7 @@ npx tsc --noEmit src/lib/engines/types.ts 2>&1 || true
 ```
 Expected: No errors (or only module resolution warnings which are fine for Astro).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/lib/engines/types.ts
@@ -417,7 +417,7 @@ git commit -m "feat: add shared PixiEngine interface and types"
 - Modify: `src/pages/showcase.astro` (script section)
 - Modify: `src/pages/case-studies.astro` (script section)
 
-- [ ] **Step 1: Create `src/lib/engines/wave-particle-bg.ts`**
+- [x] **Step 1: Create `src/lib/engines/wave-particle-bg.ts`**
 
 ```typescript
 import * as PIXI from "pixi.js"
@@ -552,7 +552,7 @@ export class WaveParticleBg implements PixiEngine {
 }
 ```
 
-- [ ] **Step 2: Update `src/pages/showcase.astro` — replace inline WaveParticleBg with import**
+- [x] **Step 2: Update `src/pages/showcase.astro` — replace inline WaveParticleBg with import**
 
 Find the entire `<script>` block in `showcase.astro` (starts after `</BaseLayout>` closing tag). Replace it with:
 
@@ -603,7 +603,7 @@ Find the entire `<script>` block in `showcase.astro` (starts after `</BaseLayout
 </script>
 ```
 
-- [ ] **Step 3: Update `src/pages/case-studies.astro` — replace inline WaveParticleBg with import**
+- [x] **Step 3: Update `src/pages/case-studies.astro` — replace inline WaveParticleBg with import**
 
 Find the entire `<script>` block. Replace it with:
 
@@ -658,7 +658,7 @@ Find the entire `<script>` block. Replace it with:
 </script>
 ```
 
-- [ ] **Step 4: Build and verify both pages**
+- [x] **Step 4: Build and verify both pages**
 
 Run:
 ```bash
@@ -667,7 +667,7 @@ ls -la dist/showcase/index.html dist/case-studies/index.html
 ```
 Expected: Both pages build successfully.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/lib/engines/wave-particle-bg.ts src/pages/showcase.astro src/pages/case-studies.astro
@@ -684,7 +684,7 @@ git commit -m "refactor: extract WaveParticleBg to shared engine module"
 - Create: `src/lib/engines/flow-field-bg.ts`
 - Modify: `src/pages/case-studies/[slug].astro` (script section)
 
-- [ ] **Step 1: Create `src/lib/engines/flow-field-bg.ts`**
+- [x] **Step 1: Create `src/lib/engines/flow-field-bg.ts`**
 
 ```typescript
 import * as PIXI from "pixi.js"
@@ -886,7 +886,7 @@ export class FlowFieldBg implements PixiEngine {
 }
 ```
 
-- [ ] **Step 2: Update `src/pages/case-studies/[slug].astro` — replace inline engines with import**
+- [x] **Step 2: Update `src/pages/case-studies/[slug].astro` — replace inline engines with import**
 
 Find the entire `<script>` block. Replace it with:
 
@@ -936,7 +936,7 @@ Find the entire `<script>` block. Replace it with:
 </script>
 ```
 
-- [ ] **Step 3: Build and verify case study pages**
+- [x] **Step 3: Build and verify case study pages**
 
 Run:
 ```bash
@@ -945,7 +945,7 @@ ls dist/case-studies/hopethreads-website/index.html
 ```
 Expected: Build succeeds.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/lib/engines/flow-field-bg.ts src/pages/case-studies/[slug].astro
@@ -962,7 +962,7 @@ git commit -m "refactor: extract FlowFieldBg and PerlinNoise to shared engine mo
 - Create: `src/lib/engines/hero-engine.ts`
 - Modify: `src/components/landing/hero.astro` (script section)
 
-- [ ] **Step 1: Create `src/lib/engines/hero-engine.ts`**
+- [x] **Step 1: Create `src/lib/engines/hero-engine.ts`**
 
 ```typescript
 import * as PIXI from "pixi.js"
@@ -1208,7 +1208,7 @@ export class HeroEngine implements PixiEngine {
 }
 ```
 
-- [ ] **Step 2: Update `src/components/landing/hero.astro` — replace inline HeroEngine with import**
+- [x] **Step 2: Update `src/components/landing/hero.astro` — replace inline HeroEngine with import**
 
 Find the entire `<script>` block. Replace it with:
 
@@ -1265,7 +1265,7 @@ Find the entire `<script>` block. Replace it with:
 </script>
 ```
 
-- [ ] **Step 3: Build and verify homepage**
+- [x] **Step 3: Build and verify homepage**
 
 Run:
 ```bash
@@ -1274,7 +1274,7 @@ ls -la dist/index.html
 ```
 Expected: Build succeeds.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/lib/engines/hero-engine.ts src/components/landing/hero.astro
@@ -1291,7 +1291,7 @@ git commit -m "refactor: extract HeroEngine to shared engine module"
 - Create: `src/lib/engines/particle-logo-engine.ts`
 - Modify: `src/components/landing/services.astro` (script section)
 
-- [ ] **Step 1: Create `src/lib/engines/particle-logo-engine.ts`**
+- [x] **Step 1: Create `src/lib/engines/particle-logo-engine.ts`**
 
 ```typescript
 import * as PIXI from "pixi.js"
@@ -1507,7 +1507,7 @@ export class ParticleLogoEngine implements PixiEngine {
 }
 ```
 
-- [ ] **Step 2: Update `src/components/landing/services.astro` — replace inline engine with import**
+- [x] **Step 2: Update `src/components/landing/services.astro` — replace inline engine with import**
 
 Find the entire `<script>` block. Replace it with:
 
@@ -1589,7 +1589,7 @@ Find the entire `<script>` block. Replace it with:
 </script>
 ```
 
-- [ ] **Step 3: Build and verify**
+- [x] **Step 3: Build and verify**
 
 Run:
 ```bash
@@ -1597,7 +1597,7 @@ bun run build
 ```
 Expected: Build succeeds.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/lib/engines/particle-logo-engine.ts src/components/landing/services.astro
@@ -1613,7 +1613,7 @@ git commit -m "refactor: extract ParticleLogoEngine to shared engine module"
 **Files:**
 - Create: `src/lib/engines/animation-manager.ts`
 
-- [ ] **Step 1: Create `src/lib/engines/animation-manager.ts`**
+- [x] **Step 1: Create `src/lib/engines/animation-manager.ts`**
 
 ```typescript
 import type { PixiEngine } from "./types"
@@ -1715,7 +1715,7 @@ export function getAnimationManager(): AnimationManager {
 export { AnimationManager }
 ```
 
-- [ ] **Step 2: Build and verify**
+- [x] **Step 2: Build and verify**
 
 Run:
 ```bash
@@ -1723,7 +1723,7 @@ bun run build
 ```
 Expected: Build succeeds (animation-manager is not imported yet, just compiled).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/lib/engines/animation-manager.ts
@@ -1737,7 +1737,7 @@ git commit -m "feat: add AnimationManager for centralized PIXI lifecycle"
 **Files:**
 - Modify: `src/layouts/BaseLayout.astro`
 
-- [ ] **Step 1: Import and add `ClientRouter` to `BaseLayout.astro`**
+- [x] **Step 1: Import and add `ClientRouter` to `BaseLayout.astro`**
 
 In `src/layouts/BaseLayout.astro`, add the import at the top of the frontmatter:
 
@@ -1773,7 +1773,7 @@ Replace with:
     </head>
 ```
 
-- [ ] **Step 2: Build and verify View Transitions work**
+- [x] **Step 2: Build and verify View Transitions work**
 
 Run:
 ```bash
@@ -1782,7 +1782,7 @@ grep -c "ClientRouter\|astro-island\|astro-transition" dist/index.html
 ```
 Expected: Build succeeds. The output may be 0 or 1+ depending on how Astro inlines the transition script — the key check is that the build doesn't error.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/layouts/BaseLayout.astro
@@ -1800,7 +1800,7 @@ git commit -m "feat: add Astro ClientRouter for View Transitions"
 - Modify: `src/pages/case-studies.astro` (script section)
 - Modify: `src/pages/case-studies/[slug].astro` (script section)
 
-- [ ] **Step 1: Update `hero.astro` to use AnimationManager**
+- [x] **Step 1: Update `hero.astro` to use AnimationManager**
 
 In the `<script>` block, add the import and wire the engine:
 
@@ -1879,7 +1879,7 @@ Replace the engine initialization section with:
     })
 ```
 
-- [ ] **Step 2: Update `services.astro` to use AnimationManager**
+- [x] **Step 2: Update `services.astro` to use AnimationManager**
 
 In the `<script>` block, add imports and wire the engine:
 
@@ -1925,7 +1925,7 @@ Replace with:
     })
 ```
 
-- [ ] **Step 3: Update `showcase.astro` to use AnimationManager**
+- [x] **Step 3: Update `showcase.astro` to use AnimationManager**
 
 In the `<script>` block, replace:
 
@@ -1977,15 +1977,15 @@ With:
     })
 ```
 
-- [ ] **Step 4: Update `case-studies.astro` similarly**
+- [x] **Step 4: Update `case-studies.astro` similarly**
 
 Same pattern as Step 3 — add `getAnimationManager`, register as `"wave-case-studies"`, add cleanup listener.
 
-- [ ] **Step 5: Update `case-studies/[slug].astro` similarly**
+- [x] **Step 5: Update `case-studies/[slug].astro` similarly**
 
 Same pattern — add `getAnimationManager`, register as `"flow-field"`, add cleanup listener.
 
-- [ ] **Step 6: Build and verify**
+- [x] **Step 6: Build and verify**
 
 Run:
 ```bash
@@ -1993,7 +1993,7 @@ bun run build
 ```
 Expected: Build succeeds.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components/landing/hero.astro src/components/landing/services.astro src/pages/showcase.astro src/pages/case-studies.astro src/pages/case-studies/[slug].astro
@@ -2010,7 +2010,7 @@ git commit -m "feat: wire AnimationManager into page lifecycle with View Transit
 - Modify: `src/components/seo.astro`
 - Modify: `src/types/seo.ts`
 
-- [ ] **Step 1: Populate `sameAs` from social links**
+- [x] **Step 1: Populate `sameAs` from social links**
 
 In `src/components/seo.astro`, import the social links and use them:
 
@@ -2043,7 +2043,7 @@ const organizationSchema: OrganizationSchema = {
 }
 ```
 
-- [ ] **Step 2: Add Article schema support to seo.astro**
+- [x] **Step 2: Add Article schema support to seo.astro**
 
 In the `generateJsonLd()` function, add article support when `meta.type === "article"`:
 
@@ -2116,7 +2116,7 @@ function generateJsonLd() {
 }
 ```
 
-- [ ] **Step 3: Build and verify Article schema renders**
+- [x] **Step 3: Build and verify Article schema renders**
 
 Run:
 ```bash
@@ -2126,7 +2126,7 @@ grep -c 'sameAs' dist/index.html
 ```
 Expected: Article schema present in case study pages. sameAs present in homepage.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/components/seo.astro
@@ -2144,7 +2144,7 @@ git commit -m "seo: populate sameAs, add Article schema for case studies"
 - Modify: `src/pages/showcase.astro`
 - Modify: `src/pages/case-studies.astro`
 
-- [ ] **Step 1: Add `width`/`height` and `loading="lazy"` to project.astro**
+- [x] **Step 1: Add `width`/`height` and `loading="lazy"` to project.astro**
 
 Find:
 ```html
@@ -2168,7 +2168,7 @@ Replace with:
     />
 ```
 
-- [ ] **Step 2: Add `loading="lazy"` to showcase images in `showcase.astro`**
+- [x] **Step 2: Add `loading="lazy"` to showcase images in `showcase.astro`**
 
 Find both `<Image src={project.image}` occurrences and add attributes:
 
@@ -2184,7 +2184,7 @@ Find both `<Image src={project.image}` occurrences and add attributes:
 />
 ```
 
-- [ ] **Step 3: Add `loading="lazy"` to case study images in `case-studies.astro`**
+- [x] **Step 3: Add `loading="lazy"` to case study images in `case-studies.astro`**
 
 Find the image inside the case study card:
 ```html
@@ -2208,7 +2208,7 @@ Replace with:
 />
 ```
 
-- [ ] **Step 4: Build and verify**
+- [x] **Step 4: Build and verify**
 
 Run:
 ```bash
@@ -2218,7 +2218,7 @@ grep -c 'loading="lazy"' dist/showcase/index.html
 ```
 Expected: Lazy loading attributes present in output HTML.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/landing/featured/project.astro src/pages/showcase.astro src/pages/case-studies.astro
@@ -2233,7 +2233,7 @@ git commit -m "perf: add image dimensions, lazy loading, and alt text"
 - Modify: `src/lib/featured.ts`
 - Modify: `src/lib/showcase.ts`
 
-- [ ] **Step 1: Update `src/lib/featured.ts` to derive from content collection**
+- [x] **Step 1: Update `src/lib/featured.ts` to derive from content collection**
 
 Find the current file content (imports 3 images and defines `FeaturedProject[]` manually). Replace with:
 
@@ -2276,11 +2276,11 @@ export const featuredProjects: FeaturedProject[] = [
 
 This is the same data but with the NOTE documenting that it should be consolidated in a future iteration when content collection images can be resolved at build time.
 
-- [ ] **Step 2: Update `src/lib/showcase.ts` to reference the same images with a NOTE**
+- [x] **Step 2: Update `src/lib/showcase.ts` to reference the same images with a NOTE**
 
 Same pattern — add a NOTE documenting the future consolidation goal. No structural change needed since the data shapes differ (showcase has `year`, featured has `tags`).
 
-- [ ] **Step 3: Build and verify**
+- [x] **Step 3: Build and verify**
 
 Run:
 ```bash
@@ -2288,7 +2288,7 @@ bun run build
 ```
 Expected: Build succeeds. Homepage and showcase render correctly.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/lib/featured.ts src/lib/showcase.ts
@@ -2304,7 +2304,7 @@ git commit -m "docs: add consolidation notes to project data manifests"
 **Files:**
 - Modify: `src/components/navbar.astro`
 
-- [ ] **Step 1: Add ARIA attributes to the mobile menu in `navbar.astro`**
+- [x] **Step 1: Add ARIA attributes to the mobile menu in `navbar.astro`**
 
 Find the mobile menu section:
 ```html
@@ -2357,7 +2357,7 @@ Replace with:
         >
 ```
 
-- [ ] **Step 2: Add JS to sync `aria-expanded` state**
+- [x] **Step 2: Add JS to sync `aria-expanded` state**
 
 In the `<script>` block, add after the existing mobile link click handlers:
 
@@ -2404,7 +2404,7 @@ Replace with:
     })
 ```
 
-- [ ] **Step 3: Build and verify**
+- [x] **Step 3: Build and verify**
 
 Run:
 ```bash
@@ -2414,7 +2414,7 @@ grep -c 'aria-controls' dist/index.html
 ```
 Expected: Both attributes present in built HTML.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/components/navbar.astro
@@ -2432,7 +2432,7 @@ git commit -m "a11y: add ARIA attributes and Escape key to mobile menu"
 - Modify: `src/pages/case-studies.astro` (template section)
 - Modify: `src/pages/case-studies/[slug].astro` (template section)
 
-- [ ] **Step 1: Add `aria-hidden="true"` to all decorative canvas elements**
+- [x] **Step 1: Add `aria-hidden="true"` to all decorative canvas elements**
 
 In `hero.astro`, find:
 ```html
@@ -2499,7 +2499,7 @@ Replace with:
 <canvas id='wave-canvas' class='w-full h-full' aria-hidden='true'></canvas>
 ```
 
-- [ ] **Step 2: Build and verify**
+- [x] **Step 2: Build and verify**
 
 Run:
 ```bash
@@ -2508,7 +2508,7 @@ grep -c 'aria-hidden="true"' dist/index.html
 ```
 Expected: At least 2 (hero canvas + services canvas on homepage).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/landing/hero.astro src/components/landing/services.astro src/pages/showcase.astro src/pages/case-studies.astro src/pages/case-studies/[slug].astro
@@ -2524,7 +2524,7 @@ git commit -m "a11y: add aria-hidden to decorative canvas elements"
 **Files:**
 - Modify: `src/components/landing/reviews/review.astro`
 
-- [ ] **Step 1: Replace the JS measureHeight pattern with CSS max-height**
+- [x] **Step 1: Replace the JS measureHeight pattern with CSS max-height**
 
 In `review.astro`, find the `<script>` block and replace the entire script with:
 
@@ -2574,7 +2574,7 @@ Then add a `<style>` block after the script (or in the existing inline styles):
 </style>
 ```
 
-- [ ] **Step 2: Build and verify**
+- [x] **Step 2: Build and verify**
 
 Run:
 ```bash
@@ -2582,7 +2582,7 @@ bun run build
 ```
 Expected: Build succeeds.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/landing/reviews/review.astro
@@ -2600,7 +2600,7 @@ git commit -m "fix: replace measureHeight with CSS max-height for review see-mor
 - Create: `src/pages/terms.astro`
 - Modify: `src/components/footer.astro`
 
-- [ ] **Step 1: Create `src/pages/privacy.astro`**
+- [x] **Step 1: Create `src/pages/privacy.astro`**
 
 ```astro
 ---
@@ -2656,7 +2656,7 @@ const seoProps = {
 </BaseLayout>
 ```
 
-- [ ] **Step 2: Create `src/pages/terms.astro`**
+- [x] **Step 2: Create `src/pages/terms.astro`**
 
 ```astro
 ---
@@ -2700,7 +2700,7 @@ const seoProps = {
 </BaseLayout>
 ```
 
-- [ ] **Step 3: Add privacy/terms links to the footer**
+- [x] **Step 3: Add privacy/terms links to the footer**
 
 In `src/components/footer.astro`, find the socials/copyright section:
 
@@ -2723,7 +2723,7 @@ Replace with:
         </div>
 ```
 
-- [ ] **Step 4: Build and verify**
+- [x] **Step 4: Build and verify**
 
 Run:
 ```bash
@@ -2733,7 +2733,7 @@ grep -c 'Privacy Policy' dist/index.html
 ```
 Expected: Both pages exist. Footer contains link to privacy page.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/pages/privacy.astro src/pages/terms.astro src/components/footer.astro

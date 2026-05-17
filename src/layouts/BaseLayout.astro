@@ -4,7 +4,6 @@ import "../styles/global.css"
 import { Font } from "astro:assets"
 // @ts-ignore
 import "@fontsource-variable/montserrat"
-import { ClientRouter } from "astro:transitions"
 import Footer from "../components/footer.astro"
 import Navbar from "../components/navbar.astro"
 import Seo from "../components/seo.astro"
@@ -39,7 +38,6 @@ const { seo } = Astro.props
         />
         <title>{seo?.title || "DEVGO Studio"}</title>
         <Seo seo={seo} />
-        <ClientRouter />
     </head>
     <body class='w-svw flex flex-col relative'>
         <Navbar />

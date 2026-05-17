@@ -99,27 +99,22 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
         engine.init()
     }
 
-    // Deduplicated cleanup on Astro page swap
-    manager.setupSwapCleanup()
-
-    // Intro UI Animations (deferred to avoid conflict with View Transition morph)
-    requestAnimationFrame(() => {
-        animate("#top h2", {
-            opacity: [0, 1],
-            translateY: [20, 0],
-            ease: "outCubic",
-            delay: 500,
-        })
-        animate("#top h3", {
-            opacity: [0, 0.4],
-            translateY: [20, 0],
-            ease: "outCubic",
-            delay: 800,
-        })
-        animate(".logo-infinite-scroll", {
-            opacity: [0, 1],
-            ease: "outCubic",
-            delay: 1100,
-        })
+    // Intro UI Animations
+    animate("#top h2", {
+        opacity: [0, 1],
+        translateY: [20, 0],
+        ease: "outCubic",
+        delay: 500,
+    })
+    animate("#top h3", {
+        opacity: [0, 0.4],
+        translateY: [20, 0],
+        ease: "outCubic",
+        delay: 800,
+    })
+    animate(".logo-infinite-scroll", {
+        opacity: [0, 1],
+        ease: "outCubic",
+        delay: 1100,
     })
 </script>
