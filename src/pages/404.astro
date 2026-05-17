@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { ArrowLeft } from "lucide-astro"
+
+const seoProps = {
+    title: "404 — Page Not Found | DEVGO Studio",
+    description: "The page you're looking for doesn't exist.",
+    type: "website" as const,
+}
+---
+
+<BaseLayout seo={seoProps}>
+    <section
+        id='top'
+        class='relative mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 min-h-[60svh] flex flex-col items-center justify-center'
+    >
+        <h1
+            class='text-6xl md:text-9xl font-head uppercase mb-4'
+        >
+            404
+        </h1>
+        <p class='text-lg md:text-xl text-bg-secondary mb-8 text-center'>
+            The page you're looking for doesn't exist.
+        </p>
+        <a
+            href='/'
+            class='inline-flex items-center gap-2 uppercase font-head text-sm md:text-base hover:bg-text hover:text-bg px-1 transition-colors'
+        >
+            <ArrowLeft class='w-4 h-4' />
+            Back to Home
+        </a>
+    </section>
+</BaseLayout>
