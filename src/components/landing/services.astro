@@ -120,17 +120,9 @@ import logoSrc from "../../assets/images/logo.svg"
     ) as HTMLElement
 
     if (particleCanvas && particleWrapper && !manager.getReducedMotion()) {
-        const initEngine = () => {
-            const engine = new ParticleLogoEngine(particleCanvas)
-            manager.register("particle-logo", engine)
-            engine.init()
-        }
-
-        if (document.readyState === "complete") {
-            initEngine()
-        } else {
-            window.addEventListener("load", initEngine)
-        }
+        const engine = new ParticleLogoEngine(particleCanvas)
+        manager.register("particle-logo", engine)
+        engine.init()
     }
 
     // Cleanup on Astro page swap

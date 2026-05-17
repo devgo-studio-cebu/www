@@ -134,11 +134,9 @@ const tocItems = buildToc(
     const wrapper = document.getElementById("wave-wrapper") as HTMLElement
 
     if (canvas && wrapper && !prefersReducedMotion) {
-        window.addEventListener("load", () => {
-            const bg = new FlowFieldBg(canvas, wrapper)
-            manager.register("flow-field", bg)
-            bg.init()
-        })
+        const bg = new FlowFieldBg(canvas, wrapper)
+        manager.register("flow-field", bg)
+        bg.init()
     }
 
     // Cleanup on Astro page swap

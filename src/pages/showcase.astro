@@ -160,11 +160,9 @@ const sortedYears = Array.from(projectsByYear.keys())
     const wrapper = document.getElementById("particles-wrapper") as HTMLElement
 
     if (canvas && wrapper && !prefersReducedMotion) {
-        window.addEventListener("load", () => {
-            const bg = new WaveParticleBg(canvas, wrapper)
-            manager.register("wave-showcase", bg)
-            bg.init()
-        })
+        const bg = new WaveParticleBg(canvas, wrapper)
+        manager.register("wave-showcase", bg)
+        bg.init()
     }
 
     // Cleanup on Astro page swap

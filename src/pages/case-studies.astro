@@ -125,11 +125,9 @@ const isProd = import.meta.env.PROD
     const wrapper = document.getElementById("particles-wrapper") as HTMLElement
 
     if (canvas && wrapper && !prefersReducedMotion) {
-        window.addEventListener("load", () => {
-            const bg = new WaveParticleBg(canvas, wrapper)
-            manager.register("wave-case-studies", bg)
-            bg.init()
-        })
+        const bg = new WaveParticleBg(canvas, wrapper)
+        manager.register("wave-case-studies", bg)
+        bg.init()
     }
 
     // Cleanup on Astro page swap
