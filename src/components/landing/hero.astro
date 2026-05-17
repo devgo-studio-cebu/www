@@ -19,6 +19,7 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
             id='hero-canvas'
             data-src={bg.src}
             class='w-full h-full object-cover'
+            aria-hidden='true'
         ></canvas>
         <div
             class='absolute bottom-0 left-0 w-full h-14 bg-linear-to-t from-bg to-transparent pointer-events-none'
