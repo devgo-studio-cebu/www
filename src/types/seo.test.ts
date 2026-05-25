@@ -6,6 +6,10 @@ import type {
   FAQSchema,
   BreadcrumbItem,
 } from "./seo"
+import {
+  generateBreadcrumbSchema,
+  generateServiceSchema,
+} from "../utils/seo"
 
 describe("SEO Types", () => {
   describe("ServiceSchema", () => {
@@ -119,5 +123,73 @@ describe("robots.txt", () => {
       const content = await file.text()
       expect(content).toContain("Sitemap: https://devgo.studio/sitemap-index.xml")
     }
+  })
+})
+
+describe("SEO Utilities", () => {
+  describe("generateBreadcrumbSchema", () => {
+    it("should generate valid BreadcrumbList JSON-LD", () => {
+      const items = [
+        { name: "Home", url: "https://devgo.studio/" },
+        {
+          name: "Case Studies",
+          url: "https://devgo.studio/case-studies/",
+        },
+        {
+          name: "AI Customer Support",
+          url: "https://devgo.studio/case-studies/ai-customer-support/",
+        },
+      ]
+      const result = generateBreadcrumbSchema(items) as any
+      expect(result["@context"]).toBe("https://schema.org")
+      expect(result["@type"]).toBe("BreadcrumbList")
+      expect(result.itemListElement).toHaveLength(3)
+      expect(result.itemListElement[0].position).toBe(1)
+      expect(result.itemListElement[0].name).toBe("Home")
+      expect(result.itemListElement[0].item).toBe("https://devgo.studio/")
+    })
+  })
+
+  describe("generateServiceSchema", () => {
+    it("should generate valid Service JSON-LD once implemented", () => {
+      const services = [
+        {
+          "@type": "Service" as const,
+          name: "Web Development",
+          description: "High-performance websites optimized for speed and SEO",
+          provider: {
+            "@type": "Organization" as const,
+            name: "DEVGO Studio",
+          },
+          areaServed: "Worldwide",
+        },
+      ]
+      const result = generateServiceSchema(services) as any
+      expect(result["@context"]).toBe("https://schema.org")
+      expect(result["@type"]).toBe("ItemList")
+      expect(result.itemListElement).toHaveLength(1)
+    })
+
+    it("should handle multiple services with correct positions", () => {
+      const services = [
+        {
+          "@type": "Service" as const,
+          name: "Web Development",
+          description: "Web dev services",
+          provider: { "@type": "Organization" as const, name: "DEVGO Studio" },
+        },
+        {
+          "@type": "Service" as const,
+          name: "AI Automation",
+          description: "AI automation services",
+          provider: { "@type": "Organization" as const, name: "DEVGO Studio" },
+        },
+      ]
+      const result = generateServiceSchema(services) as any
+      expect(result.itemListElement).toHaveLength(2)
+      expect(result.itemListElement[0].position).toBe(1)
+      expect(result.itemListElement[1].position).toBe(2)
+      expect(result.itemListElement[1].item.name).toBe("AI Automation")
+    })
   })
 })

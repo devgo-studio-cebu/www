@@ -1,4 +1,4 @@
-import type { SEOProps, OrganizationSchema, PersonSchema } from '../types/seo'
+import type { SEOProps, OrganizationSchema, PersonSchema, ServiceSchema } from '../types/seo'
 
 export const siteUrl = 'https://devgo.studio'
 export const siteName = 'DEVGO Studio'
@@ -103,6 +103,30 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
       name: item.name,
       item: item.url
     }))
+  }
+}
+
+/**
+ * Generates Service/ItemList schema for services offered
+ */
+export function generateServiceSchema(
+  services: ServiceSchema[]
+): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.name,
+        description: service.description,
+        provider: service.provider,
+        ...(service.areaServed && { areaServed: service.areaServed }),
+        ...(service.serviceType && { serviceType: service.serviceType }),
+      },
+    })),
   }
 }
 
