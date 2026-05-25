@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import type { PageSchema } from "../../types/seo"
+
+const title = "AI Automation Services | DEVGO Studio"
+const description = "AI-powered automation solutions by DEVGO Studio. Automate customer support, lead qualification, reporting, and workflows with n8n and LLM integration."
+const keywords = ["AI automation agency", "workflow automation", "n8n automation", "LLM integration"]
+const breadcrumbName = "AI Automation"
+const breadcrumbSlug = "ai-automation"
+const h1Text = "AI Automation"
+
+const seoProps = {
+  title,
+  description,
+  keywords,
+  type: "website" as const,
+  schema: {
+    type: "BreadcrumbList",
+    items: [
+      { name: "Home", url: "https://devgo.studio/" },
+      { name: "Services", url: "https://devgo.studio/services/" },
+      {
+        name: breadcrumbName,
+        url: `https://devgo.studio/services/${breadcrumbSlug}/`,
+      },
+    ],
+  } satisfies PageSchema,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <p class='text-sm text-bg-secondary mb-2'>
+      <a href='/services' class='hover:text-accent transition-colors'>Services</a> / {h1Text}
+    </p>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      {h1Text}
+    </h1>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20 max-w-4xl mx-auto'>
+    <div class='prose prose-invert max-w-none'>
+      <p class='lead'>
+        AI-powered automation solutions that streamline operations, reduce costs, and improve efficiency at scale.
+      </p>
+
+      <h2>What We Automate</h2>
+      <ul>
+        <li><strong>Customer Support Triage</strong> — Intelligent routing and instant responses for common inquiries.</li>
+        <li><strong>Lead Qualification &amp; Scoring</strong> — Automatically rank and route prospects based on engagement data.</li>
+        <li><strong>Document Processing &amp; RAG</strong> — Extract, summarize, and search information across your document library.</li>
+        <li><strong>Automated Reporting</strong> — Scheduled dashboards and email digests powered by real-time data.</li>
+        <li><strong>Invoice Processing</strong> — Parse, validate, and sync invoices without manual entry.</li>
+      </ul>
+
+      <h2>Our Tech Stack</h2>
+      <p>
+        We orchestrate automations with <strong>n8n</strong> for workflow management, integrate
+        <strong>LLMs</strong> (OpenAI, Claude) for intelligent processing, leverage <strong>Vector Databases</strong>
+        for semantic search and RAG, and connect everything through robust APIs and webhooks.
+      </p>
+
+      <h2>Use Cases</h2>
+      <p>
+        From startups automating lead intake to enterprises streamlining compliance workflows, our AI automation
+        solutions adapt to your unique operational challenges. Whether you need a single intelligent agent or a
+        multi-step pipeline spanning dozens of tools, we design systems that grow with your business.
+      </p>
+
+      <h2>Our Process</h2>
+      <ul>
+        <li><strong>Discovery</strong> — Map your workflows and identify high-impact automation opportunities.</li>
+        <li><strong>Design</strong> — Architect the automation pipeline with error handling and monitoring.</li>
+        <li><strong>Development</strong> — Build, test, and iterate on n8n workflows and AI integrations.</li>
+        <li><strong>Deployment</strong> — Production launch with logging, alerts, and documentation.</li>
+        <li><strong>Optimization</strong> — Monitor performance, refine prompts, and scale automations.</li>
+      </ul>
+    </div>
+    <div class='mt-8'>
+      <a
+        href='mailto:official@devgo.studio'
+        class='inline-block uppercase font-head text-sm px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors'
+      >
+        Get a Quote
+      </a>
+    </div>
+  </section>
+</BaseLayout>

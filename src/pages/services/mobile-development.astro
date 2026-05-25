@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import type { PageSchema } from "../../types/seo"
+
+const title = "Mobile App Development Services | DEVGO Studio"
+const description = "iOS and Android app development by DEVGO Studio. Native and cross-platform mobile applications with seamless user experiences."
+const keywords = ["mobile app development", "iOS Android apps", "cross-platform apps"]
+const breadcrumbName = "Mobile Development"
+const breadcrumbSlug = "mobile-development"
+const h1Text = "Mobile Development"
+
+const seoProps = {
+  title,
+  description,
+  keywords,
+  type: "website" as const,
+  schema: {
+    type: "BreadcrumbList",
+    items: [
+      { name: "Home", url: "https://devgo.studio/" },
+      { name: "Services", url: "https://devgo.studio/services/" },
+      {
+        name: breadcrumbName,
+        url: `https://devgo.studio/services/${breadcrumbSlug}/`,
+      },
+    ],
+  } satisfies PageSchema,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <p class='text-sm text-bg-secondary mb-2'>
+      <a href='/services' class='hover:text-accent transition-colors'>Services</a> / {h1Text}
+    </p>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      {h1Text}
+    </h1>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20 max-w-4xl mx-auto'>
+    <div class='prose prose-invert max-w-none'>
+      <p class='lead'>
+        High-performing iOS and Android apps delivering seamless, scalable, and user-centric experiences.
+      </p>
+
+      <h2>What We Build</h2>
+      <ul>
+        <li><strong>iOS Apps (Swift)</strong> — Native iPhone and iPad applications with polished, platform-consistent UX.</li>
+        <li><strong>Android Apps (Kotlin)</strong> — Native Android applications optimized for diverse device ecosystems.</li>
+        <li><strong>Cross-Platform (React Native, Flutter)</strong> — Single codebase, dual-platform deployment without compromise.</li>
+        <li><strong>App UI/UX Design</strong> — Intuitive interfaces grounded in platform guidelines and user research.</li>
+        <li><strong>App Store Deployment</strong> — End-to-end submission, review management, and release support for Apple and Google stores.</li>
+      </ul>
+
+      <h2>Platforms We Support</h2>
+      <p>
+        Whether you need a native experience on <strong>iOS</strong> with Swift and SwiftUI, a high-performance
+        <strong>Android</strong> app with Kotlin and Jetpack Compose, or a <strong>cross-platform</strong> solution
+        with React Native or Flutter, we match the technology to your business requirements and target audience.
+      </p>
+
+      <h2>Our Process</h2>
+      <ul>
+        <li><strong>Discovery</strong> — Define features, user flows, and platform strategy.</li>
+        <li><strong>Design</strong> — Wireframes, prototypes, and UI kits tailored to each platform.</li>
+        <li><strong>Development</strong> — Iterative sprints with regular builds and feedback loops.</li>
+        <li><strong>Testing</strong> — Device-specific QA, performance profiling, and accessibility audits.</li>
+        <li><strong>Launch</strong> — App Store and Play Store submission, monitoring, and post-launch support.</li>
+      </ul>
+    </div>
+    <div class='mt-8'>
+      <a
+        href='mailto:official@devgo.studio'
+        class='inline-block uppercase font-head text-sm px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors'
+      >
+        Get a Quote
+      </a>
+    </div>
+  </section>
+</BaseLayout>

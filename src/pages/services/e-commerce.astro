@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import type { PageSchema } from "../../types/seo"
+
+const title = "E-Commerce Development Services | DEVGO Studio"
+const description = "Custom e-commerce development by DEVGO Studio. Secure, scalable online stores with payment integrations, inventory management, and conversion-focused design."
+const keywords = ["e-commerce development", "online store Philippines", "Shopify WooCommerce"]
+const breadcrumbName = "E-Commerce"
+const breadcrumbSlug = "e-commerce"
+const h1Text = "E-Commerce"
+
+const seoProps = {
+  title,
+  description,
+  keywords,
+  type: "website" as const,
+  schema: {
+    type: "BreadcrumbList",
+    items: [
+      { name: "Home", url: "https://devgo.studio/" },
+      { name: "Services", url: "https://devgo.studio/services/" },
+      {
+        name: breadcrumbName,
+        url: `https://devgo.studio/services/${breadcrumbSlug}/`,
+      },
+    ],
+  } satisfies PageSchema,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <p class='text-sm text-bg-secondary mb-2'>
+      <a href='/services' class='hover:text-accent transition-colors'>Services</a> / {h1Text}
+    </p>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      {h1Text}
+    </h1>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20 max-w-4xl mx-auto'>
+    <div class='prose prose-invert max-w-none'>
+      <p class='lead'>
+        Secure, scalable e-commerce platforms with conversion-focused design and seamless payment integrations.
+      </p>
+
+      <h2>What We Build</h2>
+      <ul>
+        <li><strong>Custom Online Stores</strong> — Tailored storefronts that reflect your brand and convert visitors into buyers.</li>
+        <li><strong>Payment Gateway Integration</strong> — Stripe, PayPal, GCash, Maya, and region-specific payment providers.</li>
+        <li><strong>Inventory Management</strong> — Real-time stock tracking, variant handling, and multi-warehouse support.</li>
+        <li><strong>Conversion Optimization</strong> — A/B testing, cart recovery, and checkout flow optimization.</li>
+        <li><strong>Order Processing</strong> — Automated fulfillment workflows, shipping integrations, and customer notifications.</li>
+      </ul>
+
+      <h2>Payment Gateways</h2>
+      <p>
+        We integrate with the payment providers your customers trust: <strong>Stripe</strong> for international cards,
+        <strong>PayPal</strong> for global coverage, and Philippine-local options like <strong>GCash</strong> and
+        <strong>Maya</strong>. Every checkout is secured with SSL encryption and PCI-compliant processing.
+      </p>
+
+      <h2>Our Process</h2>
+      <ul>
+        <li><strong>Discovery</strong> — Understand your products, audience, and revenue goals.</li>
+        <li><strong>Design</strong> — Conversion-focused UX with brand-aligned visual design.</li>
+        <li><strong>Development</strong> — Build the store with payment, shipping, and inventory integrations.</li>
+        <li><strong>Launch</strong> — Stress testing, performance audits, and go-live with zero downtime.</li>
+        <li><strong>Growth</strong> — Analytics dashboards, marketing integrations, and iterative optimization.</li>
+      </ul>
+    </div>
+    <div class='mt-8'>
+      <a
+        href='mailto:official@devgo.studio'
+        class='inline-block uppercase font-head text-sm px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors'
+      >
+        Get a Quote
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import type { PageSchema } from "../../types/seo"
+
+const title = "Website Development Services | DEVGO Studio"
+const description = "Custom website development services by DEVGO Studio. High-performance, SEO-optimized websites built with Astro, Next.js, and modern frameworks. Philippines-based, global reach."
+const keywords = ["website development Philippines", "custom web development", "Astro web development", "SEO optimized websites"]
+const breadcrumbName = "Website Development"
+const breadcrumbSlug = "web-development"
+const h1Text = "Website Development"
+
+const seoProps = {
+  title,
+  description,
+  keywords,
+  type: "website" as const,
+  schema: {
+    type: "BreadcrumbList",
+    items: [
+      { name: "Home", url: "https://devgo.studio/" },
+      { name: "Services", url: "https://devgo.studio/services/" },
+      {
+        name: breadcrumbName,
+        url: `https://devgo.studio/services/${breadcrumbSlug}/`,
+      },
+    ],
+  } satisfies PageSchema,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <p class='text-sm text-bg-secondary mb-2'>
+      <a href='/services' class='hover:text-accent transition-colors'>Services</a> / {h1Text}
+    </p>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      {h1Text}
+    </h1>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20 max-w-4xl mx-auto'>
+    <div class='prose prose-invert max-w-none'>
+      <p class='lead'>
+        High-performance websites and web applications for global businesses — optimized for speed, scalability, and SEO.
+      </p>
+
+      <h2>What We Build</h2>
+      <ul>
+        <li><strong>Business Websites</strong> — 5-10 page sites with integrated CMS for effortless content management.</li>
+        <li><strong>Web Applications</strong> — Dashboards, SaaS platforms, and custom tools built for scale.</li>
+        <li><strong>Landing Pages</strong> — Conversion-focused designs that turn visitors into customers.</li>
+        <li><strong>E-Commerce Platforms</strong> — Online stores with payment processing and inventory management.</li>
+      </ul>
+
+      <h2>Our Tech Stack</h2>
+      <p>
+        We build with modern, battle-tested technologies: <strong>Astro</strong> for lightning-fast static sites,
+        <strong>Next.js</strong> for dynamic web applications, <strong>Tailwind CSS</strong> for consistent design systems,
+        and <strong>TypeScript</strong> for type-safe, maintainable codebases.
+      </p>
+
+      <h2>SEO Built In</h2>
+      <p>
+        Every site we deliver includes structured SEO from day one: proper H1–H6 heading hierarchy, meta tags with
+        Open Graph and Twitter Cards, JSON-LD structured data, XML sitemaps, and Core Web Vitals optimization
+        for top-tier performance scores.
+      </p>
+
+      <h2>Our Process</h2>
+      <ul>
+        <li><strong>Discovery</strong> — We learn your goals, audience, and competitive landscape.</li>
+        <li><strong>Design</strong> — Wireframes and visual designs aligned with your brand.</li>
+        <li><strong>Development</strong> — Clean, tested code with regular progress demos.</li>
+        <li><strong>Launch</strong> — Deployment, performance audits, and go-live support.</li>
+        <li><strong>Support</strong> — Ongoing maintenance, analytics, and iterative improvements.</li>
+      </ul>
+    </div>
+    <div class='mt-8'>
+      <a
+        href='mailto:official@devgo.studio'
+        class='inline-block uppercase font-head text-sm px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors'
+      >
+        Get a Quote
+      </a>
+    </div>
+  </section>
+</BaseLayout>

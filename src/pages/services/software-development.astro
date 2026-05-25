@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import type { PageSchema } from "../../types/seo"
+
+const title = "Custom Software Development | DEVGO Studio"
+const description = "Custom software solutions for startups and enterprises. SaaS platforms, internal tools, and digital transformation systems built by DEVGO Studio."
+const keywords = ["custom software development", "SaaS development", "enterprise software Philippines"]
+const breadcrumbName = "Software Development"
+const breadcrumbSlug = "software-development"
+const h1Text = "Software Development"
+
+const seoProps = {
+  title,
+  description,
+  keywords,
+  type: "website" as const,
+  schema: {
+    type: "BreadcrumbList",
+    items: [
+      { name: "Home", url: "https://devgo.studio/" },
+      { name: "Services", url: "https://devgo.studio/services/" },
+      {
+        name: breadcrumbName,
+        url: `https://devgo.studio/services/${breadcrumbSlug}/`,
+      },
+    ],
+  } satisfies PageSchema,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <p class='text-sm text-bg-secondary mb-2'>
+      <a href='/services' class='hover:text-accent transition-colors'>Services</a> / {h1Text}
+    </p>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      {h1Text}
+    </h1>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20 max-w-4xl mx-auto'>
+    <div class='prose prose-invert max-w-none'>
+      <p class='lead'>
+        Custom software solutions for startups and enterprises — enabling digital transformation and scalable operations.
+      </p>
+
+      <h2>What We Build</h2>
+      <ul>
+        <li><strong>SaaS Platforms</strong> — Multi-tenant, subscription-ready applications built for recurring revenue.</li>
+        <li><strong>Internal Business Tools</strong> — Dashboards, CRMs, and workflow systems that eliminate manual processes.</li>
+        <li><strong>Enterprise Systems</strong> — Scalable, secure architectures integrated with your existing tech stack.</li>
+        <li><strong>API Development</strong> — RESTful and GraphQL APIs designed for performance, versioning, and developer experience.</li>
+        <li><strong>Digital Transformation</strong> — Modernize legacy systems with cloud-native architectures and automation.</li>
+      </ul>
+
+      <h2>Our Process</h2>
+      <ul>
+        <li><strong>Discovery</strong> — Stakeholder interviews, requirements mapping, and architecture planning.</li>
+        <li><strong>Design</strong> — System design, database modeling, and API contract specification.</li>
+        <li><strong>Development</strong> — Iterative sprint-based delivery with continuous integration and testing.</li>
+        <li><strong>Deployment</strong> — CI/CD pipelines, infrastructure-as-code, and zero-downtime releases.</li>
+        <li><strong>Maintenance</strong> — Ongoing support, monitoring, and feature iteration based on analytics.</li>
+      </ul>
+
+      <h2>Tech Stack</h2>
+      <p>
+        We choose the right tool for the job: <strong>TypeScript</strong> and <strong>Node.js</strong> for performant
+        backends, <strong>Python</strong> for data and AI workloads, <strong>PostgreSQL</strong> for reliable data storage,
+        and cloud platforms like <strong>AWS</strong> and <strong>Vercel</strong> for resilient, scalable deployments.
+        Every project is built with security, testing, and documentation as first-class priorities.
+      </p>
+    </div>
+    <div class='mt-8'>
+      <a
+        href='mailto:official@devgo.studio'
+        class='inline-block uppercase font-head text-sm px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors'
+      >
+        Get a Quote
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import { Globe, Bot, ShoppingCart, TabletSmartphone, AppWindow } from "lucide-astro"
+
+const services: {
+  title: string
+  slug: string
+  icon: typeof Globe
+  description: string
+  keywords: string[]
+}[] = [
+  {
+    title: "Website Development",
+    slug: "web-development",
+    icon: Globe,
+    description:
+      "High-performance websites and web applications for global businesses — optimized for speed, scalability, and SEO.",
+    keywords: [
+      "website development Philippines",
+      "custom web development",
+      "Astro development",
+    ],
+  },
+  {
+    title: "AI Automation",
+    slug: "ai-automation",
+    icon: Bot,
+    description:
+      "AI-powered automation solutions that streamline operations, reduce costs, and improve efficiency at scale.",
+    keywords: [
+      "AI automation agency",
+      "workflow automation",
+      "n8n automation Philippines",
+    ],
+  },
+  {
+    title: "E-Commerce",
+    slug: "e-commerce",
+    icon: ShoppingCart,
+    description:
+      "Secure, scalable e-commerce platforms with conversion-focused design and seamless payment integrations.",
+    keywords: [
+      "e-commerce development Philippines",
+      "online store development",
+      "Shopify WooCommerce",
+    ],
+  },
+  {
+    title: "Mobile Development",
+    slug: "mobile-development",
+    icon: TabletSmartphone,
+    description:
+      "High-performing iOS and Android apps delivering seamless, scalable, and user-centric experiences.",
+    keywords: [
+      "mobile app development Philippines",
+      "iOS Android development",
+    ],
+  },
+  {
+    title: "Software Development",
+    slug: "software-development",
+    icon: AppWindow,
+    description:
+      "Custom software solutions for startups and enterprises — enabling digital transformation and scalable operations.",
+    keywords: [
+      "custom software development Philippines",
+      "enterprise software solutions",
+    ],
+  },
+]
+
+const seoProps = {
+  title: "Services | DEVGO Studio",
+  description:
+    "DEVGO Studio offers web development, AI automation, e-commerce, mobile development, and custom software solutions for Philippine businesses and global brands.",
+  keywords: [
+    "web development services",
+    "AI automation services",
+    "digital agency services Philippines",
+  ],
+  type: "website" as const,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      Our Services
+    </h1>
+    <p class='mt-4 text-bg-secondary max-w-2xl'>
+      Scalable web, mobile, and AI-powered solutions for businesses worldwide.
+    </p>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20'>
+    <div class='grid grid-cols-1 md:grid-cols-2 gap-6'>
+      {services.map((svc) => (
+        <a
+          href={`/services/${svc.slug}`}
+          class='border border-bg-secondary/20 p-6 hover:border-accent/40 transition-colors group'
+        >
+          <svc.icon class='w-8 h-8 stroke-accent mb-3' />
+          <h2 class='font-head text-xl uppercase mb-2 group-hover:text-accent transition-colors'>
+            {svc.title}
+          </h2>
+          <p class='text-sm text-bg-secondary'>{svc.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
