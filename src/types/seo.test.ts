@@ -91,3 +91,15 @@ describe("SEO Types", () => {
     })
   })
 })
+
+describe("Sitemap configuration", () => {
+  it("should produce a sitemap.xml file after build", async () => {
+    const file = Bun.file("dist/sitemap.xml")
+    const exists = await file.exists()
+    if (!exists) {
+      const indexFile = Bun.file("dist/sitemap-index.xml")
+      const indexExists = await indexFile.exists()
+      expect(indexExists).toBe(true)
+    }
+  })
+})

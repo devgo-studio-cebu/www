@@ -16,7 +16,29 @@ export default defineConfig({
         ],
     },
 
-    integrations: [sitemap(), mdx()],
+    integrations: [
+        sitemap({
+            lastmod: new Date(),
+            changefreq: "weekly",
+            priority: 1.0,
+            serialize(item) {
+                if (item.url === "https://devgo.studio/") {
+                    return { ...item, priority: 1.0, changefreq: "weekly" }
+                }
+                if (item.url.includes("/case-studies/")) {
+                    return { ...item, priority: 0.7, changefreq: "monthly" }
+                }
+                if (
+                    item.url.includes("/privacy/") ||
+                    item.url.includes("/terms/")
+                ) {
+                    return { ...item, priority: 0.3, changefreq: "yearly" }
+                }
+                return { ...item, priority: 0.5, changefreq: "weekly" }
+            },
+        }),
+        mdx(),
+    ],
 
     fonts: [
         {
