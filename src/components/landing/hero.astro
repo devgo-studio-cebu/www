@@ -69,7 +69,6 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
 
 <script>
     import { animate } from "animejs"
-    import { HeroEngine } from "../../lib/engines/hero-engine"
     import { getAnimationManager } from "../../lib/engines/animation-manager"
 
     const manager = getAnimationManager()
@@ -92,11 +91,13 @@ const logos = Object.values(logoFiles).map((mod: any) => mod.default)
         })
     }
 
-    // Initialize Pixi Engine
+    // Initialize Pixi Engine — defer after first paint so it doesn't block initial render
     if (canvas && wrapper && !manager.getReducedMotion()) {
-        const engine = new HeroEngine(canvas, wrapper)
-        manager.register("hero", engine)
-        engine.init()
+        import("../../lib/engines/hero-engine").then(({ HeroEngine }) => {
+            const engine = new HeroEngine(canvas, wrapper)
+            manager.register("hero", engine)
+            engine.init()
+        })
     }
 
     // Intro UI Animations

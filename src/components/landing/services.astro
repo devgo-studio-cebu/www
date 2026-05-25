@@ -1,6 +1,38 @@
 ---
 import { services } from "../../lib/values"
 import logoSrc from "../../assets/images/logo.svg"
+import { generateServiceSchema } from "../../utils/seo"
+import type { ServiceSchema } from "../../types/seo"
+
+const serviceSchemaItems: ServiceSchema[] = [
+  {
+    name: "Web Development",
+    description: "High-performance websites and web applications optimized for speed and SEO",
+    provider: { "@type": "Organization", name: "DEVGO Studio" },
+  },
+  {
+    name: "AI Automation",
+    description: "AI-powered automation solutions that streamline operations and reduce costs",
+    provider: { "@type": "Organization", name: "DEVGO Studio" },
+  },
+  {
+    name: "E-Commerce",
+    description: "Secure, scalable e-commerce platforms with conversion-focused design",
+    provider: { "@type": "Organization", name: "DEVGO Studio" },
+  },
+  {
+    name: "Mobile Development",
+    description: "iOS and Android apps delivering seamless, scalable user experiences",
+    provider: { "@type": "Organization", name: "DEVGO Studio" },
+  },
+  {
+    name: "Software Development",
+    description: "Custom software solutions enabling digital transformation and scalable operations",
+    provider: { "@type": "Organization", name: "DEVGO Studio" },
+  },
+]
+
+const serviceJsonLd = JSON.stringify(generateServiceSchema(serviceSchemaItems))
 ---
 
 <section
@@ -52,6 +84,7 @@ import logoSrc from "../../assets/images/logo.svg"
             ))
         }
     </div>
+    <script type="application/ld+json" set:html={serviceJsonLd} />
 </section>
 
 <script>
