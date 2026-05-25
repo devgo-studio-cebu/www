@@ -194,6 +194,68 @@ describe("SEO Utilities", () => {
   })
 })
 
+describe("Blog Content Collection", () => {
+  it("should define a blog collection in content.config.ts", async () => {
+    const configText = await Bun.file("src/content.config.ts").text()
+    // Verify blog collection is defined with defineCollection
+    expect(configText).toContain("const blog = defineCollection")
+    expect(configText).toContain("blog")
+    // Verify blog is included in the exported collections
+    expect(configText).toMatch(/collections\s*=\s*\{[^}]*blog/)
+  })
+
+  it("should validate blog frontmatter schema fields", async () => {
+    const configText = await Bun.file("src/content.config.ts").text()
+    // Extract the blog schema section (greedy match to the export line)
+    const blogEnd = configText.indexOf("export const collections")
+    const blogSection = configText.substring(configText.indexOf("const blog = defineCollection"), blogEnd !== -1 ? blogEnd : undefined)
+    expect(blogSection).toBeDefined()
+    // Verify required schema fields
+    expect(blogSection).toContain("title: z.string()")
+    expect(blogSection).toContain("description: z.string()")
+    expect(blogSection).toContain("pubDate: z.coerce.date()")
+    expect(blogSection).toContain("author: z.string()")
+    expect(blogSection).toContain("tags: z.array(z.string())")
+    expect(blogSection).toContain("draft: z.boolean()")
+  })
+
+  it("should have blog content markdown files present", async () => {
+    const files = [
+      "src/content/blog/01-website-cost-philippines.md",
+      "src/content/blog/02-ai-automation-small-business.md",
+      "src/content/blog/03-web-development-agency-cebu.md",
+    ]
+    for (const file of files) {
+      const exists = await Bun.file(file).exists()
+      expect(exists).toBe(true)
+    }
+  })
+
+  it("should have valid frontmatter in blog posts", async () => {
+    const files = [
+      "src/content/blog/01-website-cost-philippines.md",
+      "src/content/blog/02-ai-automation-small-business.md",
+      "src/content/blog/03-web-development-agency-cebu.md",
+    ]
+    for (const file of files) {
+      const content = await Bun.file(file).text()
+      // Must have frontmatter
+      expect(content.startsWith("---")).toBe(true)
+      const frontmatter = content.split("---")[1]
+      expect(frontmatter).toContain("title:")
+      expect(frontmatter).toContain("description:")
+      expect(frontmatter).toContain("pubDate:")
+      expect(frontmatter).toContain("author:")
+      expect(frontmatter).toContain("tags:")
+      // Description should be 160 chars or less
+      const descMatch = frontmatter.match(/description:\s*"(.+?)"/)
+      if (descMatch) {
+        expect(descMatch[1].length).toBeLessThanOrEqual(160)
+      }
+    }
+  })
+})
+
 describe("SEO Component Output", () => {
   it("homepage should have Organization + WebSite schemas only", async () => {
     const file = Bun.file("dist/index.html")
