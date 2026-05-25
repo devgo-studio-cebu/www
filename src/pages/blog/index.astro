@@ -1,0 +1,73 @@
+---
+// src/pages/blog/index.astro
+import { getCollection } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+
+const posts = await getCollection("blog")
+const publishedPosts = posts
+  .filter((post) => !post.data.draft)
+  .sort(
+    (a, b) =>
+      b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  )
+
+const seoProps = {
+  title: "Blog & Insights | DEVGO Studio",
+  description:
+    "Web development, AI automation, and digital growth insights from DEVGO Studio. Practical guides for Philippine businesses and global brands.",
+  keywords: [
+    "web development blog",
+    "AI automation insights",
+    "Philippines tech blog",
+    "digital agency blog",
+  ],
+  type: "website" as const,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      Blog & Insights
+    </h1>
+    <p class='mt-4 text-bg-secondary max-w-2xl'>
+      Web development, AI automation, and digital growth insights from DEVGO Studio.
+    </p>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20'>
+    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+      {
+        publishedPosts.map((post) => (
+          <a
+            href={`/blog/${post.id.replace(/\.md$/, "")}`}
+            class='border border-bg-secondary/20 p-4 hover:border-accent/40 transition-colors group'
+          >
+            <p class='text-xs text-bg-secondary mb-2'>
+              {post.data.pubDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <h2 class='font-head text-lg uppercase mb-2 group-hover:text-accent transition-colors'>
+              {post.data.title}
+            </h2>
+            <p class='text-sm text-bg-secondary line-clamp-2'>
+              {post.data.description}
+            </p>
+            <div class='flex flex-wrap gap-1 mt-3'>
+              {
+                post.data.tags.slice(0, 3).map((tag) => (
+                  <span class='text-xs px-2 py-0.5 bg-bg-secondary/10 rounded-full'>
+                    {tag}
+                  </span>
+                ))
+              }
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
