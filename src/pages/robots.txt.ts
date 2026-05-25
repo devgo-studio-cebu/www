@@ -35,10 +35,6 @@ Allow: /
 
 # Sitemap
 Sitemap: ${siteUrl}/sitemap-index.xml
-
-# Disallow admin/private areas for all crawlers
-User-agent: *
-Disallow: /_astro/
 `
 
   return new Response(robotsTxt, {

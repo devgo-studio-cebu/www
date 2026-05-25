@@ -103,3 +103,21 @@ describe("Sitemap configuration", () => {
     }
   })
 })
+
+describe("robots.txt", () => {
+  it("should NOT disallow /_astro/ path", async () => {
+    const file = Bun.file("dist/robots.txt")
+    if (await file.exists()) {
+      const content = await file.text()
+      expect(content).not.toContain("Disallow: /_astro/")
+    }
+  })
+
+  it("should still contain sitemap reference", async () => {
+    const file = Bun.file("dist/robots.txt")
+    if (await file.exists()) {
+      const content = await file.text()
+      expect(content).toContain("Sitemap: https://devgo.studio/sitemap-index.xml")
+    }
+  })
+})
