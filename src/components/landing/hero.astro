@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets"
-import bg from "../../assets/images/hero.png"
+import bg from "../../assets/images/hero.webp"
 
 const logoFiles = import.meta.glob("/src/assets/logos/*", { eager: true })
 const logos = Object.values(logoFiles).map((mod: any) => mod.default)
