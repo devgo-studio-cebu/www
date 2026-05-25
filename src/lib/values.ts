@@ -32,6 +32,18 @@ export const links: Links[] = [
         url: "/showcase"
     },
     {
+        name: "Services",
+        url: "/services"
+    },
+    {
+        name: "Blog",
+        url: "/blog"
+    },
+    {
+        name: "About",
+        url: "/about"
+    },
+    {
         name: "Dashboard",
         url: "https://dash.devgo.studio"
     },
