@@ -31,18 +31,7 @@ export const links: Links[] = [
         extra: projects.length.toString(),
         url: "/showcase"
     },
-    {
-        name: "Services",
-        url: "/services"
-    },
-    {
-        name: "Blog",
-        url: "/blog"
-    },
-    {
-        name: "About",
-        url: "/about"
-    },
+
     {
         name: "Dashboard",
         url: "https://dash.devgo.studio"

@@ -21,6 +21,12 @@ export default defineConfig({
             lastmod: new Date(),
             changefreq: "weekly",
             priority: 1.0,
+            filter: (page) =>
+                !page.startsWith("https://devgo.studio/services/") &&
+                !page.startsWith("https://devgo.studio/blog/") &&
+                page !== "https://devgo.studio/services/" &&
+                page !== "https://devgo.studio/blog/" &&
+                page !== "https://devgo.studio/about/",
             serialize(item) {
                 if (item.url === "https://devgo.studio/") {
                     return { ...item, priority: 1.0, changefreq: "weekly" }
