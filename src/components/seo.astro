@@ -32,47 +32,7 @@ const websiteSchema: WebsiteSchema = {
     description: seo.description || defaultDescription,
 }
 
-function generateJsonLd() {
-    const graph: any[] = [
-        {
-            "@type": "Organization",
-            ...organizationSchema,
-        },
-        {
-            "@type": "WebSite",
-            ...websiteSchema,
-        },
-    ]
-
-    if (meta.type === "article" && meta.publishedTime) {
-        graph.push({
-            "@type": "Article",
-            headline: meta.title,
-            description: meta.description,
-            url: meta.canonical,
-            image: meta.image,
-            datePublished: meta.publishedTime,
-            dateModified: meta.modifiedTime || meta.publishedTime,
-            author: {
-                "@type": "Organization",
-                name: "DEVGO Studio",
-            },
-            publisher: {
-                "@type": "Organization",
-                name: "DEVGO Studio",
-                logo: {
-                    "@type": "ImageObject",
-                    url: `${siteUrl}/logo.png`,
-                },
-            },
-        })
-    }
-
-    return {
-        "@context": "https://schema.org",
-        "@graph": graph,
-    }
-}
+const isHomepage = Astro.url.pathname === "/"
 
 const meta = {
     title: seo.title || defaultTitle,
@@ -84,6 +44,88 @@ const meta = {
     modifiedTime: seo.modifiedTime,
     author: seo.author,
     keywords: seo.keywords || ["devgo", "studio", "creative", "digital"],
+}
+
+function generateJsonLd() {
+    const graph: any[] = []
+
+    // Only inject Organization + WebSite on the homepage
+    if (isHomepage) {
+        graph.push(
+            {
+                "@type": "Organization",
+                "@id": `${siteUrl}/#organization`,
+                ...organizationSchema,
+            },
+            {
+                "@type": "WebSite",
+                ...websiteSchema,
+            }
+        )
+    }
+
+    if (meta.type === "article" && meta.publishedTime) {
+        graph.push({
+            "@type": "Article",
+            headline: meta.title,
+            description: meta.description,
+            url: meta.canonical,
+            image: meta.image,
+            datePublished: meta.publishedTime,
+            dateModified: meta.modifiedTime || meta.publishedTime,
+            author: {
+                "@id": `${siteUrl}/#organization`,
+            },
+            publisher: {
+                "@id": `${siteUrl}/#organization`,
+            },
+        })
+        // On non-homepage pages, add Organization node for Article author/publisher
+        if (!isHomepage) {
+            graph.push({
+                "@type": "Organization",
+                "@id": `${siteUrl}/#organization`,
+                name: "DEVGO Studio",
+                logo: {
+                    "@type": "ImageObject",
+                    url: `${siteUrl}/logo.png`,
+                },
+            })
+        }
+    }
+
+    // Inject page-level schema from seo.schema prop
+    if (seo.schema) {
+        if (seo.schema.type === "BreadcrumbList" && seo.schema.items) {
+            graph.push({
+                "@type": "BreadcrumbList",
+                itemListElement: seo.schema.items.map((item, i) => ({
+                    "@type": "ListItem",
+                    position: i + 1,
+                    name: item.name,
+                    item: item.url,
+                })),
+            })
+        }
+        if (seo.schema.type === "FAQPage" && seo.schema.questions) {
+            graph.push({
+                "@type": "FAQPage",
+                mainEntity: seo.schema.questions.map((q) => ({
+                    "@type": "Question",
+                    name: q.question,
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: q.answer,
+                    },
+                })),
+            })
+        }
+    }
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": graph,
+    }
 }
 ---
 
@@ -189,11 +231,7 @@ const meta = {
         name='twitter:creator'
         content='@devgostudio'
     />
-    <!-- Sitemap -->
-    <link
-        rel='sitemap'
-        href='/sitemap-index.xml'
-    />
+
     <!-- Article specific (if type is article) -->
     {
         meta.type === "article" && meta.publishedTime && (

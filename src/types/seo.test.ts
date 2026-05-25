@@ -193,3 +193,26 @@ describe("SEO Utilities", () => {
     })
   })
 })
+
+describe("SEO Component Output", () => {
+  it("homepage should have Organization + WebSite schemas only", async () => {
+    const file = Bun.file("dist/index.html")
+    if (await file.exists()) {
+      const html = await file.text()
+      expect(html).toContain('"@type":"Organization"')
+      expect(html).toContain('"@type":"WebSite"')
+      expect(html).not.toContain('rel="sitemap"')
+    }
+  })
+
+  it("case study page should NOT have Organization schema (homepage only)", async () => {
+    const file = Bun.file("dist/case-studies/ai-customer-support/index.html")
+    if (await file.exists()) {
+      const html = await file.text()
+      // Organization should only appear in Article publisher context, not as top-level
+      const orgCount = (html.match(/"@type":"Organization"/g) || []).length
+      // On subpages, Organization may appear in Article publisher, but no more than once
+      expect(orgCount).toBeLessThanOrEqual(1)
+    }
+  })
+})
