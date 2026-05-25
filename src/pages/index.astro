@@ -8,15 +8,18 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 import Reviews from "../components/landing/reviews.astro"
 
 const seoProps = {
-    title: "DEVGO Studio",
+    title:
+        "DEVGO Studio — Web Development & AI Automation Agency Philippines",
     description:
-        "DEVGO Studio builds innovative digital experiences. We specialize in web development, mobile apps, and creative solutions for forward-thinking brands.",
+        "DEVGO Studio builds innovative digital experiences. We specialize in web development, mobile apps, AI automation, and creative solutions for forward-thinking brands.",
     keywords: [
         "devgo",
         "studio",
-        "design agency",
-        "web development",
-        "digital experiences",
+        "web development agency Philippines",
+        "AI automation agency",
+        "digital agency Cebu",
+        "custom website development",
+        "mobile app development",
     ],
     type: "website" as const,
 }
@@ -26,6 +29,24 @@ const seoProps = {
     <Hero />
     <Stats />
     <Services />
+    <section class='sr-only'>
+        <h2>
+            DEVGO Studio: Web Development, AI Automation, and Digital Growth
+        </h2>
+        <p>
+            Based in Cebu, Philippines, DEVGO Studio is a full-service digital
+            agency delivering high-performance websites, AI-powered automation,
+            e-commerce platforms, and mobile applications. We serve startups,
+            SMEs, and enterprises worldwide with custom software solutions
+            optimized for speed, scalability, and SEO.
+        </p>
+        <p>
+            Our services include web development (Astro, Next.js, Tailwind),
+            AI automation (n8n, LLM integration, RAG systems), e-commerce
+            solutions, mobile development (iOS, Android), and custom software
+            development for digital transformation.
+        </p>
+    </section>
     <Featured />
     <!-- <Timeline /> -->
     <Reviews />
