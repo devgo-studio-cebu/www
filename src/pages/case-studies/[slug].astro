@@ -46,6 +46,20 @@ const tocItems = buildToc(
         type: "article",
         publishedTime: pubDate.toISOString(),
         keywords: [category, ...services],
+        schema: {
+            type: "BreadcrumbList",
+            items: [
+                { name: "Home", url: "https://devgo.studio/" },
+                {
+                    name: "Case Studies",
+                    url: "https://devgo.studio/case-studies/",
+                },
+                {
+                    name: title,
+                    url: `https://devgo.studio/case-studies/${entry.id.replace(/\.(md|mdx)$/, "")}/`,
+                },
+            ],
+        },
     }}
 >
     <section
@@ -75,7 +89,7 @@ const tocItems = buildToc(
         </div>
         {image && (
             <div class='w-full md:max-w-1/3'>
-                <Image src={image} alt='' />
+                <Image src={image} alt={title} />
             </div>
         )}
     </section>
