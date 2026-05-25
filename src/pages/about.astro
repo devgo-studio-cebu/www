@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+
+const seoProps = {
+  title: "About DEVGO Studio — Web Development Agency Cebu, Philippines",
+  description:
+    "DEVGO Studio is a Filipino web development and AI automation agency based in Cebu, Philippines. We build high-performance websites, mobile apps, and custom software for global brands.",
+  keywords: [
+    "about DEVGO Studio",
+    "Filipino web development agency",
+    "Cebu tech studio",
+    "web development agency Philippines",
+    "digital agency Cebu",
+  ],
+  type: "website" as const,
+}
+---
+
+<BaseLayout seo={seoProps}>
+  <section class='mt-11 md:mt-13 pt-10 md:pt-20 pb-4 md:pb-10 w-full px-2 md:px-6 overflow-hidden'>
+    <h1 class='text-3xl md:text-5xl lg:text-7xl font-head uppercase'>
+      About DEVGO Studio
+    </h1>
+  </section>
+
+  <section class='px-2 md:px-6 pb-20 max-w-4xl mx-auto'>
+    <div class='prose prose-invert max-w-none'>
+      <p class='lead'>
+        DEVGO Studio is a full-service digital agency based in Cebu, Philippines. We build high-performance websites, AI-powered automation systems, mobile applications, and custom software for startups, SMEs, and enterprises worldwide.
+      </p>
+
+      <h2>What We Do</h2>
+      <p>
+        We are a team of developers, designers, and AI engineers who believe that great digital products come from understanding the business first and the technology second. Every project starts with a deep dive into your goals, your audience, and your constraints. We don't build websites just to look good — we build them to work.
+      </p>
+
+      <h2>Our Mission</h2>
+      <p>
+        To enable businesses — from local startups to global enterprises — to innovate, automate, and grow within a digital-first economy. We deliver scalable, maintainable solutions that solve real problems, not just check feature boxes.
+      </p>
+
+      <h2>Our Values</h2>
+      <ul>
+        <li>
+          <strong>Quality Over Shortcuts</strong> — Every line of code is written for performance, maintainability, and SEO.
+        </li>
+        <li>
+          <strong>Client Partnership</strong> — We work with you, not just for you. Communication is central to every project.
+        </li>
+        <li>
+          <strong>Continuous Learning</strong> — The tech landscape changes fast. We stay current so your projects benefit from the best tools available.
+        </li>
+        <li>
+          <strong>Results That Matter</strong> — We measure success by the impact on your business, not just the deliverables we ship.
+        </li>
+      </ul>
+
+      <h2>Location</h2>
+      <p>
+        Based in Cebu, Philippines, we serve clients across the Philippines, United States, Australia, Singapore, and beyond. Remote-first since day one.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
