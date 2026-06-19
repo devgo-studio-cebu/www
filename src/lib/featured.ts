@@ -1,6 +1,6 @@
 import hopethreadsImg from '../assets/works/hopethreads.png'
 import palmsImg from '../assets/works/palms-agency-global.png'
-import serialkittenImg from '../assets/works/serialkitten.png'
+import wildRoundsImg from '../assets/works/wild-rounds-pilipinas-open.png'
 
 export interface FeaturedProject {
     title: string
@@ -14,6 +14,12 @@ export interface FeaturedProject {
 // manifest for homepage featured projects.
 export const featuredProjects: FeaturedProject[] = [
     {
+        title: "Wild Rounds Pilipinas Open",
+        image: wildRoundsImg,
+        tags: ["Website", "Event", "UI/UX Design"],
+        link: "https://wildroundspilipinasopen.com",
+    },
+    {
         title: "Hopethreads",
         image: hopethreadsImg,
         tags: ["Website", "Store", "UI/UX Design"],
@@ -24,11 +30,5 @@ export const featuredProjects: FeaturedProject[] = [
         image: palmsImg,
         tags: ["Website", "UI/UX Design"],
         link: "https://palms-agency-global.com",
-    },
-    {
-        title: "Serial Kitten",
-        image: serialkittenImg,
-        tags: ["Website", "UI/UX Design"],
-        link: "https://serialkitten.com",
     },
 ]

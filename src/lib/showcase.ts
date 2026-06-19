@@ -1,6 +1,7 @@
 import hopethreadsImg from '../assets/works/hopethreads.png'
 import palmsImg from '../assets/works/palms-agency-global.png'
 import serialkittenImg from '../assets/works/serialkitten.png'
+import wildRoundsImg from '../assets/works/wild-rounds-pilipinas-open.png'
 
 export interface Project {
     title: string
@@ -13,6 +14,12 @@ export interface Project {
 // from getCollection("case-studies") instead. For now, this is the single
 // manifest for showcase projects.
 export const projects: Project[] = [
+    {
+        title: "Wild Rounds Pilipinas Open",
+        image: wildRoundsImg,
+        url: "https://wildroundspilipinasopen.com",
+        year: 2026,
+    },
     {
         title: "Hopethreads",
         image: hopethreadsImg,
